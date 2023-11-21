@@ -7,23 +7,223 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0282CDDFC78F2376AC376C04 /* Pods_YandexMusic2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 903D763AD5343813AA6CBA0F /* Pods_YandexMusic2.framework */; };
+		095BF2B02ADC44ED00D261E8 /* MyWaveWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 095BF2AF2ADC44ED00D261E8 /* MyWaveWhite.json */; };
+		095BF2B22ADC457200D261E8 /* MyWaveBlack.json in Resources */ = {isa = PBXBuildFile; fileRef = 095BF2B12ADC457200D261E8 /* MyWaveBlack.json */; };
+		095BF2B42ADC45C800D261E8 /* MyWave.json in Resources */ = {isa = PBXBuildFile; fileRef = 095BF2B32ADC45C800D261E8 /* MyWave.json */; };
+		0997B3932AFCCDC900096764 /* YandexSansDisplay-Bold.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3642AFCCDC900096764 /* YandexSansDisplay-Bold.eot */; };
+		0997B3942AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3652AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff */; };
+		0997B3952AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3662AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url */; };
+		0997B3962AFCCDC900096764 /* YandexSansDisplay-Light.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3672AFCCDC900096764 /* YandexSansDisplay-Light.eot */; };
+		0997B3972AFCCDC900096764 /* YandexSansDisplay-RegularItalic.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3682AFCCDC900096764 /* YandexSansDisplay-RegularItalic.eot */; };
+		0997B3982AFCCDC900096764 /* YandexSansText-RegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3692AFCCDC900096764 /* YandexSansText-RegularItalic.ttf */; };
+		0997B3992AFCCDC900096764 /* YandexSansText-RegularItalic.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B36A2AFCCDC900096764 /* YandexSansText-RegularItalic.woff2 */; };
+		0997B39A2AFCCDC900096764 /* YandexSansDisplay-Regular.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B36B2AFCCDC900096764 /* YandexSansDisplay-Regular.eot */; };
+		0997B39B2AFCCDC900096764 /* YandexSansDisplay-Thin.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B36C2AFCCDC900096764 /* YandexSansDisplay-Thin.eot */; };
+		0997B39C2AFCCDC900096764 /* YandexSansText-Light.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B36D2AFCCDC900096764 /* YandexSansText-Light.eot */; };
+		0997B39D2AFCCDC900096764 /* YandexSansDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B36E2AFCCDC900096764 /* YandexSansDisplay-Bold.ttf */; };
+		0997B39E2AFCCDC900096764 /* YandexSansDisplay-Light.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B36F2AFCCDC900096764 /* YandexSansDisplay-Light.woff2 */; };
+		0997B39F2AFCCDC900096764 /* YandexSansDisplay-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3702AFCCDC900096764 /* YandexSansDisplay-Light.ttf */; };
+		0997B3A02AFCCDC900096764 /* YandexSansDisplay-Thin.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3712AFCCDC900096764 /* YandexSansDisplay-Thin.woff */; };
+		0997B3A12AFCCDC900096764 /* YandexSansDisplay-RegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3722AFCCDC900096764 /* YandexSansDisplay-RegularItalic.ttf */; };
+		0997B3A22AFCCDC900096764 /* YandexSansText-Regular.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3732AFCCDC900096764 /* YandexSansText-Regular.woff */; };
+		0997B3A32AFCCDC900096764 /* YandexSansText-RegularItalic.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3742AFCCDC900096764 /* YandexSansText-RegularItalic.eot */; };
+		0997B3A42AFCCDC900096764 /* YandexSansText-Medium.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3752AFCCDC900096764 /* YandexSansText-Medium.woff2 */; };
+		0997B3A52AFCCDC900096764 /* YandexSansText-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3762AFCCDC900096764 /* YandexSansText-Light.ttf */; };
+		0997B3A62AFCCDC900096764 /* YandexSansText-Thin.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3772AFCCDC900096764 /* YandexSansText-Thin.woff */; };
+		0997B3A72AFCCDC900096764 /* YandexSansDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3782AFCCDC900096764 /* YandexSansDisplay-Regular.ttf */; };
+		0997B3A82AFCCDC900096764 /* YandexSansText-Medium.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3792AFCCDC900096764 /* YandexSansText-Medium.woff */; };
+		0997B3A92AFCCDC900096764 /* YandexSansDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B37A2AFCCDC900096764 /* YandexSansDisplay-Thin.ttf */; };
+		0997B3AA2AFCCDC900096764 /* YandexSansText-Bold.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B37B2AFCCDC900096764 /* YandexSansText-Bold.eot */; };
+		0997B3AB2AFCCDC900096764 /* stylesheet.css in Resources */ = {isa = PBXBuildFile; fileRef = 0997B37C2AFCCDC900096764 /* stylesheet.css */; };
+		0997B3AC2AFCCDC900096764 /* YandexSansText-Light.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B37D2AFCCDC900096764 /* YandexSansText-Light.woff */; };
+		0997B3AD2AFCCDC900096764 /* YandexSansText-RegularItalic.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B37E2AFCCDC900096764 /* YandexSansText-RegularItalic.woff */; };
+		0997B3AE2AFCCDC900096764 /* YandexSansText-Regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B37F2AFCCDC900096764 /* YandexSansText-Regular.woff2 */; };
+		0997B3AF2AFCCDC900096764 /* YandexSansText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3802AFCCDC900096764 /* YandexSansText-Medium.ttf */; };
+		0997B3B02AFCCDC900096764 /* YandexSansText-Regular.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3812AFCCDC900096764 /* YandexSansText-Regular.eot */; };
+		0997B3B12AFCCDC900096764 /* YandexSansDisplay-Light.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3822AFCCDC900096764 /* YandexSansDisplay-Light.woff */; };
+		0997B3B22AFCCDC900096764 /* YandexSansDisplay-Regular.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3832AFCCDC900096764 /* YandexSansDisplay-Regular.woff */; };
+		0997B3B32AFCCDC900096764 /* YandexSansDisplay-Regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3842AFCCDC900096764 /* YandexSansDisplay-Regular.woff2 */; };
+		0997B3B42AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3852AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff2 */; };
+		0997B3B52AFCCDC900096764 /* YandexSansText-Thin.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3862AFCCDC900096764 /* YandexSansText-Thin.eot */; };
+		0997B3B62AFCCDC900096764 /* YandexSansText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3872AFCCDC900096764 /* YandexSansText-Bold.ttf */; };
+		0997B3B72AFCCDC900096764 /* YandexSansDisplay-Thin.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3882AFCCDC900096764 /* YandexSansDisplay-Thin.woff2 */; };
+		0997B3B82AFCCDC900096764 /* YandexSansText-Bold.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3892AFCCDC900096764 /* YandexSansText-Bold.woff */; };
+		0997B3B92AFCCDC900096764 /* YandexSansText-Light.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B38A2AFCCDC900096764 /* YandexSansText-Light.woff2 */; };
+		0997B3BA2AFCCDC900096764 /* demo.html in Resources */ = {isa = PBXBuildFile; fileRef = 0997B38B2AFCCDC900096764 /* demo.html */; };
+		0997B3BB2AFCCDC900096764 /* YandexSansText-Bold.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B38C2AFCCDC900096764 /* YandexSansText-Bold.woff2 */; };
+		0997B3BC2AFCCDC900096764 /* YandexSansDisplay-Bold.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B38D2AFCCDC900096764 /* YandexSansDisplay-Bold.woff2 */; };
+		0997B3BD2AFCCDC900096764 /* YandexSansText-Medium.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B38E2AFCCDC900096764 /* YandexSansText-Medium.eot */; };
+		0997B3BE2AFCCDC900096764 /* YandexSansText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B38F2AFCCDC900096764 /* YandexSansText-Regular.ttf */; };
+		0997B3BF2AFCCDC900096764 /* YandexSansDisplay-Bold.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3902AFCCDC900096764 /* YandexSansDisplay-Bold.woff */; };
+		0997B3C02AFCCDC900096764 /* YandexSansText-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3912AFCCDC900096764 /* YandexSansText-Thin.ttf */; };
+		0997B3C12AFCCDC900096764 /* YandexSansText-Thin.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3922AFCCDC900096764 /* YandexSansText-Thin.woff2 */; };
+		0997B3C32AFCD2B900096764 /* GradientBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997B3C22AFCD2B900096764 /* GradientBarButton.swift */; };
+		0997B3C62AFCE6D600096764 /* AllMyTracksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997B3C52AFCE6D600096764 /* AllMyTracksVC.swift */; };
+		0997B3C82AFCE85100096764 /* StretchyTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997B3C72AFCE85100096764 /* StretchyTableHeaderView.swift */; };
+		0997B3CA2AFCE92200096764 /* AllMyTracksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997B3C92AFCE92200096764 /* AllMyTracksTableViewCell.swift */; };
+		0997B3D02AFCEF6500096764 /* AllTracksAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3CF2AFCEF6500096764 /* AllTracksAnimation.json */; };
+		0997B3D72AFE8D6C00096764 /* AllMyTracksViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0997B3D62AFE8D6C00096764 /* AllMyTracksViews.swift */; };
+		0997B3D92AFE9A7100096764 /* TrackPlayingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3D82AFE9A7100096764 /* TrackPlayingAnimation.json */; };
+		09CA8A362B0012DF0074B6B9 /* MiniPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CA8A352B0012DF0074B6B9 /* MiniPlayerView.swift */; };
+		09CA8A3B2B010E070074B6B9 /* NILETTO, Олег Майами & Лёша Свик - Не Вспоминай.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09CA8A3A2B010E070074B6B9 /* NILETTO, Олег Майами & Лёша Свик - Не Вспоминай.mp3 */; };
 		09EDF1422AD95530002F4CFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1412AD95530002F4CFC /* AppDelegate.swift */; };
 		09EDF1442AD95530002F4CFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1432AD95530002F4CFC /* SceneDelegate.swift */; };
-		09EDF1462AD95530002F4CFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1452AD95530002F4CFC /* ViewController.swift */; };
-		09EDF1492AD95530002F4CFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09EDF1472AD95530002F4CFC /* Main.storyboard */; };
+		09EDF1462AD95530002F4CFC /* PlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1452AD95530002F4CFC /* PlayerVC.swift */; };
 		09EDF14B2AD95531002F4CFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09EDF14A2AD95531002F4CFC /* Assets.xcassets */; };
 		09EDF14E2AD95531002F4CFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09EDF14C2AD95531002F4CFC /* LaunchScreen.storyboard */; };
+		09EDF1562AD95558002F4CFC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1552AD95558002F4CFC /* TabBarController.swift */; };
+		09EDF1592AD95598002F4CFC /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1582AD95598002F4CFC /* MainVC.swift */; };
+		09EDF15B2AD955CA002F4CFC /* Books&PodcastsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF15A2AD955CA002F4CFC /* Books&PodcastsVC.swift */; };
+		09EDF15D2AD955EE002F4CFC /* MyCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF15C2AD955EE002F4CFC /* MyCollectionVC.swift */; };
+		09EDF15F2AD95C0F002F4CFC /* MainViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF15E2AD95C0F002F4CFC /* MainViews.swift */; };
+		09EDF1622AD97BDB002F4CFC /* PlayerVIews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1612AD97BDB002F4CFC /* PlayerVIews.swift */; };
+		09EDF1642AD981D2002F4CFC /* SongsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1632AD981D2002F4CFC /* SongsCollectionViewCell.swift */; };
+		09EDF1662AD98483002F4CFC /* SongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1652AD98483002F4CFC /* SongModel.swift */; };
+		09EDF1682AD9C655002F4CFC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1672AD9C655002F4CFC /* Extensions.swift */; };
+		09EDF1742ADBECD7002F4CFC /* MyCollectionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1732ADBECD7002F4CFC /* MyCollectionViews.swift */; };
+		09EDF1782ADBF819002F4CFC /* MyCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1772ADBF819002F4CFC /* MyCollectionTableViewCell.swift */; };
+		09EDF17A2ADBFDA4002F4CFC /* ILikeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDF1792ADBFDA4002F4CFC /* ILikeCell.swift */; };
+		09F3E2202B0601B9004BFBD0 /* Не вспоминай - сниппет.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 09F3E21F2B05FE10004BFBD0 /* Не вспоминай - сниппет.mp4 */; };
+		09F3E2442B0629AD004BFBD0 /* Markul_Тося Чайкина-Стрелы_Сниппет.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 09F3E2432B0628F7004BFBD0 /* Markul_Тося Чайкина-Стрелы_Сниппет.mp4 */; };
+		09F89EBA2AEEA917006086E2 /* Три дня дождя, MONA - Прощание.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09F89EB92AEEA917006086E2 /* Три дня дождя, MONA - Прощание.mp3 */; };
+		09F89EBC2AEEAB2B006086E2 /* Лёша Свик - Загоны.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09F89EBB2AEEAB2B006086E2 /* Лёша Свик - Загоны.mp3 */; };
+		09F89EBE2AEEAB55006086E2 /* Markul, Тося Чайкина - Стрелы.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09F89EBD2AEEAB55006086E2 /* Markul, Тося Чайкина - Стрелы.mp3 */; };
+		09F89EC02AEEABAC006086E2 /* Muse - The Handler.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09F89EBF2AEEABAC006086E2 /* Muse - The Handler.mp3 */; };
+		09F89EC22AEEABE4006086E2 /* The Weeknd - Save Your Tears.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09F89EC12AEEABE4006086E2 /* The Weeknd - Save Your Tears.mp3 */; };
+		09F89EC42AEFAD8E006086E2 /* MainChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89EC32AEFAD8E006086E2 /* MainChildVC.swift */; };
+		09F89EC82AEFDC32006086E2 /* MainChildViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89EC72AEFDC32006086E2 /* MainChildViews.swift */; };
+		09F89ECA2AEFDE03006086E2 /* MainChildCollectForYouCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89EC92AEFDE03006086E2 /* MainChildCollectForYouCell.swift */; };
+		09F89ECC2AEFECA1006086E2 /* CollectForYouCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89ECB2AEFECA1006086E2 /* CollectForYouCell.swift */; };
+		09F89ECE2AF00D70006086E2 /* YourFavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89ECD2AF00D70006086E2 /* YourFavouriteTableViewCell.swift */; };
+		09F89ED02AF013A9006086E2 /* ListenedRecentlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89ECF2AF013A9006086E2 /* ListenedRecentlyTableViewCell.swift */; };
+		09F89ED22AF0162A006086E2 /* ListenedRecentlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89ED12AF0162A006086E2 /* ListenedRecentlyCollectionViewCell.swift */; };
+		09F89ED42AF02570006086E2 /* InterestingNowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89ED32AF02570006086E2 /* InterestingNowTableViewCell.swift */; };
+		09F89ED62AF02610006086E2 /* InterestingNowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89ED52AF02610006086E2 /* InterestingNowCollectionViewCell.swift */; };
+		09F89ED82AF12072006086E2 /* Oxxxymiron - Агент.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09F89ED72AF12072006086E2 /* Oxxxymiron - Агент.mp3 */; };
+		09F89EDA2AF15729006086E2 /* ClipsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89ED92AF15729006086E2 /* ClipsTableViewCell.swift */; };
+		09F89F082AF3CEB7006086E2 /* NewReleasesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89F072AF3CEB7006086E2 /* NewReleasesTableViewCell.swift */; };
+		09F89F0A2AF3CEFC006086E2 /* NewReleasesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89F092AF3CEFC006086E2 /* NewReleasesCollectionViewCell.swift */; };
+		09F89F2C2AF7BAD2006086E2 /* PopularPlaylistsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89F2B2AF7BAD2006086E2 /* PopularPlaylistsTableViewCell.swift */; };
+		09F89F2E2AF7BB6F006086E2 /* PopularPlaylistsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89F2D2AF7BB6F006086E2 /* PopularPlaylistsCollectionViewCell.swift */; };
+		09F89F302AF7ECB5006086E2 /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89F2F2AF7ECB5006086E2 /* ChartTableViewCell.swift */; };
+		09F89F362AF7F397006086E2 /* FullChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89F352AF7F397006086E2 /* FullChartTableViewCell.swift */; };
+		09F89F3A2AF90160006086E2 /* NeuroMusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89F392AF90160006086E2 /* NeuroMusicTableViewCell.swift */; };
+		09F89F3C2AF903BC006086E2 /* NeuroMusicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89F3B2AF903BC006086E2 /* NeuroMusicCollectionViewCell.swift */; };
+		09F89F3E2AF917B6006086E2 /* SelectionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89F3D2AF917B6006086E2 /* SelectionsTableViewCell.swift */; };
+		09F89F402AF917EE006086E2 /* SelectionsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F89F3F2AF917EE006086E2 /* SelectionsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08CABB972DF89F3C55689EC4 /* Pods-YandexMusic2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YandexMusic2.release.xcconfig"; path = "Target Support Files/Pods-YandexMusic2/Pods-YandexMusic2.release.xcconfig"; sourceTree = "<group>"; };
+		095BF2AF2ADC44ED00D261E8 /* MyWaveWhite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyWaveWhite.json; sourceTree = "<group>"; };
+		095BF2B12ADC457200D261E8 /* MyWaveBlack.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyWaveBlack.json; sourceTree = "<group>"; };
+		095BF2B32ADC45C800D261E8 /* MyWave.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyWave.json; sourceTree = "<group>"; };
+		0997B3642AFCCDC900096764 /* YandexSansDisplay-Bold.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Bold.eot"; sourceTree = "<group>"; };
+		0997B3652AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-RegularItalic.woff"; sourceTree = "<group>"; };
+		0997B3662AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url"; sourceTree = "<group>"; };
+		0997B3672AFCCDC900096764 /* YandexSansDisplay-Light.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Light.eot"; sourceTree = "<group>"; };
+		0997B3682AFCCDC900096764 /* YandexSansDisplay-RegularItalic.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-RegularItalic.eot"; sourceTree = "<group>"; };
+		0997B3692AFCCDC900096764 /* YandexSansText-RegularItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-RegularItalic.ttf"; sourceTree = "<group>"; };
+		0997B36A2AFCCDC900096764 /* YandexSansText-RegularItalic.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-RegularItalic.woff2"; sourceTree = "<group>"; };
+		0997B36B2AFCCDC900096764 /* YandexSansDisplay-Regular.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Regular.eot"; sourceTree = "<group>"; };
+		0997B36C2AFCCDC900096764 /* YandexSansDisplay-Thin.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Thin.eot"; sourceTree = "<group>"; };
+		0997B36D2AFCCDC900096764 /* YandexSansText-Light.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Light.eot"; sourceTree = "<group>"; };
+		0997B36E2AFCCDC900096764 /* YandexSansDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Bold.ttf"; sourceTree = "<group>"; };
+		0997B36F2AFCCDC900096764 /* YandexSansDisplay-Light.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Light.woff2"; sourceTree = "<group>"; };
+		0997B3702AFCCDC900096764 /* YandexSansDisplay-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Light.ttf"; sourceTree = "<group>"; };
+		0997B3712AFCCDC900096764 /* YandexSansDisplay-Thin.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Thin.woff"; sourceTree = "<group>"; };
+		0997B3722AFCCDC900096764 /* YandexSansDisplay-RegularItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-RegularItalic.ttf"; sourceTree = "<group>"; };
+		0997B3732AFCCDC900096764 /* YandexSansText-Regular.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Regular.woff"; sourceTree = "<group>"; };
+		0997B3742AFCCDC900096764 /* YandexSansText-RegularItalic.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-RegularItalic.eot"; sourceTree = "<group>"; };
+		0997B3752AFCCDC900096764 /* YandexSansText-Medium.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Medium.woff2"; sourceTree = "<group>"; };
+		0997B3762AFCCDC900096764 /* YandexSansText-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Light.ttf"; sourceTree = "<group>"; };
+		0997B3772AFCCDC900096764 /* YandexSansText-Thin.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Thin.woff"; sourceTree = "<group>"; };
+		0997B3782AFCCDC900096764 /* YandexSansDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		0997B3792AFCCDC900096764 /* YandexSansText-Medium.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Medium.woff"; sourceTree = "<group>"; };
+		0997B37A2AFCCDC900096764 /* YandexSansDisplay-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Thin.ttf"; sourceTree = "<group>"; };
+		0997B37B2AFCCDC900096764 /* YandexSansText-Bold.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Bold.eot"; sourceTree = "<group>"; };
+		0997B37C2AFCCDC900096764 /* stylesheet.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = stylesheet.css; sourceTree = "<group>"; };
+		0997B37D2AFCCDC900096764 /* YandexSansText-Light.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Light.woff"; sourceTree = "<group>"; };
+		0997B37E2AFCCDC900096764 /* YandexSansText-RegularItalic.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-RegularItalic.woff"; sourceTree = "<group>"; };
+		0997B37F2AFCCDC900096764 /* YandexSansText-Regular.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Regular.woff2"; sourceTree = "<group>"; };
+		0997B3802AFCCDC900096764 /* YandexSansText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Medium.ttf"; sourceTree = "<group>"; };
+		0997B3812AFCCDC900096764 /* YandexSansText-Regular.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Regular.eot"; sourceTree = "<group>"; };
+		0997B3822AFCCDC900096764 /* YandexSansDisplay-Light.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Light.woff"; sourceTree = "<group>"; };
+		0997B3832AFCCDC900096764 /* YandexSansDisplay-Regular.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Regular.woff"; sourceTree = "<group>"; };
+		0997B3842AFCCDC900096764 /* YandexSansDisplay-Regular.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Regular.woff2"; sourceTree = "<group>"; };
+		0997B3852AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-RegularItalic.woff2"; sourceTree = "<group>"; };
+		0997B3862AFCCDC900096764 /* YandexSansText-Thin.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Thin.eot"; sourceTree = "<group>"; };
+		0997B3872AFCCDC900096764 /* YandexSansText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Bold.ttf"; sourceTree = "<group>"; };
+		0997B3882AFCCDC900096764 /* YandexSansDisplay-Thin.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Thin.woff2"; sourceTree = "<group>"; };
+		0997B3892AFCCDC900096764 /* YandexSansText-Bold.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Bold.woff"; sourceTree = "<group>"; };
+		0997B38A2AFCCDC900096764 /* YandexSansText-Light.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Light.woff2"; sourceTree = "<group>"; };
+		0997B38B2AFCCDC900096764 /* demo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = demo.html; sourceTree = "<group>"; };
+		0997B38C2AFCCDC900096764 /* YandexSansText-Bold.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Bold.woff2"; sourceTree = "<group>"; };
+		0997B38D2AFCCDC900096764 /* YandexSansDisplay-Bold.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Bold.woff2"; sourceTree = "<group>"; };
+		0997B38E2AFCCDC900096764 /* YandexSansText-Medium.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Medium.eot"; sourceTree = "<group>"; };
+		0997B38F2AFCCDC900096764 /* YandexSansText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Regular.ttf"; sourceTree = "<group>"; };
+		0997B3902AFCCDC900096764 /* YandexSansDisplay-Bold.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Bold.woff"; sourceTree = "<group>"; };
+		0997B3912AFCCDC900096764 /* YandexSansText-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Thin.ttf"; sourceTree = "<group>"; };
+		0997B3922AFCCDC900096764 /* YandexSansText-Thin.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansText-Thin.woff2"; sourceTree = "<group>"; };
+		0997B3C22AFCD2B900096764 /* GradientBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBarButton.swift; sourceTree = "<group>"; };
+		0997B3C52AFCE6D600096764 /* AllMyTracksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMyTracksVC.swift; sourceTree = "<group>"; };
+		0997B3C72AFCE85100096764 /* StretchyTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyTableHeaderView.swift; sourceTree = "<group>"; };
+		0997B3C92AFCE92200096764 /* AllMyTracksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMyTracksTableViewCell.swift; sourceTree = "<group>"; };
+		0997B3CF2AFCEF6500096764 /* AllTracksAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllTracksAnimation.json; sourceTree = "<group>"; };
+		0997B3D62AFE8D6C00096764 /* AllMyTracksViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMyTracksViews.swift; sourceTree = "<group>"; };
+		0997B3D82AFE9A7100096764 /* TrackPlayingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TrackPlayingAnimation.json; sourceTree = "<group>"; };
+		09CA8A352B0012DF0074B6B9 /* MiniPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerView.swift; sourceTree = "<group>"; };
+		09CA8A3A2B010E070074B6B9 /* NILETTO, Олег Майами & Лёша Свик - Не Вспоминай.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "NILETTO, Олег Майами & Лёша Свик - Не Вспоминай.mp3"; sourceTree = "<group>"; };
 		09EDF13E2AD95530002F4CFC /* YandexMusic2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YandexMusic2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09EDF1412AD95530002F4CFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09EDF1432AD95530002F4CFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		09EDF1452AD95530002F4CFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		09EDF1482AD95530002F4CFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		09EDF1452AD95530002F4CFC /* PlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVC.swift; sourceTree = "<group>"; };
 		09EDF14A2AD95531002F4CFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09EDF14D2AD95531002F4CFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09EDF14F2AD95531002F4CFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09EDF1552AD95558002F4CFC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		09EDF1582AD95598002F4CFC /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		09EDF15A2AD955CA002F4CFC /* Books&PodcastsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Books&PodcastsVC.swift"; sourceTree = "<group>"; };
+		09EDF15C2AD955EE002F4CFC /* MyCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionVC.swift; sourceTree = "<group>"; };
+		09EDF15E2AD95C0F002F4CFC /* MainViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViews.swift; sourceTree = "<group>"; };
+		09EDF1612AD97BDB002F4CFC /* PlayerVIews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVIews.swift; sourceTree = "<group>"; };
+		09EDF1632AD981D2002F4CFC /* SongsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsCollectionViewCell.swift; sourceTree = "<group>"; };
+		09EDF1652AD98483002F4CFC /* SongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongModel.swift; sourceTree = "<group>"; };
+		09EDF1672AD9C655002F4CFC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		09EDF1732ADBECD7002F4CFC /* MyCollectionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViews.swift; sourceTree = "<group>"; };
+		09EDF1772ADBF819002F4CFC /* MyCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionTableViewCell.swift; sourceTree = "<group>"; };
+		09EDF1792ADBFDA4002F4CFC /* ILikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ILikeCell.swift; sourceTree = "<group>"; };
+		09F3E21F2B05FE10004BFBD0 /* Не вспоминай - сниппет.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Не вспоминай - сниппет.mp4"; sourceTree = "<group>"; };
+		09F3E2432B0628F7004BFBD0 /* Markul_Тося Чайкина-Стрелы_Сниппет.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Markul_Тося Чайкина-Стрелы_Сниппет.mp4"; sourceTree = "<group>"; };
+		09F89EB92AEEA917006086E2 /* Три дня дождя, MONA - Прощание.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Три дня дождя, MONA - Прощание.mp3"; sourceTree = "<group>"; };
+		09F89EBB2AEEAB2B006086E2 /* Лёша Свик - Загоны.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Лёша Свик - Загоны.mp3"; sourceTree = "<group>"; };
+		09F89EBD2AEEAB55006086E2 /* Markul, Тося Чайкина - Стрелы.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Markul, Тося Чайкина - Стрелы.mp3"; sourceTree = "<group>"; };
+		09F89EBF2AEEABAC006086E2 /* Muse - The Handler.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Muse - The Handler.mp3"; sourceTree = "<group>"; };
+		09F89EC12AEEABE4006086E2 /* The Weeknd - Save Your Tears.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "The Weeknd - Save Your Tears.mp3"; sourceTree = "<group>"; };
+		09F89EC32AEFAD8E006086E2 /* MainChildVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainChildVC.swift; sourceTree = "<group>"; };
+		09F89EC72AEFDC32006086E2 /* MainChildViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainChildViews.swift; sourceTree = "<group>"; };
+		09F89EC92AEFDE03006086E2 /* MainChildCollectForYouCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainChildCollectForYouCell.swift; sourceTree = "<group>"; };
+		09F89ECB2AEFECA1006086E2 /* CollectForYouCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectForYouCell.swift; sourceTree = "<group>"; };
+		09F89ECD2AF00D70006086E2 /* YourFavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourFavouriteTableViewCell.swift; sourceTree = "<group>"; };
+		09F89ECF2AF013A9006086E2 /* ListenedRecentlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenedRecentlyTableViewCell.swift; sourceTree = "<group>"; };
+		09F89ED12AF0162A006086E2 /* ListenedRecentlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenedRecentlyCollectionViewCell.swift; sourceTree = "<group>"; };
+		09F89ED32AF02570006086E2 /* InterestingNowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestingNowTableViewCell.swift; sourceTree = "<group>"; };
+		09F89ED52AF02610006086E2 /* InterestingNowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestingNowCollectionViewCell.swift; sourceTree = "<group>"; };
+		09F89ED72AF12072006086E2 /* Oxxxymiron - Агент.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Oxxxymiron - Агент.mp3"; sourceTree = "<group>"; };
+		09F89ED92AF15729006086E2 /* ClipsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipsTableViewCell.swift; sourceTree = "<group>"; };
+		09F89F072AF3CEB7006086E2 /* NewReleasesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesTableViewCell.swift; sourceTree = "<group>"; };
+		09F89F092AF3CEFC006086E2 /* NewReleasesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesCollectionViewCell.swift; sourceTree = "<group>"; };
+		09F89F2B2AF7BAD2006086E2 /* PopularPlaylistsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlaylistsTableViewCell.swift; sourceTree = "<group>"; };
+		09F89F2D2AF7BB6F006086E2 /* PopularPlaylistsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPlaylistsCollectionViewCell.swift; sourceTree = "<group>"; };
+		09F89F2F2AF7ECB5006086E2 /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
+		09F89F352AF7F397006086E2 /* FullChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullChartTableViewCell.swift; sourceTree = "<group>"; };
+		09F89F392AF90160006086E2 /* NeuroMusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuroMusicTableViewCell.swift; sourceTree = "<group>"; };
+		09F89F3B2AF903BC006086E2 /* NeuroMusicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuroMusicCollectionViewCell.swift; sourceTree = "<group>"; };
+		09F89F3D2AF917B6006086E2 /* SelectionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionsTableViewCell.swift; sourceTree = "<group>"; };
+		09F89F3F2AF917EE006086E2 /* SelectionsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionsCollectionViewCell.swift; sourceTree = "<group>"; };
+		903D763AD5343813AA6CBA0F /* Pods_YandexMusic2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YandexMusic2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F19B2A38B1372879364C896F /* Pods-YandexMusic2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YandexMusic2.debug.xcconfig"; path = "Target Support Files/Pods-YandexMusic2/Pods-YandexMusic2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +231,100 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0282CDDFC78F2376AC376C04 /* Pods_YandexMusic2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0997B3632AFCCDC900096764 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0997B3642AFCCDC900096764 /* YandexSansDisplay-Bold.eot */,
+				0997B3652AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff */,
+				0997B3662AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url */,
+				0997B3672AFCCDC900096764 /* YandexSansDisplay-Light.eot */,
+				0997B3682AFCCDC900096764 /* YandexSansDisplay-RegularItalic.eot */,
+				0997B3692AFCCDC900096764 /* YandexSansText-RegularItalic.ttf */,
+				0997B36A2AFCCDC900096764 /* YandexSansText-RegularItalic.woff2 */,
+				0997B36B2AFCCDC900096764 /* YandexSansDisplay-Regular.eot */,
+				0997B36C2AFCCDC900096764 /* YandexSansDisplay-Thin.eot */,
+				0997B36D2AFCCDC900096764 /* YandexSansText-Light.eot */,
+				0997B36E2AFCCDC900096764 /* YandexSansDisplay-Bold.ttf */,
+				0997B36F2AFCCDC900096764 /* YandexSansDisplay-Light.woff2 */,
+				0997B3702AFCCDC900096764 /* YandexSansDisplay-Light.ttf */,
+				0997B3712AFCCDC900096764 /* YandexSansDisplay-Thin.woff */,
+				0997B3722AFCCDC900096764 /* YandexSansDisplay-RegularItalic.ttf */,
+				0997B3732AFCCDC900096764 /* YandexSansText-Regular.woff */,
+				0997B3742AFCCDC900096764 /* YandexSansText-RegularItalic.eot */,
+				0997B3752AFCCDC900096764 /* YandexSansText-Medium.woff2 */,
+				0997B3762AFCCDC900096764 /* YandexSansText-Light.ttf */,
+				0997B3772AFCCDC900096764 /* YandexSansText-Thin.woff */,
+				0997B3782AFCCDC900096764 /* YandexSansDisplay-Regular.ttf */,
+				0997B3792AFCCDC900096764 /* YandexSansText-Medium.woff */,
+				0997B37A2AFCCDC900096764 /* YandexSansDisplay-Thin.ttf */,
+				0997B37B2AFCCDC900096764 /* YandexSansText-Bold.eot */,
+				0997B37C2AFCCDC900096764 /* stylesheet.css */,
+				0997B37D2AFCCDC900096764 /* YandexSansText-Light.woff */,
+				0997B37E2AFCCDC900096764 /* YandexSansText-RegularItalic.woff */,
+				0997B37F2AFCCDC900096764 /* YandexSansText-Regular.woff2 */,
+				0997B3802AFCCDC900096764 /* YandexSansText-Medium.ttf */,
+				0997B3812AFCCDC900096764 /* YandexSansText-Regular.eot */,
+				0997B3822AFCCDC900096764 /* YandexSansDisplay-Light.woff */,
+				0997B3832AFCCDC900096764 /* YandexSansDisplay-Regular.woff */,
+				0997B3842AFCCDC900096764 /* YandexSansDisplay-Regular.woff2 */,
+				0997B3852AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff2 */,
+				0997B3862AFCCDC900096764 /* YandexSansText-Thin.eot */,
+				0997B3872AFCCDC900096764 /* YandexSansText-Bold.ttf */,
+				0997B3882AFCCDC900096764 /* YandexSansDisplay-Thin.woff2 */,
+				0997B3892AFCCDC900096764 /* YandexSansText-Bold.woff */,
+				0997B38A2AFCCDC900096764 /* YandexSansText-Light.woff2 */,
+				0997B38B2AFCCDC900096764 /* demo.html */,
+				0997B38C2AFCCDC900096764 /* YandexSansText-Bold.woff2 */,
+				0997B38D2AFCCDC900096764 /* YandexSansDisplay-Bold.woff2 */,
+				0997B38E2AFCCDC900096764 /* YandexSansText-Medium.eot */,
+				0997B38F2AFCCDC900096764 /* YandexSansText-Regular.ttf */,
+				0997B3902AFCCDC900096764 /* YandexSansDisplay-Bold.woff */,
+				0997B3912AFCCDC900096764 /* YandexSansText-Thin.ttf */,
+				0997B3922AFCCDC900096764 /* YandexSansText-Thin.woff2 */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		0997B3C42AFCE6BA00096764 /* My Collection */ = {
+			isa = PBXGroup;
+			children = (
+				09EDF15C2AD955EE002F4CFC /* MyCollectionVC.swift */,
+				0997B3C52AFCE6D600096764 /* AllMyTracksVC.swift */,
+			);
+			path = "My Collection";
+			sourceTree = "<group>";
+		};
+		0997B3D52AFE8D4C00096764 /* AllMyTracksViews */ = {
+			isa = PBXGroup;
+			children = (
+				0997B3C72AFCE85100096764 /* StretchyTableHeaderView.swift */,
+				0997B3D62AFE8D6C00096764 /* AllMyTracksViews.swift */,
+			);
+			path = AllMyTracksViews;
+			sourceTree = "<group>";
+		};
+		09CA8A372B0012E80074B6B9 /* MiniPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				09CA8A352B0012DF0074B6B9 /* MiniPlayerView.swift */,
+			);
+			path = MiniPlayer;
+			sourceTree = "<group>";
+		};
 		09EDF1352AD95530002F4CFC = {
 			isa = PBXGroup;
 			children = (
 				09EDF1402AD95530002F4CFC /* YandexMusic2 */,
 				09EDF13F2AD95530002F4CFC /* Products */,
+				873B2A30D01D2EC0C7578ECE /* Pods */,
+				A965F2426DBFD4EE2F579882 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +339,146 @@
 		09EDF1402AD95530002F4CFC /* YandexMusic2 */ = {
 			isa = PBXGroup;
 			children = (
+				0997B3632AFCCDC900096764 /* Fonts */,
+				09F89EC12AEEABE4006086E2 /* The Weeknd - Save Your Tears.mp3 */,
+				09F89EBF2AEEABAC006086E2 /* Muse - The Handler.mp3 */,
+				09F89EBD2AEEAB55006086E2 /* Markul, Тося Чайкина - Стрелы.mp3 */,
+				09F89EBB2AEEAB2B006086E2 /* Лёша Свик - Загоны.mp3 */,
+				09CA8A3A2B010E070074B6B9 /* NILETTO, Олег Майами & Лёша Свик - Не Вспоминай.mp3 */,
+				09F89ED72AF12072006086E2 /* Oxxxymiron - Агент.mp3 */,
+				09F89EB92AEEA917006086E2 /* Три дня дождя, MONA - Прощание.mp3 */,
+				095BF2B32ADC45C800D261E8 /* MyWave.json */,
+				095BF2B12ADC457200D261E8 /* MyWaveBlack.json */,
+				095BF2AF2ADC44ED00D261E8 /* MyWaveWhite.json */,
+				0997B3CF2AFCEF6500096764 /* AllTracksAnimation.json */,
+				0997B3D82AFE9A7100096764 /* TrackPlayingAnimation.json */,
+				09F3E21F2B05FE10004BFBD0 /* Не вспоминай - сниппет.mp4 */,
+				09F3E2432B0628F7004BFBD0 /* Markul_Тося Чайкина-Стрелы_Сниппет.mp4 */,
 				09EDF1412AD95530002F4CFC /* AppDelegate.swift */,
 				09EDF1432AD95530002F4CFC /* SceneDelegate.swift */,
-				09EDF1452AD95530002F4CFC /* ViewController.swift */,
-				09EDF1472AD95530002F4CFC /* Main.storyboard */,
+				09EDF16A2AD9EDC1002F4CFC /* Model */,
 				09EDF14A2AD95531002F4CFC /* Assets.xcassets */,
 				09EDF14C2AD95531002F4CFC /* LaunchScreen.storyboard */,
 				09EDF14F2AD95531002F4CFC /* Info.plist */,
+				09EDF1692AD9C659002F4CFC /* Supporting Files */,
+				09EDF1602AD95E15002F4CFC /* Views */,
+				09EDF1572AD95587002F4CFC /* Controllers */,
 			);
 			path = YandexMusic2;
+			sourceTree = "<group>";
+		};
+		09EDF1572AD95587002F4CFC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				09EDF1552AD95558002F4CFC /* TabBarController.swift */,
+				09EDF1582AD95598002F4CFC /* MainVC.swift */,
+				09EDF15A2AD955CA002F4CFC /* Books&PodcastsVC.swift */,
+				0997B3C42AFCE6BA00096764 /* My Collection */,
+				09EDF1452AD95530002F4CFC /* PlayerVC.swift */,
+				09F89EC32AEFAD8E006086E2 /* MainChildVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		09EDF1602AD95E15002F4CFC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				09CA8A372B0012E80074B6B9 /* MiniPlayer */,
+				09EDF15E2AD95C0F002F4CFC /* MainViews.swift */,
+				09F89EC72AEFDC32006086E2 /* MainChildViews.swift */,
+				09EDF1612AD97BDB002F4CFC /* PlayerVIews.swift */,
+				09EDF1732ADBECD7002F4CFC /* MyCollectionViews.swift */,
+				0997B3D52AFE8D4C00096764 /* AllMyTracksViews */,
+				09F89EB32AEEA8C7006086E2 /* Cells */,
+				09EDF17B2ADBFDAA002F4CFC /* MyFavouriteCells */,
+				0997B3C22AFCD2B900096764 /* GradientBarButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		09EDF1692AD9C659002F4CFC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				09EDF1672AD9C655002F4CFC /* Extensions.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		09EDF16A2AD9EDC1002F4CFC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				09EDF1652AD98483002F4CFC /* SongModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		09EDF17B2ADBFDAA002F4CFC /* MyFavouriteCells */ = {
+			isa = PBXGroup;
+			children = (
+				09EDF1772ADBF819002F4CFC /* MyCollectionTableViewCell.swift */,
+				09EDF1792ADBFDA4002F4CFC /* ILikeCell.swift */,
+			);
+			path = MyFavouriteCells;
+			sourceTree = "<group>";
+		};
+		09F89EB32AEEA8C7006086E2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				09F89F372AF818BC006086E2 /* CollectionViewCells */,
+				09F89F382AF818FB006086E2 /* TableViewCells */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		09F89F372AF818BC006086E2 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				09EDF1632AD981D2002F4CFC /* SongsCollectionViewCell.swift */,
+				09F89EC92AEFDE03006086E2 /* MainChildCollectForYouCell.swift */,
+				09F89ED12AF0162A006086E2 /* ListenedRecentlyCollectionViewCell.swift */,
+				09F89ED52AF02610006086E2 /* InterestingNowCollectionViewCell.swift */,
+				09F89F092AF3CEFC006086E2 /* NewReleasesCollectionViewCell.swift */,
+				09F89F2D2AF7BB6F006086E2 /* PopularPlaylistsCollectionViewCell.swift */,
+				09F89F3B2AF903BC006086E2 /* NeuroMusicCollectionViewCell.swift */,
+				09F89F3F2AF917EE006086E2 /* SelectionsCollectionViewCell.swift */,
+			);
+			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		09F89F382AF818FB006086E2 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				09F89ECB2AEFECA1006086E2 /* CollectForYouCell.swift */,
+				09F89ECD2AF00D70006086E2 /* YourFavouriteTableViewCell.swift */,
+				09F89ECF2AF013A9006086E2 /* ListenedRecentlyTableViewCell.swift */,
+				09F89ED32AF02570006086E2 /* InterestingNowTableViewCell.swift */,
+				09F89ED92AF15729006086E2 /* ClipsTableViewCell.swift */,
+				09F89F072AF3CEB7006086E2 /* NewReleasesTableViewCell.swift */,
+				09F89F2B2AF7BAD2006086E2 /* PopularPlaylistsTableViewCell.swift */,
+				09F89F2F2AF7ECB5006086E2 /* ChartTableViewCell.swift */,
+				09F89F352AF7F397006086E2 /* FullChartTableViewCell.swift */,
+				09F89F392AF90160006086E2 /* NeuroMusicTableViewCell.swift */,
+				09F89F3D2AF917B6006086E2 /* SelectionsTableViewCell.swift */,
+				0997B3C92AFCE92200096764 /* AllMyTracksTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		873B2A30D01D2EC0C7578ECE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F19B2A38B1372879364C896F /* Pods-YandexMusic2.debug.xcconfig */,
+				08CABB972DF89F3C55689EC4 /* Pods-YandexMusic2.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A965F2426DBFD4EE2F579882 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				903D763AD5343813AA6CBA0F /* Pods_YandexMusic2.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +488,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09EDF1522AD95531002F4CFC /* Build configuration list for PBXNativeTarget "YandexMusic2" */;
 			buildPhases = (
+				55EE9AF20006C479F1C7C6FA /* [CP] Check Pods Manifest.lock */,
 				09EDF13A2AD95530002F4CFC /* Sources */,
 				09EDF13B2AD95530002F4CFC /* Frameworks */,
 				09EDF13C2AD95530002F4CFC /* Resources */,
+				C33082D31A888A45601AFF8C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,36 +541,168 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09F3E2442B0629AD004BFBD0 /* Markul_Тося Чайкина-Стрелы_Сниппет.mp4 in Resources */,
+				09F3E2202B0601B9004BFBD0 /* Не вспоминай - сниппет.mp4 in Resources */,
+				0997B3B92AFCCDC900096764 /* YandexSansText-Light.woff2 in Resources */,
+				09F89EBC2AEEAB2B006086E2 /* Лёша Свик - Загоны.mp3 in Resources */,
+				0997B3B62AFCCDC900096764 /* YandexSansText-Bold.ttf in Resources */,
 				09EDF14E2AD95531002F4CFC /* LaunchScreen.storyboard in Resources */,
+				0997B3BE2AFCCDC900096764 /* YandexSansText-Regular.ttf in Resources */,
+				0997B3972AFCCDC900096764 /* YandexSansDisplay-RegularItalic.eot in Resources */,
+				0997B3AD2AFCCDC900096764 /* YandexSansText-RegularItalic.woff in Resources */,
+				0997B3B32AFCCDC900096764 /* YandexSansDisplay-Regular.woff2 in Resources */,
+				0997B3962AFCCDC900096764 /* YandexSansDisplay-Light.eot in Resources */,
+				0997B3D02AFCEF6500096764 /* AllTracksAnimation.json in Resources */,
+				0997B3B82AFCCDC900096764 /* YandexSansText-Bold.woff in Resources */,
+				0997B3D92AFE9A7100096764 /* TrackPlayingAnimation.json in Resources */,
+				0997B3AE2AFCCDC900096764 /* YandexSansText-Regular.woff2 in Resources */,
+				0997B3A42AFCCDC900096764 /* YandexSansText-Medium.woff2 in Resources */,
+				0997B3A12AFCCDC900096764 /* YandexSansDisplay-RegularItalic.ttf in Resources */,
+				0997B3952AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url in Resources */,
+				0997B39C2AFCCDC900096764 /* YandexSansText-Light.eot in Resources */,
+				0997B3932AFCCDC900096764 /* YandexSansDisplay-Bold.eot in Resources */,
+				09F89EC22AEEABE4006086E2 /* The Weeknd - Save Your Tears.mp3 in Resources */,
+				0997B3BB2AFCCDC900096764 /* YandexSansText-Bold.woff2 in Resources */,
+				0997B3A02AFCCDC900096764 /* YandexSansDisplay-Thin.woff in Resources */,
+				0997B3BC2AFCCDC900096764 /* YandexSansDisplay-Bold.woff2 in Resources */,
+				0997B3B12AFCCDC900096764 /* YandexSansDisplay-Light.woff in Resources */,
+				0997B39F2AFCCDC900096764 /* YandexSansDisplay-Light.ttf in Resources */,
+				0997B3BA2AFCCDC900096764 /* demo.html in Resources */,
+				0997B3A92AFCCDC900096764 /* YandexSansDisplay-Thin.ttf in Resources */,
+				0997B3C12AFCCDC900096764 /* YandexSansText-Thin.woff2 in Resources */,
+				0997B3B72AFCCDC900096764 /* YandexSansDisplay-Thin.woff2 in Resources */,
+				0997B3BD2AFCCDC900096764 /* YandexSansText-Medium.eot in Resources */,
+				0997B3A72AFCCDC900096764 /* YandexSansDisplay-Regular.ttf in Resources */,
+				0997B3B52AFCCDC900096764 /* YandexSansText-Thin.eot in Resources */,
+				0997B39D2AFCCDC900096764 /* YandexSansDisplay-Bold.ttf in Resources */,
+				0997B3A82AFCCDC900096764 /* YandexSansText-Medium.woff in Resources */,
+				0997B39E2AFCCDC900096764 /* YandexSansDisplay-Light.woff2 in Resources */,
+				095BF2B02ADC44ED00D261E8 /* MyWaveWhite.json in Resources */,
+				0997B3A22AFCCDC900096764 /* YandexSansText-Regular.woff in Resources */,
+				095BF2B42ADC45C800D261E8 /* MyWave.json in Resources */,
+				0997B3B02AFCCDC900096764 /* YandexSansText-Regular.eot in Resources */,
+				095BF2B22ADC457200D261E8 /* MyWaveBlack.json in Resources */,
+				09F89ED82AF12072006086E2 /* Oxxxymiron - Агент.mp3 in Resources */,
+				0997B3BF2AFCCDC900096764 /* YandexSansDisplay-Bold.woff in Resources */,
+				0997B3AC2AFCCDC900096764 /* YandexSansText-Light.woff in Resources */,
+				09F89EBA2AEEA917006086E2 /* Три дня дождя, MONA - Прощание.mp3 in Resources */,
+				0997B3C02AFCCDC900096764 /* YandexSansText-Thin.ttf in Resources */,
+				0997B3A62AFCCDC900096764 /* YandexSansText-Thin.woff in Resources */,
+				0997B3992AFCCDC900096764 /* YandexSansText-RegularItalic.woff2 in Resources */,
+				0997B3A32AFCCDC900096764 /* YandexSansText-RegularItalic.eot in Resources */,
+				0997B3942AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff in Resources */,
+				09CA8A3B2B010E070074B6B9 /* NILETTO, Олег Майами & Лёша Свик - Не Вспоминай.mp3 in Resources */,
+				0997B3AF2AFCCDC900096764 /* YandexSansText-Medium.ttf in Resources */,
+				0997B39A2AFCCDC900096764 /* YandexSansDisplay-Regular.eot in Resources */,
+				0997B3AA2AFCCDC900096764 /* YandexSansText-Bold.eot in Resources */,
+				0997B3A52AFCCDC900096764 /* YandexSansText-Light.ttf in Resources */,
+				09F89EC02AEEABAC006086E2 /* Muse - The Handler.mp3 in Resources */,
+				0997B39B2AFCCDC900096764 /* YandexSansDisplay-Thin.eot in Resources */,
+				09F89EBE2AEEAB55006086E2 /* Markul, Тося Чайкина - Стрелы.mp3 in Resources */,
+				0997B3B22AFCCDC900096764 /* YandexSansDisplay-Regular.woff in Resources */,
+				0997B3B42AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff2 in Resources */,
+				0997B3982AFCCDC900096764 /* YandexSansText-RegularItalic.ttf in Resources */,
 				09EDF14B2AD95531002F4CFC /* Assets.xcassets in Resources */,
-				09EDF1492AD95530002F4CFC /* Main.storyboard in Resources */,
+				0997B3AB2AFCCDC900096764 /* stylesheet.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		55EE9AF20006C479F1C7C6FA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YandexMusic2-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C33082D31A888A45601AFF8C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YandexMusic2/Pods-YandexMusic2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YandexMusic2/Pods-YandexMusic2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YandexMusic2/Pods-YandexMusic2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		09EDF13A2AD95530002F4CFC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09EDF1462AD95530002F4CFC /* ViewController.swift in Sources */,
+				09F89F082AF3CEB7006086E2 /* NewReleasesTableViewCell.swift in Sources */,
+				09EDF1462AD95530002F4CFC /* PlayerVC.swift in Sources */,
+				0997B3CA2AFCE92200096764 /* AllMyTracksTableViewCell.swift in Sources */,
+				09EDF1662AD98483002F4CFC /* SongModel.swift in Sources */,
+				09EDF17A2ADBFDA4002F4CFC /* ILikeCell.swift in Sources */,
+				0997B3C82AFCE85100096764 /* StretchyTableHeaderView.swift in Sources */,
+				0997B3D72AFE8D6C00096764 /* AllMyTracksViews.swift in Sources */,
+				09F89ED42AF02570006086E2 /* InterestingNowTableViewCell.swift in Sources */,
+				09F89EDA2AF15729006086E2 /* ClipsTableViewCell.swift in Sources */,
+				09EDF1562AD95558002F4CFC /* TabBarController.swift in Sources */,
 				09EDF1422AD95530002F4CFC /* AppDelegate.swift in Sources */,
+				09EDF1622AD97BDB002F4CFC /* PlayerVIews.swift in Sources */,
+				09F89F2C2AF7BAD2006086E2 /* PopularPlaylistsTableViewCell.swift in Sources */,
+				09EDF1782ADBF819002F4CFC /* MyCollectionTableViewCell.swift in Sources */,
+				09F89F3C2AF903BC006086E2 /* NeuroMusicCollectionViewCell.swift in Sources */,
 				09EDF1442AD95530002F4CFC /* SceneDelegate.swift in Sources */,
+				09F89ECA2AEFDE03006086E2 /* MainChildCollectForYouCell.swift in Sources */,
+				09EDF1592AD95598002F4CFC /* MainVC.swift in Sources */,
+				0997B3C62AFCE6D600096764 /* AllMyTracksVC.swift in Sources */,
+				09F89ED22AF0162A006086E2 /* ListenedRecentlyCollectionViewCell.swift in Sources */,
+				09F89F402AF917EE006086E2 /* SelectionsCollectionViewCell.swift in Sources */,
+				09EDF1682AD9C655002F4CFC /* Extensions.swift in Sources */,
+				0997B3C32AFCD2B900096764 /* GradientBarButton.swift in Sources */,
+				09F89F3E2AF917B6006086E2 /* SelectionsTableViewCell.swift in Sources */,
+				09F89F0A2AF3CEFC006086E2 /* NewReleasesCollectionViewCell.swift in Sources */,
+				09F89EC82AEFDC32006086E2 /* MainChildViews.swift in Sources */,
+				09EDF1642AD981D2002F4CFC /* SongsCollectionViewCell.swift in Sources */,
+				09F89ECC2AEFECA1006086E2 /* CollectForYouCell.swift in Sources */,
+				09F89ED62AF02610006086E2 /* InterestingNowCollectionViewCell.swift in Sources */,
+				09F89ED02AF013A9006086E2 /* ListenedRecentlyTableViewCell.swift in Sources */,
+				09EDF1742ADBECD7002F4CFC /* MyCollectionViews.swift in Sources */,
+				09EDF15F2AD95C0F002F4CFC /* MainViews.swift in Sources */,
+				09F89F302AF7ECB5006086E2 /* ChartTableViewCell.swift in Sources */,
+				09F89ECE2AF00D70006086E2 /* YourFavouriteTableViewCell.swift in Sources */,
+				09EDF15B2AD955CA002F4CFC /* Books&PodcastsVC.swift in Sources */,
+				09F89EC42AEFAD8E006086E2 /* MainChildVC.swift in Sources */,
+				09F89F3A2AF90160006086E2 /* NeuroMusicTableViewCell.swift in Sources */,
+				09EDF15D2AD955EE002F4CFC /* MyCollectionVC.swift in Sources */,
+				09F89F2E2AF7BB6F006086E2 /* PopularPlaylistsCollectionViewCell.swift in Sources */,
+				09F89F362AF7F397006086E2 /* FullChartTableViewCell.swift in Sources */,
+				09CA8A362B0012DF0074B6B9 /* MiniPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		09EDF1472AD95530002F4CFC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				09EDF1482AD95530002F4CFC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		09EDF14C2AD95531002F4CFC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -218,7 +766,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -275,7 +823,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -287,19 +835,20 @@
 		};
 		09EDF1532AD95531002F4CFC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F19B2A38B1372879364C896F /* Pods-YandexMusic2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 44S95Z526W;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YandexMusic2/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,19 +864,20 @@
 		};
 		09EDF1542AD95531002F4CFC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08CABB972DF89F3C55689EC4 /* Pods-YandexMusic2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 44S95Z526W;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YandexMusic2/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
