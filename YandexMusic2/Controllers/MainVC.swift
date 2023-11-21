@@ -366,7 +366,6 @@ class MainVC: UIViewController {
             existingPlayerVC.updateTrack(getNeededTrack)
             existingPlayerVC.audioPlayer = AudioPlayer.shared.player // Передайте текущий экземпляр AudioPlayer
             existingPlayerVC.currentTrack = getNeededTrack
-            print("esdfds")
             existingPlayerVC.modalPresentationStyle = .overFullScreen
             present(existingPlayerVC, animated: true)
         } else {
