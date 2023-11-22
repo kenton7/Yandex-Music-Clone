@@ -125,8 +125,6 @@ class MiniPlayerView: UIView {
             
             playPauseButtonMiniPlayer.trailingAnchor.constraint(equalTo: miniPlayer.trailingAnchor, constant: -10),
             playPauseButtonMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
-//            playPauseButtonMiniPlayer.heightAnchor.constraint(equalToConstant: 18),
-//            playPauseButtonMiniPlayer.widthAnchor.constraint(equalToConstant: 18),
             
             changeSourcePlayingMiniPlayer.trailingAnchor.constraint(equalTo: playPauseButtonMiniPlayer.leadingAnchor, constant: -20),
             changeSourcePlayingMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),

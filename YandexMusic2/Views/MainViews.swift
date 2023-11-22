@@ -52,6 +52,7 @@ class MainViews: MiniPlayerView {
         super.init(frame: frame)
         
         configureViews()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -68,7 +69,7 @@ class MainViews: MiniPlayerView {
         NSLayoutConstraint.activate([
             waveAnimationView.centerXAnchor.constraint(equalTo: centerXAnchor),
             waveAnimationView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            waveAnimationView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.55),
+            waveAnimationView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.65),
             
             myWaveStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             myWaveStackView.centerYAnchor.constraint(equalTo: centerYAnchor),

@@ -69,11 +69,13 @@ class MainVC: UIViewController {
     
     override func loadView() {
         super.loadView()
+        mainViews.frame = view.bounds
         view = mainViews
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         view.backgroundColor = .black
         self.definesPresentationContext = true
         navigationItem.title = "Яндекс Музыка"
@@ -155,21 +157,9 @@ class MainVC: UIViewController {
         
         mainChild = MainChildVC()
         addChild(mainChild)
-        //view.addSubview(mainChild.view)
         view.insertSubview(mainChild.view, at: 3)
         mainChild.didMove(toParent: self)
-        mainChild.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            mainChild.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mainChild.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
-        
-        childHeight = mainChild.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.40)
-        childHeight.isActive = true
-        
-        mainChildViewBottomAnchor = mainChild.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        mainChildViewBottomAnchor.isActive = true
+        mainChild.view.frame = CGRect(x: 0, y: view.frame.height - view.frame.height * 0.4, width: view.frame.width, height: view.bounds.height * 0.4)
         mainChild.view.clipsToBounds = true
         
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainVC.handleMainChildTap(recognizer:)))
