@@ -17,6 +17,7 @@ import CoreImage
 
 class PlayerVC: UIViewController {
     
+    static let shared = PlayerVC()
     let playerViews = PlayerVIews()
     let mainVC = MainVC()
 //    var isPlayPressed: Bool {
@@ -26,7 +27,14 @@ class PlayerVC: UIViewController {
 //            return false
 //        }
 //    }
-    var isPlayPressed = false
+    var isPlayPressed: Bool {
+        guard let player = AudioPlayer.shared.player else { return false }
+        if player.isPlaying {
+            return true
+        } else {
+            return false
+        }
+    }
     private var isRepeatActivated = UserDefaults.standard.bool(forKey: "isRepeatActivated")
     
     var playerCalled: (() -> Void)?
@@ -62,8 +70,8 @@ class PlayerVC: UIViewController {
         
         let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == playerViews.songAuthor.text && $0.songName == playerViews.songName.text }.first
         
-        AudioPlayer.shared.setTrack(track: AudioPlayer.shared.currentTrack!)
-        print(audioPlayer?.isPlaying)
+        //AudioPlayer.shared.setupPlayer(track: getNeededTrack!)
+        //AudioPlayer.shared.setTrack(track: AudioPlayer.shared.currentTrack!)
         //audioPlayer = AudioPlayer.shared.player
 //        guard let player = AudioPlayer.shared.player else {
 //                print("Player is not set")
@@ -80,7 +88,7 @@ class PlayerVC: UIViewController {
                 
         playerViews.albumImageCollectionView.delegate = self
         playerViews.albumImageCollectionView.dataSource = self
-        playerViews.playPauseButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        playerViews.playPauseButton.addTarget(self, action: #selector(playButtonPressed(_ :)), for: .touchUpInside)
         playerViews.downArrowButton.addTarget(self, action: #selector(closePlayerVCPressed), for: .touchUpInside)
         playerViews.repeatButton.addTarget(self, action: #selector(repeatButtonPressed), for: .touchUpInside)
         playerViews.slider.addTarget(self, action: #selector(rewindTrack), for: .valueChanged)
@@ -88,18 +96,30 @@ class PlayerVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        guard let player = AudioPlayer.shared.player else {
+            print("Не удалось инициировать плеер")
+            return
+        }
+        
+        print(player.isPlaying)
+        
+        if player.isPlaying {
+            playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
+        } else {
+            playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+        }
+       
                 
         //guard let audioPlayer = self.audioPlayer else { return }
-        
-        print(audioPlayer?.isPlaying)
-        
-        if let audioPlayer = AudioPlayer.shared.player {
-            if audioPlayer.isPlaying {
-                playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
-            } else {
-                playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
-            }
-        }
+                
+//        if let audioPlayer = AudioPlayer.shared.player {
+//            if audioPlayer.isPlaying {
+//                playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
+//            } else {
+//                playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+//            }
+//        }
         
         if isRepeatActivated {
             AudioPlayer.shared.player?.numberOfLoops = -1
@@ -115,7 +135,7 @@ class PlayerVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
                 
-        if AudioPlayer.shared.currentTrack?.hasVideoshot == true && audioPlayer?.isPlaying == true {
+        if AudioPlayer.shared.currentTrack?.hasVideoshot == true && AudioPlayer.shared.player?.isPlaying == true {
             
             // Запускаем анимацию изменения прозрачности цвета с повторением и автовозвратом
             UIView.animate(withDuration: 0.5, delay: 0, options: [.autoreverse, .repeat], animations: {
@@ -237,7 +257,7 @@ class PlayerVC: UIViewController {
         
         //playerViews.songStartTimeLabel.text = NSString(format: "%2d:%02d", AudioPlayer.shared.currentMinutes, AudioPlayer.shared.currentSeconds) as String
         
-        if audioPlayer?.isPlaying == true {
+        if AudioPlayer.shared.player?.isPlaying == true {
 
             playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
         } else {
@@ -255,17 +275,20 @@ class PlayerVC: UIViewController {
         // Другие необходимые обновления, если есть
     }
     
-    @objc func playButtonPressed() {
+    @objc func playButtonPressed(_ sender: UIButton) {
         
         print(audioPlayer?.isPlaying)
-        //isPlayPressed.toggle()
-        //isPlayPressed.toggle()
-        playerViews.playPauseButton.isSelected.toggle()
         
-        if playerViews.playPauseButton.isSelected {
-            audioPlayer?.play()
+        if isPlayPressed == true {
+            sender.isSelected = true
+        } else {
+            sender.isSelected = false
+        }
+        
+        if sender.isSelected == true {
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
             playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .selected) // кнопка нажата (трек играет)
+            
             UIView.animate(withDuration: 0.5, delay: 0, options: [.autoreverse, .repeat]) {
                 self.playerViews.albumImageCollectionView.alpha = 0.5
             }
@@ -276,6 +299,7 @@ class PlayerVC: UIViewController {
         } else {
             playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal) // трек на паузе
             audioPlayer?.pause()
+            
             playerViews.subviews.forEach {
                 if $0.tag == 100 {
                     $0.removeFromSuperview()
@@ -285,6 +309,34 @@ class PlayerVC: UIViewController {
             playerViews.albumImageCollectionView.alpha = 1.0
             playerViews.albumImageCollectionView.isHidden = false
         }
+        
+        //isPlayPressed.toggle()
+        //isPlayPressed.toggle()
+//        playerViews.playPauseButton.isSelected.toggle()
+//        
+//        if playerViews.playPauseButton.isSelected {
+//            audioPlayer?.play()
+//            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+//            playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .selected) // кнопка нажата (трек играет)
+//            UIView.animate(withDuration: 0.5, delay: 0, options: [.autoreverse, .repeat]) {
+//                self.playerViews.albumImageCollectionView.alpha = 0.5
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                self.playVideoshot()
+//                self.playerViews.albumImageCollectionView.alpha = 1.0
+//            }
+//        } else {
+//            playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal) // трек на паузе
+//            audioPlayer?.pause()
+//            playerViews.subviews.forEach {
+//                if $0.tag == 100 {
+//                    $0.removeFromSuperview()
+//                }
+//                playerViews.layoutIfNeeded()
+//            }
+//            playerViews.albumImageCollectionView.alpha = 1.0
+//            playerViews.albumImageCollectionView.isHidden = false
+//        }
     }
     
     @objc private func repeatButtonPressed() {

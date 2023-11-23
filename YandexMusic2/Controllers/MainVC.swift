@@ -285,68 +285,49 @@ class MainVC: UIViewController {
         
         //isSongPlaying.toggle()
         
-        if !runningAnimations.isEmpty {
-                runningAnimations.forEach { $0.stopAnimation(false) }
-                runningAnimations.removeAll()
-            }
+        
         
         if audioPlayer?.isPlaying == true {
             mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
-            audioPlayer?.pause()
+            AudioPlayer.shared.playerShared.pause()
         } else {
-            let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first
+            guard let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first else { return }
             let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
             audioPlayer?.currentTime = TimeInterval(mainViews.sliderOnMiniPlayer.value)
             mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-            AudioPlayer().setTrack(track: getNeededTrack!)
+            //AudioPlayer().setTrack(track: getNeededTrack)
             //AudioPlayer.shared.player?.play()
-            audioPlayer?.play()
+            //AudioPlayer.shared.playerShared.play()
+            AudioPlayer.shared.setupPlayer(track: getNeededTrack)
+            AudioPlayer.shared.player?.play()
         }
     }
     
-    //    @objc private func miniPlayerPressed() {
-    ////        let playerVC = PlayerVC()
-    //        let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first
-    ////
-    ////        playerVC.currentTrack = getNeededTrack
-    ////        playerVC.modalPresentationStyle = .overFullScreen
-    ////        present(playerVC, animated: true)
-    //
-    //        if let existingPlayerVC = playerVC {
-    //            existingPlayerVC.updateTrack(getNeededTrack)
-    //            existingPlayerVC.audioPlayer = self.audioPlayer
-    //            //existingPlayerVC.currentTrack = getNeededTrack
-    //            print("old")
-    //            existingPlayerVC.modalPresentationStyle = .overFullScreen
-    //            present(existingPlayerVC, animated: true)
-    //        } else {
-    //            let newPlayerVC = PlayerVC()
-    //            newPlayerVC.currentTrack = getNeededTrack
-    //            newPlayerVC.audioPlayer = self.audioPlayer
-    //            newPlayerVC.modalPresentationStyle = .overFullScreen
-    //            present(newPlayerVC, animated: true)
-    //            playerVC = newPlayerVC
-    //            print("new")
-    //        }
-    //    }
     @objc private func miniPlayerPressed() {
         let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first
         
-        if let existingPlayerVC = playerVC {
-            existingPlayerVC.updateTrack(getNeededTrack)
-            existingPlayerVC.audioPlayer = AudioPlayer.shared.player // Передайте текущий экземпляр AudioPlayer
-            existingPlayerVC.currentTrack = getNeededTrack
-            existingPlayerVC.modalPresentationStyle = .overFullScreen
-            present(existingPlayerVC, animated: true)
-        } else {
-            let newPlayerVC = PlayerVC()
-            newPlayerVC.currentTrack = getNeededTrack
-            newPlayerVC.audioPlayer = AudioPlayer.shared.player // Передайте текущий экземпляр AudioPlayer
-            newPlayerVC.modalPresentationStyle = .overFullScreen
-            present(newPlayerVC, animated: true)
-            playerVC = newPlayerVC
-        }
+        let player = PlayerVC.shared
+        player.currentTrack = getNeededTrack
+        player.audioPlayer = AudioPlayer.shared.player
+        player.modalPresentationStyle = .overFullScreen
+        present(player, animated: true)
+        
+        //------------
+//        if let existingPlayerVC = playerVC {
+//            existingPlayerVC.updateTrack(getNeededTrack)
+//            existingPlayerVC.audioPlayer = AudioPlayer.shared.player // Передайте текущий экземпляр AudioPlayer
+//            existingPlayerVC.currentTrack = getNeededTrack
+//            existingPlayerVC.modalPresentationStyle = .overFullScreen
+//            present(existingPlayerVC, animated: true)
+//        } else {
+//            let newPlayerVC = PlayerVC()
+//            newPlayerVC.currentTrack = getNeededTrack
+//            newPlayerVC.audioPlayer = AudioPlayer.shared.player // Передайте текущий экземпляр AudioPlayer
+//            newPlayerVC.modalPresentationStyle = .overFullScreen
+//            present(newPlayerVC, animated: true)
+//            playerVC = newPlayerVC
+//        }
     }
     
     

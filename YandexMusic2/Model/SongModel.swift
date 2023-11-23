@@ -33,6 +33,7 @@ struct SongModel {
 
 class AudioPlayer {
     
+    var playerShared = AVAudioPlayer()
     var player: AVAudioPlayer?
     static let shared = AudioPlayer()
     private var songs: [SongModel] = [] // Массив песен
@@ -73,6 +74,20 @@ class AudioPlayer {
             player?.play()
         } catch let error {
             print("Error playing audio: \(error.localizedDescription)")
+        }
+    }
+    
+    func setupPlayer(track: SongModel) {
+        guard let url = Bundle.main.url(forResource: "\(track.songAuthor) - \(track.songName)", withExtension: "mp3") else { return }
+        print(track.songAuthor)
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            guard let player = player else { return }
+            player.prepareToPlay()
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     
