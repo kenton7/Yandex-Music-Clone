@@ -146,14 +146,11 @@ extension AllMyTracksVC: UITableViewDelegate, UITableViewDataSource {
             // Сохраняем индекс текущей ячейки
             selectedIndexPath = indexPath
         }
-        
         if indexPath.row == SongModel.getSongs().last?.trackID {
             cell.explicitImageView.isHidden = false
         }
-        
         return cell
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60

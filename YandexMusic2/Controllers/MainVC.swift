@@ -299,17 +299,18 @@ class MainVC: UIViewController {
             //AudioPlayer().setTrack(track: getNeededTrack)
             //AudioPlayer.shared.player?.play()
             //AudioPlayer.shared.playerShared.play()
-            AudioPlayer.shared.setupPlayer(track: getNeededTrack)
-            AudioPlayer.shared.player?.play()
+            AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack ?? getNeededTrack)
+            //AudioPlayer.shared.setupPlayer(track: getNeededTrack)
+            //AudioPlayer.shared.player?.play()
         }
     }
     
     @objc private func miniPlayerPressed() {
         let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first
         
-        let player = PlayerVC.shared
+        let player = PlayerVC()
         player.currentTrack = getNeededTrack
-        player.audioPlayer = AudioPlayer.shared.player
+        //player.audioPlayer = AudioPlayer.shared.player
         player.modalPresentationStyle = .overFullScreen
         present(player, animated: true)
         
