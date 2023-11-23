@@ -258,7 +258,6 @@ class PlayerVC: UIViewController {
         //playerViews.songStartTimeLabel.text = NSString(format: "%2d:%02d", AudioPlayer.shared.currentMinutes, AudioPlayer.shared.currentSeconds) as String
         
         if AudioPlayer.shared.player?.isPlaying == true {
-            print("here")
             playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
         } else {
             playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
