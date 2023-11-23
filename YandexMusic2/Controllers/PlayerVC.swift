@@ -83,7 +83,8 @@ class PlayerVC: UIViewController {
         playerViews.songNameLabel.text = AudioPlayer.shared.currentTrack?.songName
         playerViews.songAuthorLabel.text = AudioPlayer.shared.currentTrack?.songAuthor
         playerViews.slider.maximumValue = Float(AudioPlayer.shared.player?.duration ?? 0)
-        playerViews.slider.value = playerViews.sliderOnMiniPlayer.value
+        //playerViews.slider.value = playerViews.sliderOnMiniPlayer.value
+        playerViews.slider.value = UserDefaults.standard.float(forKey: "valueSlider")
                 
         playerViews.albumImageCollectionView.delegate = self
         playerViews.albumImageCollectionView.dataSource = self
@@ -101,7 +102,7 @@ class PlayerVC: UIViewController {
             return
         }
         
-        print(player.isPlaying)
+        print(AudioPlayer.shared.currentTrack)
         
         if player.isPlaying {
             playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)

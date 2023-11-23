@@ -47,6 +47,7 @@ final class AllMyTracksVC: UIViewController {
         backButton.tintColor = .white
         backButton.title = ""
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        navigationController?.navigationBar.shadowImage = UIImage()
         
         view.addSubview(tableView)
         setupMiniPlayer()
@@ -64,6 +65,8 @@ final class AllMyTracksVC: UIViewController {
 //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        self.navigationController?.navigationBar.shadowImage = UIImage()
 //        self.navigationController?.navigationBar.isTranslucent = true
+        
+        tableView.reloadData()
         
         if UserDefaults.standard.string(forKey: "songName") == nil && UserDefaults.standard.string(forKey: "songAuthor") == nil {
             allMyTracksViews.miniPlayer.isHidden = true
@@ -119,7 +122,7 @@ extension AllMyTracksVC: UITableViewDelegate, UITableViewDataSource {
                 $0.removeFromSuperview()
             }
         }
-        
+                
         let bgColorView = UIView()
         bgColorView.backgroundColor = #colorLiteral(red: 0.07843136042, green: 0.07843136042, blue: 0.07843136042, alpha: 1)
         
@@ -136,14 +139,12 @@ extension AllMyTracksVC: UITableViewDelegate, UITableViewDataSource {
             handleStartPlayingXAnchor.isActive = true
             handleStartPlayingYAnchor = allMyTracksViews.trackPlayingAnimation.centerYAnchor.constraint(equalTo: cell.songImage.centerYAnchor)
             handleStartPlayingYAnchor.isActive = true
-
             cell.insertSubview(bgColorView, at: 0)
             bgColorView.frame = CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height)
             bgColorView.tag = 100
             
             // Сохраняем индекс текущей ячейки
             selectedIndexPath = indexPath
-            
         }
         
         if indexPath.row == SongModel.getSongs().last?.trackID {
@@ -170,6 +171,10 @@ extension AllMyTracksVC: UITableViewDelegate, UITableViewDataSource {
         cell.selectedBackgroundView = bgColorView
         cell.songImage.addSubview(allMyTracksViews.trackPlayingAnimation)
         
+        if AudioPlayer.shared.currentTrack == SongModel.getSongs()[indexPath.row] {
+            miniPlayerPressed()
+        }
+        
         // Удаляем кастомное выделение из предыдущей выбранной ячейки
         if let selectedIndexPath = selectedIndexPath, let selectedCell = tableView.cellForRow(at: selectedIndexPath) as? AllMyTracksTableViewCell {
             selectedCell.subviews.forEach {
@@ -184,9 +189,13 @@ extension AllMyTracksVC: UITableViewDelegate, UITableViewDataSource {
         
         allMyTracksViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
         AudioPlayer.shared.currentTrack = SongModel.getSongs()[indexPath.row]
+        //print(AudioPlayer.shared.currentTrack!)
+        //AudioPlayer.shared.setupPlayer(track: AudioPlayer.shared.currentTrack!)
         AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack!)
+        AudioPlayer.shared.player?.play()
+        //AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack!)
         
-        if AudioPlayer.shared.playerShared.isPlaying == true {
+        if AudioPlayer.shared.player?.isPlaying == true {
             handleStartPlayingXAnchor.isActive = false
             handleStartPlayingYAnchor.isActive = false
             selectTrackInTableViewXAnchor = allMyTracksViews.trackPlayingAnimation.centerXAnchor.constraint(equalTo: cell.songImage.centerXAnchor)
@@ -274,9 +283,11 @@ private extension AllMyTracksVC {
     @objc private func miniPlayerPressed() {
         let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == allMyTracksViews.songAuthor.text && $0.songName == allMyTracksViews.songName.text }.first
         
-        let player = PlayerVC.shared
-        player.currentTrack = getNeededTrack
-        player.audioPlayer = AudioPlayer.shared.player
+        //let player = PlayerVC.shared
+        let player = PlayerVC()
+        player.updateTrack(AudioPlayer.shared.currentTrack ?? getNeededTrack)
+        //player.currentTrack = AudioPlayer.shared.currentTrack ?? getNeededTrack
+        //player.audioPlayer = AudioPlayer.shared.player
         player.modalPresentationStyle = .overFullScreen
         present(player, animated: true)
     }

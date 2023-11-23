@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
-struct SongModel {
+struct SongModel: Equatable {
     var songName: String
     var albumImage: UIImage
     var songAuthor: String
