@@ -50,8 +50,9 @@ class AudioPlayer {
     var remainingSeconds: Int {
         return duration - remainingMinutes * 60
     }
+    
     var duration: Int {
-        return Int(player?.duration ?? 0 - (player?.currentTime ?? 0))
+        return Int((player?.duration ?? 0) - (player?.currentTime ?? 0))
     }
     
     var currentTime: Int {

@@ -84,7 +84,6 @@ class PlayerVC: UIViewController {
         playerViews.songAuthorLabel.text = AudioPlayer.shared.currentTrack?.songAuthor
         playerViews.slider.maximumValue = Float(AudioPlayer.shared.player?.duration ?? 0)
         playerViews.slider.value = playerViews.sliderOnMiniPlayer.value
-        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
                 
         playerViews.albumImageCollectionView.delegate = self
         playerViews.albumImageCollectionView.dataSource = self
@@ -110,6 +109,7 @@ class PlayerVC: UIViewController {
             playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
         }
        
+        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
                 
         //guard let audioPlayer = self.audioPlayer else { return }
                 
@@ -221,21 +221,17 @@ class PlayerVC: UIViewController {
     
     @objc private func updateSlider() {
         
-        print("minutes \(AudioPlayer.shared.currentTime)")
-        print("seconds \(AudioPlayer.shared.remainingSeconds)")
-        
-        playerViews.slider.value = Float(AudioPlayer.shared.player!.currentTime)
+        guard let player = AudioPlayer.shared.player else {
+            print("Не удалось инициировать плеер")
+            return
+        }
+                
+        playerViews.slider.value = Float(player.currentTime)
         UserDefaults.standard.set(playerViews.slider.value, forKey: "valueSlider")
         
         playerViews.songFinishTimeLabel.text = NSString(format: "%2d:%02d", AudioPlayer.shared.remainingMinutes, AudioPlayer.shared.remainingSeconds) as String
         
         playerViews.songStartTimeLabel.text = NSString(format: "%2d:%02d", AudioPlayer.shared.currentMinutes, AudioPlayer.shared.currentSeconds) as String
-        
-//        if AudioPlayer.shared.player?.isPlaying == true {
-//            playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
-//        } else {
-//            playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
-//        }
     }
     
     @objc private func closePlayerVCPressed() {
