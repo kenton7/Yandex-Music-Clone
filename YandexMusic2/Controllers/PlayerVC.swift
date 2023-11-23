@@ -82,7 +82,7 @@ class PlayerVC: UIViewController {
         view.backgroundColor = dominantColor(for: getNeededTrack?.albumImage ?? SongModel.getSongs().randomElement()!.albumImage)
         playerViews.songNameLabel.text = AudioPlayer.shared.currentTrack?.songName
         playerViews.songAuthorLabel.text = AudioPlayer.shared.currentTrack?.songAuthor
-        playerViews.slider.maximumValue = Float(audioPlayer?.duration ?? 0)
+        playerViews.slider.maximumValue = Float(AudioPlayer.shared.player?.duration ?? 0)
         playerViews.slider.value = playerViews.sliderOnMiniPlayer.value
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
                 
@@ -216,52 +216,26 @@ class PlayerVC: UIViewController {
     }
     
     @objc private func rewindTrack() {
-        audioPlayer?.currentTime = TimeInterval(playerViews.slider.value)
+        AudioPlayer.shared.player?.currentTime = TimeInterval(playerViews.slider.value)
     }
     
     @objc private func updateSlider() {
         
-        var currentTime: Int {
-            return Int(audioPlayer?.currentTime ?? 0)
-        }
+        print("minutes \(AudioPlayer.shared.currentTime)")
+        print("seconds \(AudioPlayer.shared.remainingSeconds)")
         
-        var currentMinutes: Int {
-            return currentTime / 60
-        }
-        
-        var currentSeconds: Int {
-            return currentTime - currentMinutes * 60
-        }
-        
-        var duration: Int {
-            return Int(audioPlayer?.duration ?? 0 - (audioPlayer?.currentTime ?? 0))
-        }
-        
-        var remainingMinutes: Int {
-            return duration / 60
-        }
-        
-        var remainingSeconds: Int {
-            return duration - remainingMinutes * 60
-        }
-        
-        
-        playerViews.slider.value = Float(audioPlayer?.currentTime ?? 0)
+        playerViews.slider.value = Float(AudioPlayer.shared.player!.currentTime)
         UserDefaults.standard.set(playerViews.slider.value, forKey: "valueSlider")
         
-        playerViews.songFinishTimeLabel.text = NSString(format: "%2d:%02d", remainingMinutes, remainingSeconds) as String
+        playerViews.songFinishTimeLabel.text = NSString(format: "%2d:%02d", AudioPlayer.shared.remainingMinutes, AudioPlayer.shared.remainingSeconds) as String
         
-        playerViews.songStartTimeLabel.text = NSString(format: "%2d:%02d", currentMinutes, currentSeconds) as String
-        //----
-        //playerViews.songFinishTimeLabel.text = NSString(format: "%2d:%02d", AudioPlayer.shared.remainingMinutes, AudioPlayer.shared.remainingSeconds) as String
+        playerViews.songStartTimeLabel.text = NSString(format: "%2d:%02d", AudioPlayer.shared.currentMinutes, AudioPlayer.shared.currentSeconds) as String
         
-        //playerViews.songStartTimeLabel.text = NSString(format: "%2d:%02d", AudioPlayer.shared.currentMinutes, AudioPlayer.shared.currentSeconds) as String
-        
-        if AudioPlayer.shared.player?.isPlaying == true {
-            playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
-        } else {
-            playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
-        }
+//        if AudioPlayer.shared.player?.isPlaying == true {
+//            playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
+//        } else {
+//            playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+//        }
     }
     
     @objc private func closePlayerVCPressed() {
@@ -275,9 +249,7 @@ class PlayerVC: UIViewController {
     }
     
     @objc func playButtonPressed(_ sender: UIButton) {
-        
-        print(audioPlayer?.isPlaying)
-        
+                
         if isPlayPressed == true {
             sender.isSelected = true
         } else {
@@ -297,7 +269,7 @@ class PlayerVC: UIViewController {
             }
         } else {
             playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal) // трек на паузе
-            audioPlayer?.pause()
+            AudioPlayer.shared.player?.pause()
             
             playerViews.subviews.forEach {
                 if $0.tag == 100 {
@@ -308,34 +280,6 @@ class PlayerVC: UIViewController {
             playerViews.albumImageCollectionView.alpha = 1.0
             playerViews.albumImageCollectionView.isHidden = false
         }
-        
-        //isPlayPressed.toggle()
-        //isPlayPressed.toggle()
-//        playerViews.playPauseButton.isSelected.toggle()
-//        
-//        if playerViews.playPauseButton.isSelected {
-//            audioPlayer?.play()
-//            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
-//            playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .selected) // кнопка нажата (трек играет)
-//            UIView.animate(withDuration: 0.5, delay: 0, options: [.autoreverse, .repeat]) {
-//                self.playerViews.albumImageCollectionView.alpha = 0.5
-//            }
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                self.playVideoshot()
-//                self.playerViews.albumImageCollectionView.alpha = 1.0
-//            }
-//        } else {
-//            playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal) // трек на паузе
-//            audioPlayer?.pause()
-//            playerViews.subviews.forEach {
-//                if $0.tag == 100 {
-//                    $0.removeFromSuperview()
-//                }
-//                playerViews.layoutIfNeeded()
-//            }
-//            playerViews.albumImageCollectionView.alpha = 1.0
-//            playerViews.albumImageCollectionView.isHidden = false
-//        }
     }
     
     @objc private func repeatButtonPressed() {

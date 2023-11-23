@@ -293,7 +293,7 @@ class MainVC: UIViewController {
         } else {
             guard let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first else { return }
             let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
-            audioPlayer?.currentTime = TimeInterval(mainViews.sliderOnMiniPlayer.value)
+            AudioPlayer.shared.player?.currentTime = TimeInterval(mainViews.sliderOnMiniPlayer.value)
             mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             //AudioPlayer().setTrack(track: getNeededTrack)
