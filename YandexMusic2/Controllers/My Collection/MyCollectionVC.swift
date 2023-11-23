@@ -103,7 +103,6 @@ class MyCollectionVC: UIViewController {
     
             let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == myCollectionViews.songAuthor.text && $0.songName == myCollectionViews.songName.text }.first
             let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
-            print(currentSliderValue)
             AudioPlayer.shared.currentTrack = getNeededTrack
             AudioPlayer.shared.play(song: getNeededTrack!)
             AudioPlayer.shared.player?.currentTime = TimeInterval(myCollectionViews.sliderOnMiniPlayer.value)

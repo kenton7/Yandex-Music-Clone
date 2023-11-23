@@ -86,8 +86,8 @@ class MainVC: UIViewController {
         
         guard let getNeededTrack = SongModel.getSongs().filter({ $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }).first else { return }
         
-        AudioPlayer.shared.setTrack(track: getNeededTrack)
-        audioPlayer = AudioPlayer.shared.player
+        //AudioPlayer.shared.setTrack(track: getNeededTrack)
+        //audioPlayer = AudioPlayer.shared.player
         
         mainViews.myWaveButton.addTarget(self, action: #selector(myWavePressed), for: .touchUpInside)
         
@@ -282,26 +282,19 @@ class MainVC: UIViewController {
     }
     
     @objc private func playButtonPressed() {
-        
-        //isSongPlaying.toggle()
-        
-        
-        
-        if audioPlayer?.isPlaying == true {
+
+        if AudioPlayer.shared.player?.isPlaying == true {
             mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
-            AudioPlayer.shared.playerShared.pause()
+            AudioPlayer.shared.player?.pause()
         } else {
-            guard let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first else { return }
+            let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first
             let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
+            AudioPlayer.shared.currentTrack = getNeededTrack
+            AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack ?? getNeededTrack!)
             AudioPlayer.shared.player?.currentTime = TimeInterval(mainViews.sliderOnMiniPlayer.value)
             mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-            //AudioPlayer().setTrack(track: getNeededTrack)
-            //AudioPlayer.shared.player?.play()
-            //AudioPlayer.shared.playerShared.play()
-            AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack ?? getNeededTrack)
-            //AudioPlayer.shared.setupPlayer(track: getNeededTrack)
-            //AudioPlayer.shared.player?.play()
+            AudioPlayer.shared.player?.play()
         }
     }
     

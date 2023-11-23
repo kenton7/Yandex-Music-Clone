@@ -294,15 +294,13 @@ private extension AllMyTracksVC {
             allMyTracksViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
             AudioPlayer.shared.player?.pause()
         } else {
-            guard let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == allMyTracksViews.songAuthor.text && $0.songName == allMyTracksViews.songName.text }.first else { return }
+            let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == allMyTracksViews.songAuthor.text && $0.songName == allMyTracksViews.songName.text }.first
             let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
+            AudioPlayer.shared.currentTrack = getNeededTrack
+            AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack ?? getNeededTrack!)
             AudioPlayer.shared.player?.currentTime = TimeInterval(allMyTracksViews.sliderOnMiniPlayer.value)
             allMyTracksViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-            //AudioPlayer().setTrack(track: getNeededTrack)
-            //AudioPlayer.shared.player?.play()
-            //AudioPlayer.shared.playerShared.play()
-            AudioPlayer.shared.setupPlayer(track: getNeededTrack)
             AudioPlayer.shared.player?.play()
         }
     }
