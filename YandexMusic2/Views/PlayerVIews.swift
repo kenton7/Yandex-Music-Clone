@@ -345,6 +345,7 @@ class PlayerVIews: MainViews, IPlayer {
         super.init(frame: frame)
         
         configureViews()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -435,6 +436,7 @@ class PlayerVIews: MainViews, IPlayer {
             
             controlButtonsStackView.centerXAnchor.constraint(equalTo: viewForEqualSpacing.centerXAnchor),
             controlButtonsStackView.centerYAnchor.constraint(equalTo: viewForEqualSpacing.centerYAnchor),
+            controlButtonsStackView.heightAnchor.constraint(equalToConstant: 80),
             
             dislikeButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             dislikeButton.centerYAnchor.constraint(equalTo: controlButtonsStackView.centerYAnchor),

@@ -309,18 +309,6 @@ private extension AllMyTracksVC {
         allMyTracksViews.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
         UserDefaults.standard.set(allMyTracksViews.sliderOnMiniPlayer.value, forKey: "valueSlider")
     }
-    
-//    private func isPlaying() {
-//        if AudioPlayer.shared.player.isPlaying {
-//            allMyTracksViews.miniPlayer.isHidden = false
-//            allMyTracksViews.likeButtonMiniPlayer.isHidden = false
-//            allMyTracksViews.songName.isHidden = false
-//            allMyTracksViews.songAuthor.isHidden = false
-//            allMyTracksViews.changeSourcePlayingMiniPlayer.isHidden = false
-//            allMyTracksViews.playPauseButtonMiniPlayer.isHidden = false
-//            allMyTracksViews.sliderOnMiniPlayer.isHidden = false
-//        }
-//    }
 }
 
 extension Notification.Name {

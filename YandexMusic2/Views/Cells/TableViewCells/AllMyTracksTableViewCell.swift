@@ -88,8 +88,8 @@ class AllMyTracksTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             moreButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            moreButton.heightAnchor.constraint(equalToConstant: 50),
-            moreButton.widthAnchor.constraint(equalToConstant: 50),
+            moreButton.heightAnchor.constraint(equalToConstant: 60),
+            moreButton.widthAnchor.constraint(equalToConstant: 60),
             moreButton.centerXAnchor.constraint(equalTo: stackViewForSongInfo.centerXAnchor),
             
             songImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),

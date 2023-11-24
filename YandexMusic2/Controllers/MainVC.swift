@@ -204,11 +204,9 @@ class MainVC: UIViewController {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
                 switch state {
                 case .large:
-                    self.mainChild.view.translatesAutoresizingMaskIntoConstraints = true
                     self.mainChild.view.frame = self.view.bounds
-                    self.mainChild.view.frame.size.height = self.view.frame.height
+                    self.mainChild.view.frame.size.height = self.view.bounds.height + self.mainChild.mainChildViews.miniPlayer.frame.height + self.tabBarController!.tabBar.frame.size.height
                 case .mini:
-                    //self.mainChild.view.translatesAutoresizingMaskIntoConstraints = true
                     self.mainChild.view.frame.origin.y = self.view.frame.height - self.view.frame.height * 0.4 //* 0.40
                     self.mainChild.view.frame.size.height = self.view.bounds.height
                 }
@@ -234,6 +232,7 @@ class MainVC: UIViewController {
                     self.mainChild.view.alpha = 1.0
                     self.mainChild.view.layer.cornerRadius = 0
                     self.mainChild.mainChildViews.tableView.isUserInteractionEnabled = false
+                    self.mainChild.mainChildViews.controlImageOnHandleArea.image = UIImage(systemName: "chevron.compact.up")
                 }
             }
             cornerRadiusAnimator.startAnimation()
@@ -275,7 +274,6 @@ class MainVC: UIViewController {
     }
     
     private func continueInteractiveTransition() {
-        
         for animator in runningAnimations {
             animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
         }

@@ -11,6 +11,7 @@
 		095BF2B02ADC44ED00D261E8 /* MyWaveWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = 095BF2AF2ADC44ED00D261E8 /* MyWaveWhite.json */; };
 		095BF2B22ADC457200D261E8 /* MyWaveBlack.json in Resources */ = {isa = PBXBuildFile; fileRef = 095BF2B12ADC457200D261E8 /* MyWaveBlack.json */; };
 		095BF2B42ADC45C800D261E8 /* MyWave.json in Resources */ = {isa = PBXBuildFile; fileRef = 095BF2B32ADC45C800D261E8 /* MyWave.json */; };
+		0963DE5C2B0F98EA00F0BCB2 /* ZoomAndSnapFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0963DE5B2B0F98EA00F0BCB2 /* ZoomAndSnapFlowLayout.swift */; };
 		0997B3932AFCCDC900096764 /* YandexSansDisplay-Bold.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3642AFCCDC900096764 /* YandexSansDisplay-Bold.eot */; };
 		0997B3942AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3652AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff */; };
 		0997B3952AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3662AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url */; };
@@ -119,6 +120,7 @@
 		095BF2AF2ADC44ED00D261E8 /* MyWaveWhite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyWaveWhite.json; sourceTree = "<group>"; };
 		095BF2B12ADC457200D261E8 /* MyWaveBlack.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyWaveBlack.json; sourceTree = "<group>"; };
 		095BF2B32ADC45C800D261E8 /* MyWave.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyWave.json; sourceTree = "<group>"; };
+		0963DE5B2B0F98EA00F0BCB2 /* ZoomAndSnapFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAndSnapFlowLayout.swift; sourceTree = "<group>"; };
 		0997B3642AFCCDC900096764 /* YandexSansDisplay-Bold.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Bold.eot"; sourceTree = "<group>"; };
 		0997B3652AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-RegularItalic.woff"; sourceTree = "<group>"; };
 		0997B3662AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url"; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				09EDF1672AD9C655002F4CFC /* Extensions.swift */,
+				0963DE5B2B0F98EA00F0BCB2 /* ZoomAndSnapFlowLayout.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 				09F89ECE2AF00D70006086E2 /* YourFavouriteTableViewCell.swift in Sources */,
 				09EDF15B2AD955CA002F4CFC /* Books&PodcastsVC.swift in Sources */,
 				09F89EC42AEFAD8E006086E2 /* MainChildVC.swift in Sources */,
+				0963DE5C2B0F98EA00F0BCB2 /* ZoomAndSnapFlowLayout.swift in Sources */,
 				09F89F3A2AF90160006086E2 /* NeuroMusicTableViewCell.swift in Sources */,
 				09EDF15D2AD955EE002F4CFC /* MyCollectionVC.swift in Sources */,
 				09F89F2E2AF7BB6F006086E2 /* PopularPlaylistsCollectionViewCell.swift in Sources */,

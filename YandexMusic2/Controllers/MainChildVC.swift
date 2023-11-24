@@ -43,11 +43,11 @@ final class MainChildVC: UIViewController {
         mainChildViews.tableView.delegate = self
         mainChildViews.tableView.dataSource = self
                 
-        tabBarController?.tabBar.isTranslucent = true
-        tabBarController?.tabBar.backgroundImage = UIImage()
-        tabBarController?.tabBar.shadowImage = UIImage()
-        tabBarController?.tabBar.backgroundColor = UIColor.clear
-        tabBarController?.tabBar.barTintColor = UIColor.clear
+       // tabBarController?.tabBar.isTranslucent = false
+        //tabBarController?.tabBar.backgroundImage = UIImage()
+        //tabBarController?.tabBar.shadowImage = UIImage()
+        //tabBarController?.tabBar.backgroundColor = UIColor.clear
+        //tabBarController?.tabBar.barTintColor = UIColor.clear
         
     }
     
@@ -66,13 +66,13 @@ final class MainChildVC: UIViewController {
             mainChildViews.changeSourcePlayingMiniPlayer.isHidden = true
             mainChildViews.playPauseButtonMiniPlayer.isHidden = true
         } else {
-            mainChildViews.miniPlayer.isHidden = false
-            mainChildViews.sliderOnMiniPlayer.isHidden = false
-            mainChildViews.songName.isHidden = false
-            mainChildViews.songAuthor.isHidden = false
-            mainChildViews.likeButtonMiniPlayer.isHidden = false
-            mainChildViews.changeSourcePlayingMiniPlayer.isHidden = false
-            mainChildViews.playPauseButtonMiniPlayer.isHidden = false
+//            mainChildViews.miniPlayer.isHidden = false
+//            mainChildViews.sliderOnMiniPlayer.isHidden = false
+//            mainChildViews.songName.isHidden = false
+//            mainChildViews.songAuthor.isHidden = false
+//            mainChildViews.likeButtonMiniPlayer.isHidden = false
+//            mainChildViews.changeSourcePlayingMiniPlayer.isHidden = false
+//            mainChildViews.playPauseButtonMiniPlayer.isHidden = false
         }
         
         if AudioPlayer.shared.player?.isPlaying == true {
@@ -233,18 +233,19 @@ extension MainChildVC: UITableViewDelegate, UITableViewDataSource {
         case 8:
             return 180
         case 9:
-            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-            let numberOfColumns: CGFloat = 2
-            let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // Установите свои значения отступов
             
-            let interItemSpacing = CGFloat(10) // Установите свои значения интервалов между ячейками
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: mainChildViews.miniPlayer.frame.height + tabBarController!.tabBar.frame.height + 12, right: 0)
+            let numberOfColumns: CGFloat = 2 // кол-во рядов на экране в одну строку
+            let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // значения отступов между секциями
             
-            let collectionViewWidth = tableView.frame.width - sectionInsets.left - sectionInsets.right
-            let itemWidth = floor((collectionViewWidth + interItemSpacing) / numberOfColumns) - interItemSpacing
+            let interItemSpacing = CGFloat(10) // значение интервалов между ячейками
+            
+            let collectionViewWidth = tableView.frame.width - sectionInsets.left - sectionInsets.right // ширина коллекции
+            let itemWidth = floor((collectionViewWidth + interItemSpacing) / numberOfColumns) - interItemSpacing //ширина контента коллекции (ячейки)
             
             let numberOfRows = ceil(CGFloat(11) / numberOfColumns)
             
-            let totalHeight = (itemWidth * numberOfRows) + ((numberOfRows - 1) * interItemSpacing) + sectionInsets.top + sectionInsets.bottom
+            let totalHeight = (itemWidth * numberOfRows) + ((numberOfRows - 1) * interItemSpacing) + sectionInsets.top + sectionInsets.bottom // высота
             
             return totalHeight
         default:

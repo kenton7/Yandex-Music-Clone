@@ -28,6 +28,12 @@ class PlayerVC: UIViewController {
         }
     }
     
+    private var currentTrackIndex: Int = 0 {
+        didSet {
+            playerViews.albumImageCollectionView.reloadData()
+        }
+    }
+    
     private var isRepeatActivated = UserDefaults.standard.bool(forKey: "isRepeatActivated")
     
     var playerCalled: (() -> Void)?
@@ -80,6 +86,10 @@ class PlayerVC: UIViewController {
         playerViews.slider.value = UserDefaults.standard.float(forKey: "valueSlider")
         
         AudioPlayer.shared.currentTrack = getNeededTrack!
+        
+        currentTrackIndex = SongModel.getSongs().firstIndex(where: { $0 == getNeededTrack }) ?? 0
+        
+        print(currentTrackIndex)
                         
         playerViews.albumImageCollectionView.delegate = self
         playerViews.albumImageCollectionView.dataSource = self
@@ -104,16 +114,6 @@ class PlayerVC: UIViewController {
         }
        
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
-                
-        //guard let audioPlayer = self.audioPlayer else { return }
-                
-//        if let audioPlayer = AudioPlayer.shared.player {
-//            if audioPlayer.isPlaying {
-//                playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
-//            } else {
-//                playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
-//            }
-//        }
         
         if isRepeatActivated {
             AudioPlayer.shared.player?.numberOfLoops = -1
@@ -123,6 +123,14 @@ class PlayerVC: UIViewController {
             AudioPlayer.shared.player?.numberOfLoops = 0
             playerViews.repeatButton.setImage(UIImage(systemName: "repeat"), for: .normal)
             playerViews.repeatButton.tintColor = .lightGray
+        }
+        
+        if AudioPlayer.shared.currentTrack?.isFavourite == true {
+            playerViews.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            playerViews.likeButton.tintColor = .white
+        } else {
+            playerViews.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            playerViews.likeButton.tintColor = .white
         }
     }
     
@@ -326,12 +334,12 @@ class PlayerVC: UIViewController {
         }
     }
     
-    func enlargeImage(for imageView: UIImageView) {
+    private func enlargeImage(for imageView: UIImageView) {
         imageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
     }
     
     //Функция для получения доминирующего цвета картинки трека
-    func dominantColor(for image: UIImage) -> UIColor? {
+    private func dominantColor(for image: UIImage) -> UIColor? {
         /*
          Эта строка создает объект CIImage из входного изображения (image).
          Если изображение не может быть преобразовано в CIImage, функция возвращает nil.
@@ -365,9 +373,9 @@ extension PlayerVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SongsCollectionViewCell.cellID, for: indexPath) as! SongsCollectionViewCell
-        //let song = songs[indexPath.row]
-        //cell.songImage.image = songs[selectedSong?.trackID ?? indexPath.row].albumImage
-        cell.songImage.image = AudioPlayer.shared.currentTrack?.albumImage
+        
+        //cell.songImage.image = SongModel.getSongs()[indexPath.item].albumImage
+        cell.songImage.image = SongModel.getSongs()[AudioPlayer.shared.currentTrack?.trackID ?? 0].albumImage
         
         if ((AudioPlayer.shared.player?.isPlaying) != nil) {
             UIView.animate(withDuration: 0.3) {
@@ -381,13 +389,6 @@ extension PlayerVC: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         return cell
     }
-    
-    //размер ячейки
-    //    func collectionView(_ collectionView: UICollectionView,
-    //                        layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    //        let frameSize = collectionView.frame.size
-    //        return CGSize(width: frameSize.width - 10, height: frameSize.height - 10)
-    //    }
     
     
     /// Код, чтобы после скролла view отображалась по центру

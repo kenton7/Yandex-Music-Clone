@@ -60,6 +60,14 @@ class MainChildViews: MiniPlayerView {
     
     private func configure() {
         
+        sliderOnMiniPlayer.isHidden = true
+        miniPlayer.isHidden = true
+        likeButtonMiniPlayer.isHidden = true
+        changeSourcePlayingMiniPlayer.isHidden = true
+        playPauseButtonMiniPlayer.isHidden = true
+        songName.isHidden = true
+        songAuthor.isHidden = true
+        
         NSLayoutConstraint.activate([
             
 //            handleArea.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -frame.height / 2),
