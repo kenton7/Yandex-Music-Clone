@@ -117,7 +117,6 @@ class StretchyTableHeaderView: UIView {
     func setViewConstraints() {
         // UIView Constraints
         NSLayoutConstraint.activate([
-            //self.widthAnchor.constraint(equalTo: containerView.widthAnchor),
             self.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             self.heightAnchor.constraint(equalTo: containerView.heightAnchor),
             

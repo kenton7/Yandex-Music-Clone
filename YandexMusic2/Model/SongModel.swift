@@ -81,7 +81,6 @@ class AudioPlayer {
     
     func setupPlayer(track: SongModel) {
         guard let url = Bundle.main.url(forResource: "\(track.songAuthor) - \(track.songName)", withExtension: "mp3") else { return }
-        print(track.songAuthor)
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)

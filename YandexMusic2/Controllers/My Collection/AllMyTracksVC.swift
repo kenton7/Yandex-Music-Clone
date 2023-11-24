@@ -55,7 +55,7 @@ final class AllMyTracksVC: UIViewController {
         tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 62 * 2, right: 0)
         tableView.tableHeaderView = headerView
     }
     

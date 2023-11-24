@@ -114,7 +114,7 @@ class PlayerVIews: MainViews, IPlayer {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "backward.end.fill"), for: .normal)
-        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 30), forImageIn: .normal)
+        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 35), forImageIn: .normal)
         button.tintColor = .white
         return button
     }()
@@ -122,7 +122,7 @@ class PlayerVIews: MainViews, IPlayer {
     var forwardButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 30), forImageIn: .normal)
+        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 35), forImageIn: .normal)
         button.setImage(UIImage(systemName: "forward.end.fill"), for: .normal)
         button.tintColor = .white
         return button
@@ -195,7 +195,7 @@ class PlayerVIews: MainViews, IPlayer {
         let button = UIButton()
         button.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
         //высота картинки из SF Symbol
-        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 55), forImageIn: .normal)
+        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 60), forImageIn: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
         return button
@@ -436,7 +436,6 @@ class PlayerVIews: MainViews, IPlayer {
             
             controlButtonsStackView.centerXAnchor.constraint(equalTo: viewForEqualSpacing.centerXAnchor),
             controlButtonsStackView.centerYAnchor.constraint(equalTo: viewForEqualSpacing.centerYAnchor),
-            controlButtonsStackView.heightAnchor.constraint(equalToConstant: 80),
             
             dislikeButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             dislikeButton.centerYAnchor.constraint(equalTo: controlButtonsStackView.centerYAnchor),

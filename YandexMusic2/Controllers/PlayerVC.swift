@@ -102,6 +102,12 @@ class PlayerVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if AudioPlayer.shared.player == nil {
+            AudioPlayer.shared.setTrack(track: AudioPlayer.shared.currentTrack!)
+            playerViews.slider.maximumValue = Float(AudioPlayer.shared.player?.duration ?? 0)
+            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+        }
+        
         guard let player = AudioPlayer.shared.player else {
             print("Не удалось инициировать плеер")
             return
@@ -109,11 +115,10 @@ class PlayerVC: UIViewController {
                 
         if player.isPlaying {
             playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
+            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
         } else {
             playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
         }
-       
-        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
         
         if isRepeatActivated {
             AudioPlayer.shared.player?.numberOfLoops = -1
@@ -169,6 +174,11 @@ class PlayerVC: UIViewController {
             print("Не удалось найти видеошот для этого трека")
             return
         }
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.autoreverse, .repeat]) {
+            self.playerViews.albumImageCollectionView.alpha = 0.5
+        }
+        
         videoShotPlayer = AVPlayer(url: videoURL)
         playerController.player = videoShotPlayer
         playerController.showsPlaybackControls = false
@@ -222,7 +232,7 @@ class PlayerVC: UIViewController {
     }
     
     @objc private func updateSlider() {
-        
+
         guard let player = AudioPlayer.shared.player else {
             print("Не удалось инициировать плеер")
             return
@@ -232,7 +242,6 @@ class PlayerVC: UIViewController {
         UserDefaults.standard.set(playerViews.slider.value, forKey: "valueSlider")
         
         playerViews.songFinishTimeLabel.text = NSString(format: "%2d:%02d", AudioPlayer.shared.remainingMinutes, AudioPlayer.shared.remainingSeconds) as String
-        
         playerViews.songStartTimeLabel.text = NSString(format: "%2d:%02d", AudioPlayer.shared.currentMinutes, AudioPlayer.shared.currentSeconds) as String
     }
     
@@ -261,12 +270,15 @@ class PlayerVC: UIViewController {
             }
             playerViews.albumImageCollectionView.alpha = 1.0
             playerViews.albumImageCollectionView.isHidden = false
+            playerViews.albumImageCollectionView.transform = CGAffineTransform.identity
         } else {
             playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
             AudioPlayer.shared.player?.play()
-            UIView.animate(withDuration: 0.5, delay: 0, options: [.autoreverse, .repeat]) {
-                self.playerViews.albumImageCollectionView.alpha = 0.5
-            }
+            playerViews.albumImageCollectionView.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+//            UIView.animate(withDuration: 0.5, delay: 0, options: [.autoreverse, .repeat]) {
+//                self.playerViews.albumImageCollectionView.alpha = 0.5
+//            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 self.playVideoshot()
                 self.playerViews.albumImageCollectionView.alpha = 1.0
@@ -332,10 +344,6 @@ class PlayerVC: UIViewController {
             playerViews.repeatButton.setImage(UIImage(systemName: "repeat"), for: .normal)
             playerViews.repeatButton.tintColor = .lightGray
         }
-    }
-    
-    private func enlargeImage(for imageView: UIImageView) {
-        imageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
     }
     
     //Функция для получения доминирующего цвета картинки трека
