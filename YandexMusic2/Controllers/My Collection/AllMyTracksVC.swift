@@ -174,6 +174,7 @@ extension AllMyTracksVC: UITableViewDelegate, UITableViewDataSource {
         
         // Удаляем кастомное выделение из предыдущей выбранной ячейки
         if let selectedIndexPath = selectedIndexPath, let selectedCell = tableView.cellForRow(at: selectedIndexPath) as? AllMyTracksTableViewCell {
+            
             selectedCell.subviews.forEach {
                 if $0.tag == 100 {
                     $0.removeFromSuperview()
@@ -200,13 +201,13 @@ extension AllMyTracksVC: UITableViewDelegate, UITableViewDataSource {
             selectTrackInTableViewYAnchor = allMyTracksViews.trackPlayingAnimation.centerYAnchor.constraint(equalTo: cell.songImage.centerYAnchor)
             selectTrackInTableViewYAnchor.isActive = true
             
-            allMyTracksViews.miniPlayer.isHidden = false
-            allMyTracksViews.sliderOnMiniPlayer.isHidden = false
-            allMyTracksViews.songName.isHidden = false
-            allMyTracksViews.songAuthor.isHidden = false
-            allMyTracksViews.likeButtonMiniPlayer.isHidden = false
-            allMyTracksViews.changeSourcePlayingMiniPlayer.isHidden = false
-            allMyTracksViews.playPauseButtonMiniPlayer.isHidden = false
+//            allMyTracksViews.miniPlayer.isHidden = false
+//            allMyTracksViews.sliderOnMiniPlayer.isHidden = false
+//            allMyTracksViews.songName.isHidden = false
+//            allMyTracksViews.songAuthor.isHidden = false
+//            allMyTracksViews.likeButtonMiniPlayer.isHidden = false
+//            allMyTracksViews.changeSourcePlayingMiniPlayer.isHidden = false
+//            allMyTracksViews.playPauseButtonMiniPlayer.isHidden = false
         } else {
             selectTrackInTableViewXAnchor = allMyTracksViews.trackPlayingAnimation.centerXAnchor.constraint(equalTo: cell.songImage.centerXAnchor)
             selectTrackInTableViewXAnchor.isActive = false

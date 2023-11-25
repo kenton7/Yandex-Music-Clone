@@ -16,7 +16,7 @@ enum LabelTitles: String, CaseIterable {
     case audiobooks = "Аудиокниги"
     case podcasts = "Подкасты"
     case forChildred = "Детям"
-    case downloadedTracks = "Скачанные треки"
+    case downloadedTracks = "Скачанное"
 }
 
 enum ImagesForRows: String, CaseIterable {
@@ -30,13 +30,13 @@ enum ImagesForRows: String, CaseIterable {
     case downloadedTracks = "arrow.down"
 }
 
-class MyCollectionTableViewCell: UITableViewCell {
+class MyCollectiontableViewCell: UITableViewCell {
     
-    static let cellID = "MyCollectionTableViewCell"
+    static let cellID = "MyCollectiontableViewCell"
     
     let chevronImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
 
-    let titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
        let label = UILabel()
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +45,7 @@ class MyCollectionTableViewCell: UITableViewCell {
         return label
     }()
     
-    let picturesForRows: UIImageView = {
+    lazy var picturesForRows: UIImageView = {
        let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFit
@@ -89,4 +89,20 @@ class MyCollectionTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+extension ILikeCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return SongModel.getSongs().count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ILikeCollectionViewCell.cellID, for: indexPath) as! ILikeCollectionViewCell
+        
+        return cell
+    }
+    
+    
+    
+    
 }

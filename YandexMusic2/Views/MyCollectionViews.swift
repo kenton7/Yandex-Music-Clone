@@ -8,6 +8,12 @@
 import UIKit
 class MyCollectionViews: MiniPlayerView {
     
+    
+    //при редизайне здесь должно быть tableView с 3 секциями
+    //в первой - раздел "Мне нравится" - в нем CollectionView, внутри collectionView - tableView с 3 рядами
+    //во второй - "Еще у вас в коллекции"
+    //в третьей - Любимые исполнители
+    
     lazy var myWaveCollectionButton: UIButton = {
         let button = UIButton()
         button.setTitle("Моя волна по разделу\n▶ Коллекция", for: .normal)
@@ -34,7 +40,7 @@ class MyCollectionViews: MiniPlayerView {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.register(MyCollectionTableViewCell.self, forCellReuseIdentifier: MyCollectionTableViewCell.cellID)
+        tableView.register(MyCollectiontableViewCell.self, forCellReuseIdentifier: MyCollectiontableViewCell.cellID)
         tableView.backgroundColor = .clear
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorColor = .clear

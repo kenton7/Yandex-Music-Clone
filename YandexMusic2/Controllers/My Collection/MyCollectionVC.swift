@@ -158,7 +158,7 @@ extension MyCollectionVC: UITableViewDelegate, UITableViewDataSource {
             cell.numberOfTrackLabel.text = "\(SongModel.getSongs().count) треков"
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: MyCollectionTableViewCell.cellID, for: indexPath) as! MyCollectionTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: MyCollectiontableViewCell.cellID, for: indexPath) as! MyCollectiontableViewCell
             cell.titleLabel.text = LabelTitles.allCases[indexPath.row + 1].rawValue
             cell.picturesForRows.image = UIImage(systemName: ImagesForRows.allCases[indexPath.row].rawValue)
             return cell

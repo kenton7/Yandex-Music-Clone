@@ -140,7 +140,6 @@ class StretchyTableHeaderView: UIView {
         
         // Container View Constraints
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        
         containerView.widthAnchor.constraint(equalTo: heartsAnimation.widthAnchor).isActive = true
         containerViewHeight = containerView.heightAnchor.constraint(equalTo: self.heightAnchor)
         containerViewHeight.isActive = true

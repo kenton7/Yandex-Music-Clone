@@ -97,6 +97,8 @@ class AudioPlayer {
         currentTrack = track
 
         do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
             // Создаем новый AVAudioPlayer с URL текущего трека
             player = try AVAudioPlayer(contentsOf: track.fileURL)
             // Дополнительные настройки аудиоплеера, если необходимо
