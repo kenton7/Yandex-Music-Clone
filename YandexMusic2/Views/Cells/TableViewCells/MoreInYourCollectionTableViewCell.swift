@@ -29,7 +29,7 @@ class MoreInYourCollectionTableViewCell: UITableViewCell {
     private lazy var moreInYourCollectionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Еще у вас в Коллекции"
+        label.text = "Ещё у вас в Коллекции"
         label.textColor = .white
         label.font = .boldSystemFont(ofSize: 17)
         return label
@@ -71,12 +71,51 @@ extension MoreInYourCollectionTableViewCell: UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoreInYourCollectionViewCell.cellID, for: indexPath) as! MoreInYourCollectionViewCell
-        cell.backgroundColor = .brown
+        cell.backgroundColor = #colorLiteral(red: 0.07843136042, green: 0.07843136042, blue: 0.07843136042, alpha: 1)
+        cell.playlistTypeLabel.text = cell.playlistTypes[indexPath.item]
+        
+        switch indexPath.item {
+        case 0:
+            cell.informationAboutPlaylistLabel.text = "Топ, Тайник, Мой 22-й"
+            cell.imageView3.image = UIImage(named: "100RussianHits")
+            cell.imageView2.image = UIImage(named: "Premier")
+            cell.imageView1.image = UIImage(named: "NILETTO, Олег Майами & Лёша Свик - Не Вспоминай")
+        case 1:
+            cell.informationAboutPlaylistLabel.text = "3 часа"
+            cell.imageView3.image = UIImage(named: "Oxxxymiron - Агент")
+            cell.imageView2.image = UIImage(named: "Markul, Тося Чайкина - Стрелы")
+            cell.imageView1.image = UIImage(named: "Muse - The Handler")
+        case 2:
+            cell.informationAboutPlaylistLabel.text = "Не вспоминай, Мурашками"
+            cell.imageView3.image = UIImage(named: "The Weeknd - Save Your Tears")
+            cell.imageView2.image = UIImage(named: "NILETTO, Олег Майами & Лёша Свик - Не Вспоминай")
+            cell.imageView1.image = UIImage(named: "Три дня дождя, MONA - Прощание")
+        case 3:
+            cell.informationAboutPlaylistLabel.isHidden = true
+            cell.imageView1.image = UIImage(systemName: "teddybear")
+            cell.imageView1.tintColor = .lightGray
+            cell.imageView2.isHidden = true
+            cell.imageView3.isHidden = true
+        case 4:
+            cell.informationAboutPlaylistLabel.isHidden = true
+            cell.imageView1.image = UIImage(systemName: "books.vertical")
+            cell.imageView1.tintColor = .lightGray
+            cell.imageView2.isHidden = true
+            cell.imageView3.isHidden = true
+        case 5:
+            cell.informationAboutPlaylistLabel.text = "CocoaHeads, Podlodka Podcast"
+            cell.imageView3.image = UIImage(named: "Podlodka")
+            cell.imageView2.image = UIImage(named: "CocoaHeads")
+            cell.imageView1.isHidden = true
+        default:
+            break
+        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 120, height: 80)
+        return CGSize(width: 150, height: 80)
     }
     
 }

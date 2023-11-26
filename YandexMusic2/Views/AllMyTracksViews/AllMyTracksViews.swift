@@ -37,7 +37,6 @@ class AllMyTracksViews: MiniPlayerView {
     private func configure() {
         
         addSubview(trackPlayingAnimation)
-        
     }
     
     func setupMiniPlayer() {

@@ -11,7 +11,7 @@ class MyCollectionWaveTableViewCell: UITableViewCell {
     
     static let cellID = "MyCollectionWaveTableViewCell"
     
-    private lazy var myWaveCollectionButton: UIButton = {
+    lazy var myWaveCollectionButton: UIButton = {
         let button = UIButton()
         button.setTitle("Моя волна по разделу\n▶ Коллекция", for: .normal)
         button.tintColor = .white
@@ -39,6 +39,7 @@ class MyCollectionWaveTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        //contentView.isUserInteractionEnabled = false
         backgroundColor = .black
         selectionStyle = .none
         configure()

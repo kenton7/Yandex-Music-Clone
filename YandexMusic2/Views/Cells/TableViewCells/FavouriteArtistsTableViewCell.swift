@@ -11,6 +11,17 @@ class FavouriteArtistsTableViewCell: UITableViewCell {
     
     static let cellID = "FavouriteArtistsTableViewCell"
     
+    private let favouriteArtistsImages: [UIImage] = [
+        UIImage(named: "ThirtySecondsToMars")!,
+        UIImage(named: "ТаСторона")!,
+        UIImage(named: "OxxxymironFavourite")!,
+        UIImage(named: "Lx24")!,
+        UIImage(named: "Nickelback")!,
+        UIImage(named: "LocDog")!,
+        UIImage(named: "Лёша Свик")!,
+        UIImage(named: "Muse")!
+    ]
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -21,6 +32,7 @@ class FavouriteArtistsTableViewCell: UITableViewCell {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         collectionView.register(FavouriteArtistsCollectionViewCell.self, forCellWithReuseIdentifier: FavouriteArtistsCollectionViewCell.cellID)
         return collectionView
     }()
@@ -72,10 +84,12 @@ extension FavouriteArtistsTableViewCell: UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavouriteArtistsCollectionViewCell.cellID, for: indexPath) as! FavouriteArtistsCollectionViewCell
+        cell.artistsImages.image = favouriteArtistsImages[indexPath.item]
+        cell.artistLabel.text = cell.artsts[indexPath.item]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 110)
+        return CGSize(width: 110, height: 150)
     }
 }

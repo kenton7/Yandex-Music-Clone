@@ -11,12 +11,35 @@ class FavouriteArtistsCollectionViewCell: UICollectionViewCell {
     
     static let cellID = "FavouriteArtistsCollectionViewCell"
     
+    lazy var artsts = [
+        "Thirty Seconds To Mars",
+        "Та Сторона",
+        "Oxxxymiron",
+        "Lx24",
+        "Nickelback",
+        "Loc Dog",
+        "Лёша Свик",
+        "Muse"
+    ]
+    
     lazy var artistsImages: UIImageView = {
        let view = UIImageView()
         view.frame = CGRect(x: 10, y: 10, width: 100, height: 100)
         view.layer.cornerRadius = view.frame.width / 2
+        view.clipsToBounds = true
         view.backgroundColor = .green
+        view.contentMode = .scaleAspectFill
         return view
+    }()
+    
+    lazy var artistLabel: UILabel = {
+       let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Test"
+        label.textAlignment = .center
+        label.textColor = .white
+        label.font = .boldSystemFont(ofSize: 14)
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -31,6 +54,13 @@ class FavouriteArtistsCollectionViewCell: UICollectionViewCell {
     
     private func configure() {
         addSubview(artistsImages)
+        addSubview(artistLabel)
+        
+        NSLayoutConstraint.activate([
+            artistLabel.topAnchor.constraint(equalTo: artistsImages.bottomAnchor, constant: 10),
+            artistLabel.widthAnchor.constraint(equalToConstant: artistsImages.frame.width),
+            artistLabel.centerXAnchor.constraint(equalTo: artistsImages.centerXAnchor),
+        ])
     }
     
 }
