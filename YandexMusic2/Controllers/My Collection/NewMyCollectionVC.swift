@@ -34,6 +34,10 @@ final class NewMyCollectionVC: UIViewController {
         ], animated: true)
         navigationItem.leftBarButtonItems?.forEach { $0.tintColor = .white }
         
+        //guard let getNeededTrack = SongModel.getSongs().filter({ $0.songAuthor == newMyCollectionViews.songAuthor.text && $0.songName == newMyCollectionViews.songName.text }).first else { return }
+        //AudioPlayer.shared.setTrack(track: getNeededTrack)
+        
+        
         newMyCollectionViews.tableView.delegate = self
         newMyCollectionViews.tableView.dataSource = self
         
@@ -91,10 +95,10 @@ final class NewMyCollectionVC: UIViewController {
             AudioPlayer.shared.player?.pause()
         } else {
     
-            let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == newMyCollectionViews.songAuthor.text && $0.songName == newMyCollectionViews.songName.text }.first
-            let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
-            AudioPlayer.shared.currentTrack = getNeededTrack
-            AudioPlayer.shared.play(song: getNeededTrack!)
+//            let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == newMyCollectionViews.songAuthor.text && $0.songName == newMyCollectionViews.songName.text }.first
+//            let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
+//            AudioPlayer.shared.currentTrack = getNeededTrack
+//            AudioPlayer.shared.play(song: getNeededTrack!)
             AudioPlayer.shared.player?.currentTime = TimeInterval(newMyCollectionViews.sliderOnMiniPlayer.value)
             //mainViews.sliderOnMiniPlayer.value = UserDefaults.standard.float(forKey: "valueSlider")
             newMyCollectionViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
@@ -104,9 +108,12 @@ final class NewMyCollectionVC: UIViewController {
     }
     
     @objc private func updateTime() {
-        newMyCollectionViews.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.player?.currentTime ?? 0)
+        
+        let cell = newMyCollectionViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! MiniPlayerCollectionViewCell
+        
+        cell.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.player?.currentTime ?? 0)
         if AudioPlayer.shared.player?.isPlaying == true {
-            newMyCollectionViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+            cell.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
         } else {
             newMyCollectionViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
         }
@@ -174,7 +181,7 @@ extension NewMyCollectionVC: UITableViewDelegate, UITableViewDataSource {
         case 2:
             return 120
         case 3:
-            return 130
+            return 200
         default:
             return UITableView.automaticDimension
         }
@@ -248,6 +255,11 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
                 }
             }
         }
+        
+        let miniPlayerCell = newMyCollectionViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! MiniPlayerCollectionViewCell
+        miniPlayerCell.songName.text = SongModel.getSongs()[indexPath.item].songName
+        miniPlayerCell.songAuthor.text = SongModel.getSongs()[indexPath.item].songAuthor
+        miniPlayerCell.trackImage.image = SongModel.getSongs()[indexPath.item].albumImage
         
         newMyCollectionViews.songAuthor.text = SongModel.getSongs()[indexPath.item].songAuthor
         newMyCollectionViews.songName.text = SongModel.getSongs()[indexPath.item].songName

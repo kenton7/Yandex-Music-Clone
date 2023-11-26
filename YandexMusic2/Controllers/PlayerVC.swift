@@ -276,46 +276,11 @@ class PlayerVC: UIViewController {
             AudioPlayer.shared.player?.play()
             playerViews.albumImageCollectionView.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
-//            UIView.animate(withDuration: 0.5, delay: 0, options: [.autoreverse, .repeat]) {
-//                self.playerViews.albumImageCollectionView.alpha = 0.5
-//            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 self.playVideoshot()
                 self.playerViews.albumImageCollectionView.alpha = 1.0
             }
         }
-           
-            //------
-//        if isPlayPressed == true {
-//            sender.isSelected = true
-//        } else {
-//            sender.isSelected = false
-//        }
-        
-//        if sender.isSelected == true {
-//            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
-//            playerViews.playPauseButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .selected) // кнопка нажата (трек играет)
-//            
-//            UIView.animate(withDuration: 0.5, delay: 0, options: [.autoreverse, .repeat]) {
-//                self.playerViews.albumImageCollectionView.alpha = 0.5
-//            }
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                self.playVideoshot()
-//                self.playerViews.albumImageCollectionView.alpha = 1.0
-//            }
-//        } else {
-//            playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal) // трек на паузе
-//            AudioPlayer.shared.player?.pause()
-//            
-//            playerViews.subviews.forEach {
-//                if $0.tag == 100 {
-//                    $0.removeFromSuperview()
-//                }
-//                playerViews.layoutIfNeeded()
-//            }
-//            playerViews.albumImageCollectionView.alpha = 1.0
-//            playerViews.albumImageCollectionView.isHidden = false
-//        }
     }
     
     @objc private func repeatButtonPressed() {

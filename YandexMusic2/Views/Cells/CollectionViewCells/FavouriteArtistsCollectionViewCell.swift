@@ -24,7 +24,7 @@ class FavouriteArtistsCollectionViewCell: UICollectionViewCell {
     
     lazy var artistsImages: UIImageView = {
        let view = UIImageView()
-        view.frame = CGRect(x: 10, y: 10, width: 100, height: 100)
+        view.frame = CGRect(x: 10, y: 40, width: 100, height: 100)
         view.layer.cornerRadius = view.frame.width / 2
         view.clipsToBounds = true
         view.backgroundColor = .green

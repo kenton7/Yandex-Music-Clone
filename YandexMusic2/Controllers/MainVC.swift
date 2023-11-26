@@ -79,14 +79,16 @@ class MainVC: UIViewController {
         view.backgroundColor = .black
         self.definesPresentationContext = true
         navigationItem.title = "Яндекс Музыка"
+        navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(name: "YandexSansText-Medium", size: 18)!]
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.circle.fill"), style: .done, target: self, action: #selector(profileButtonPressed))
         navigationItem.leftBarButtonItem?.tintColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: self, action: #selector(searchButtonPressed))
         
         guard let getNeededTrack = SongModel.getSongs().filter({ $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }).first else { return }
+        AudioPlayer.shared.currentTrack = getNeededTrack
         
-        //AudioPlayer.shared.setTrack(track: getNeededTrack)
+        AudioPlayer.shared.setTrack(track: getNeededTrack)
         //audioPlayer = AudioPlayer.shared.player
         
         mainViews.myWaveButton.addTarget(self, action: #selector(myWavePressed), for: .touchUpInside)
@@ -95,14 +97,11 @@ class MainVC: UIViewController {
         let tapOnMiniPlayerGesture = UITapGestureRecognizer(target: self, action: #selector(miniPlayerPressed))
         
         mainViews.miniPlayer.addGestureRecognizer(tapOnMiniPlayerGesture)
-        mainViews.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        mainViews.miniPlayerCollectionView.delegate = self
+        mainViews.miniPlayerCollectionView.dataSource = self
+        //mainViews.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         
         navigationItem.rightBarButtonItem?.tintColor = .white
-        
-        //addSecondMainChildVC()
-//        let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(showChildMainVC))
-//        swipeUpGesture.direction = .up
-//        view.addGestureRecognizer(swipeUpGesture)
         
         if AudioPlayer.shared.player?.isPlaying == true {
             mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)), for: .normal)
@@ -135,6 +134,8 @@ class MainVC: UIViewController {
             mainViews.changeSourcePlayingMiniPlayer.isHidden = false
             mainViews.playPauseButtonMiniPlayer.isHidden = false
         }
+        
+        
         mainViews.songName.text = UserDefaults.standard.string(forKey: "songName")
         mainViews.songAuthor.text = UserDefaults.standard.string(forKey: "songAuthor")
         mainViews.sliderOnMiniPlayer.maximumValue = UserDefaults.standard.float(forKey: "maximumValue")
@@ -282,15 +283,17 @@ class MainVC: UIViewController {
     @objc private func playButtonPressed() {
 
         if AudioPlayer.shared.player?.isPlaying == true {
+            print("pause")
             mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
             AudioPlayer.shared.player?.pause()
         } else {
-            let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first
-            let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
-            AudioPlayer.shared.currentTrack = getNeededTrack
-            AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack ?? getNeededTrack!)
-            AudioPlayer.shared.player?.currentTime = TimeInterval(mainViews.sliderOnMiniPlayer.value)
-            mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+            print("play")
+//            let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first
+//            let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
+//            AudioPlayer.shared.currentTrack = getNeededTrack
+//            AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack ?? getNeededTrack!)
+//            AudioPlayer.shared.player?.currentTime = TimeInterval(mainViews.sliderOnMiniPlayer.value)
+//            mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             AudioPlayer.shared.player?.play()
         }
@@ -304,22 +307,6 @@ class MainVC: UIViewController {
         //player.audioPlayer = AudioPlayer.shared.player
         player.modalPresentationStyle = .overFullScreen
         present(player, animated: true)
-        
-        //------------
-//        if let existingPlayerVC = playerVC {
-//            existingPlayerVC.updateTrack(getNeededTrack)
-//            existingPlayerVC.audioPlayer = AudioPlayer.shared.player // Передайте текущий экземпляр AudioPlayer
-//            existingPlayerVC.currentTrack = getNeededTrack
-//            existingPlayerVC.modalPresentationStyle = .overFullScreen
-//            present(existingPlayerVC, animated: true)
-//        } else {
-//            let newPlayerVC = PlayerVC()
-//            newPlayerVC.currentTrack = getNeededTrack
-//            newPlayerVC.audioPlayer = AudioPlayer.shared.player // Передайте текущий экземпляр AudioPlayer
-//            newPlayerVC.modalPresentationStyle = .overFullScreen
-//            present(newPlayerVC, animated: true)
-//            playerVC = newPlayerVC
-//        }
     }
     
     
@@ -364,7 +351,13 @@ class MainVC: UIViewController {
     
     @objc func updateTime() {
         //mainViews.sliderOnMiniPlayer.value = UserDefaults.standard.float(forKey: "valueSlider")
-        mainViews.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
+        let cell = mainViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! MiniPlayerCollectionViewCell
+        
+        cell.songName.text = UserDefaults.standard.string(forKey: "songName")
+        cell.songAuthor.text = UserDefaults.standard.string(forKey: "songAuthor")
+        cell.trackImage.image = AudioPlayer.shared.currentTrack?.albumImage
+        cell.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
+        //mainViews.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
         UserDefaults.standard.set(mainViews.sliderOnMiniPlayer.value, forKey: "valueSlider")
     }
     
@@ -408,6 +401,35 @@ class MainVC: UIViewController {
 extension MainChildVC: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+}
+
+extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return SongModel.getSongs().count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MiniPlayerCollectionViewCell.cellID, for: indexPath) as! MiniPlayerCollectionViewCell
+        cell.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        cell.trackImage.image = AudioPlayer.shared.currentTrack?.albumImage
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let frameSize = collectionView.frame.size
+        return CGSize(width: frameSize.width - 10, height: frameSize.height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+
+        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
     }
 }
 

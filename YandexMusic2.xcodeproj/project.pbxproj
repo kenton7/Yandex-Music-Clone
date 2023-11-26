@@ -21,6 +21,7 @@
 		0963DE6C2B12815000F0BCB2 /* MyCollectionWaveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0963DE6B2B12815000F0BCB2 /* MyCollectionWaveTableViewCell.swift */; };
 		0963DE6E2B1282CB00F0BCB2 /* FavouriteArtistsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0963DE6D2B1282CB00F0BCB2 /* FavouriteArtistsTableViewCell.swift */; };
 		0963DE702B12846900F0BCB2 /* FavouriteArtistsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0963DE6F2B12846900F0BCB2 /* FavouriteArtistsCollectionViewCell.swift */; };
+		0963DE722B13CB2000F0BCB2 /* MiniPlayerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0963DE712B13CB2000F0BCB2 /* MiniPlayerCollectionViewCell.swift */; };
 		0997B3932AFCCDC900096764 /* YandexSansDisplay-Bold.eot in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3642AFCCDC900096764 /* YandexSansDisplay-Bold.eot */; };
 		0997B3942AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3652AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff */; };
 		0997B3952AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url in Resources */ = {isa = PBXBuildFile; fileRef = 0997B3662AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url */; };
@@ -139,6 +140,7 @@
 		0963DE6B2B12815000F0BCB2 /* MyCollectionWaveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionWaveTableViewCell.swift; sourceTree = "<group>"; };
 		0963DE6D2B1282CB00F0BCB2 /* FavouriteArtistsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteArtistsTableViewCell.swift; sourceTree = "<group>"; };
 		0963DE6F2B12846900F0BCB2 /* FavouriteArtistsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteArtistsCollectionViewCell.swift; sourceTree = "<group>"; };
+		0963DE712B13CB2000F0BCB2 /* MiniPlayerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerCollectionViewCell.swift; sourceTree = "<group>"; };
 		0997B3642AFCCDC900096764 /* YandexSansDisplay-Bold.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-Bold.eot"; sourceTree = "<group>"; };
 		0997B3652AFCCDC900096764 /* YandexSansDisplay-RegularItalic.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YandexSansDisplay-RegularItalic.woff"; sourceTree = "<group>"; };
 		0997B3662AFCCDC900096764 /* Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Б†І† иа®двЃҐ б ™®а®ЂЂ®ж•©.url"; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 				0963DE5D2B125FD700F0BCB2 /* ILikeCollectionViewCell.swift */,
 				0963DE692B127C0200F0BCB2 /* MoreInYourCollectionViewCell.swift */,
 				0963DE6F2B12846900F0BCB2 /* FavouriteArtistsCollectionViewCell.swift */,
+				0963DE712B13CB2000F0BCB2 /* MiniPlayerCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -732,6 +735,7 @@
 				0963DE5C2B0F98EA00F0BCB2 /* ZoomAndSnapFlowLayout.swift in Sources */,
 				09F89F3A2AF90160006086E2 /* NeuroMusicTableViewCell.swift in Sources */,
 				0963DE662B12679400F0BCB2 /* ILikeTableViewCell.swift in Sources */,
+				0963DE722B13CB2000F0BCB2 /* MiniPlayerCollectionViewCell.swift in Sources */,
 				09EDF15D2AD955EE002F4CFC /* MyCollectionVC.swift in Sources */,
 				0963DE622B1262C900F0BCB2 /* NewMyCollectionViews.swift in Sources */,
 				09F89F2E2AF7BB6F006086E2 /* PopularPlaylistsCollectionViewCell.swift in Sources */,

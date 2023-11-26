@@ -83,6 +83,23 @@ class MiniPlayerView: UIView {
         return button
     }()
     
+    lazy var miniPlayerCollectionView: UICollectionView = {
+       let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        //layout.minimumInteritemSpacing = 10
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.isPagingEnabled = true
+        collectionView.layer.cornerRadius = 8
+        collectionView.register(MiniPlayerCollectionViewCell.self, forCellWithReuseIdentifier: MiniPlayerCollectionViewCell.cellID)
+        return collectionView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -96,43 +113,83 @@ class MiniPlayerView: UIView {
     private func configure() {
                 
         //addSubview(miniPlayer)
-        addSubview(likeButtonMiniPlayer)
-        addSubview(songName)
-        addSubview(songAuthor)
-        addSubview(changeSourcePlayingMiniPlayer)
-        addSubview(playPauseButtonMiniPlayer)
-        addSubview(sliderOnMiniPlayer)
+        //addSubview(likeButtonMiniPlayer)
+        //addSubview(songName)
+        //addSubview(songAuthor)
+        //addSubview(changeSourcePlayingMiniPlayer)
+        //addSubview(playPauseButtonMiniPlayer)
+        //addSubview(sliderOnMiniPlayer)
         
         insertSubview(miniPlayer, at: 1)
-        insertSubview(likeButtonMiniPlayer, at: 1)
+        miniPlayer.addSubview(miniPlayerCollectionView)
+        //insertSubview(likeButtonMiniPlayer, at: 1)
         
         
         NSLayoutConstraint.activate([
             
             miniPlayer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             miniPlayer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            miniPlayer.heightAnchor.constraint(equalToConstant: 40),
+            miniPlayer.heightAnchor.constraint(equalToConstant: 65),
             miniPlayer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0),
             
-            likeButtonMiniPlayer.leadingAnchor.constraint(equalTo: miniPlayer.leadingAnchor, constant: 10),
-            likeButtonMiniPlayer.topAnchor.constraint(equalTo: miniPlayer.topAnchor, constant: 10),
-            likeButtonMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
-            
-            songName.leadingAnchor.constraint(equalTo: likeButtonMiniPlayer.trailingAnchor, constant: 10),
-            songName.topAnchor.constraint(equalTo: miniPlayer.topAnchor, constant: 5),
-            songAuthor.leadingAnchor.constraint(equalTo: likeButtonMiniPlayer.trailingAnchor, constant: 10),
-            songAuthor.bottomAnchor.constraint(equalTo: likeButtonMiniPlayer.bottomAnchor, constant: 5),
-            
-            playPauseButtonMiniPlayer.trailingAnchor.constraint(equalTo: miniPlayer.trailingAnchor, constant: -10),
-            playPauseButtonMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
-            
-            changeSourcePlayingMiniPlayer.trailingAnchor.constraint(equalTo: playPauseButtonMiniPlayer.leadingAnchor, constant: -20),
-            changeSourcePlayingMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
-            
-            sliderOnMiniPlayer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -2),
-            sliderOnMiniPlayer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 2),
-            sliderOnMiniPlayer.bottomAnchor.constraint(equalTo: miniPlayer.topAnchor, constant: 0)
+            miniPlayerCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            miniPlayerCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            miniPlayerCollectionView.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
+            miniPlayerCollectionView.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     
+    @objc func updateTime() {
+        //mainViews.sliderOnMiniPlayer.value = UserDefaults.standard.float(forKey: "valueSlider")
+        let cell = miniPlayerCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! MiniPlayerCollectionViewCell
+        cell.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
+        //mainViews.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
+        UserDefaults.standard.set(sliderOnMiniPlayer.value, forKey: "valueSlider")
+    }
+    
+    @objc private func playButtonPressed() {
+
+        if AudioPlayer.shared.player?.isPlaying == true {
+            playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+            AudioPlayer.shared.player?.pause()
+        } else {
+            let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == songAuthor.text && $0.songName == songName.text }.first
+            let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
+            AudioPlayer.shared.currentTrack = getNeededTrack
+            AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack ?? getNeededTrack!)
+            AudioPlayer.shared.player?.currentTime = TimeInterval(sliderOnMiniPlayer.value)
+            playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            AudioPlayer.shared.player?.play()
+        }
+    }
+}
+
+extension MiniPlayerView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return SongModel.getSongs().count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MiniPlayerCollectionViewCell.cellID, for: indexPath) as! MiniPlayerCollectionViewCell
+        cell.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        cell.trackImage.image = AudioPlayer.shared.currentTrack?.albumImage
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let frameSize = collectionView.frame.size
+        return CGSize(width: frameSize.width - 10, height: frameSize.height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+
+        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+    }
 }

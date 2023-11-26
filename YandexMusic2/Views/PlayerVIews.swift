@@ -354,6 +354,10 @@ class PlayerVIews: MainViews, IPlayer {
     
     override func configureViews() {
         
+        let tabBarController = TabBarController()
+        
+        print(tabBarController.selectedIndex)
+        
         addSubview(albumImageCollectionView)
         addSubview(downArrowButton)
         addSubview(playlistNameStackView)

@@ -90,6 +90,6 @@ extension FavouriteArtistsTableViewCell: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 110, height: 150)
+        return CGSize(width: 110, height: 200)
     }
 }
