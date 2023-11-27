@@ -53,8 +53,8 @@ class MyCollectionWaveTableViewCell: UITableViewCell {
         addSubview(myWaveCollectionButton)
         
         NSLayoutConstraint.activate([
-            myWaveCollectionButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            myWaveCollectionButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            myWaveCollectionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            myWaveCollectionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             myWaveCollectionButton.topAnchor.constraint(equalTo: topAnchor),
             myWaveCollectionButton.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])

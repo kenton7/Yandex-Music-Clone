@@ -15,7 +15,6 @@ class MiniPlayerCollectionViewCell: UICollectionViewCell {
        let view = UIImageView(frame: CGRect(x: 10, y: 10, width: 40, height: 40))
         view.center.y = self.center.y
         view.contentMode = .scaleAspectFit
-        view.image = UIImage(named: "NILETTO, Олег Майами & Лёша Свик - Не Вспоминай")
         view.layer.cornerRadius = 5
         view.clipsToBounds = true
         return view
@@ -31,6 +30,8 @@ class MiniPlayerCollectionViewCell: UICollectionViewCell {
         songSlider.isUserInteractionEnabled = false
         songSlider.value = UserDefaults.standard.float(forKey: "valueSlider")
         songSlider.maximumValue = UserDefaults.standard.float(forKey: "maximumValue")
+        songSlider.layer.cornerRadius = 8
+        songSlider.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         return songSlider
     }()
     
@@ -86,8 +87,8 @@ class MiniPlayerCollectionViewCell: UICollectionViewCell {
         
         let blurEffect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blurEffect)
-        addSubview(blurView)
         blurView.frame = bounds
+        addSubview(blurView)
         blurView.layer.cornerRadius = 10
         blurView.clipsToBounds = true
         

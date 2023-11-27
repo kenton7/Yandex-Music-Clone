@@ -67,6 +67,8 @@ class MainVC: UIViewController {
     var tapGestureRecognizer: UITapGestureRecognizer!
     var panGestureRecognizer: UIPanGestureRecognizer!
     
+    private var selectedIndexPath: Int?
+    
     override func loadView() {
         super.loadView()
         mainViews.frame = view.bounds
@@ -94,9 +96,9 @@ class MainVC: UIViewController {
         mainViews.myWaveButton.addTarget(self, action: #selector(myWavePressed), for: .touchUpInside)
         
         
-        let tapOnMiniPlayerGesture = UITapGestureRecognizer(target: self, action: #selector(miniPlayerPressed))
+        //let tapOnMiniPlayerGesture = UITapGestureRecognizer(target: self, action: #selector(miniPlayerPressed))
         
-        mainViews.miniPlayer.addGestureRecognizer(tapOnMiniPlayerGesture)
+        //mainViews.miniPlayer.addGestureRecognizer(tapOnMiniPlayerGesture)
         mainViews.miniPlayerCollectionView.delegate = self
         mainViews.miniPlayerCollectionView.dataSource = self
         //mainViews.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
@@ -117,23 +119,23 @@ class MainVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if UserDefaults.standard.string(forKey: "songName") == nil && UserDefaults.standard.string(forKey: "songAuthor") == nil {
-            mainViews.miniPlayer.isHidden = true
-            mainViews.sliderOnMiniPlayer.isHidden = true
-            mainViews.songName.isHidden = true
-            mainViews.songAuthor.isHidden = true
-            mainViews.likeButtonMiniPlayer.isHidden = true
-            mainViews.changeSourcePlayingMiniPlayer.isHidden = true
-            mainViews.playPauseButtonMiniPlayer.isHidden = true
-        } else {
-            mainViews.miniPlayer.isHidden = false
-            mainViews.sliderOnMiniPlayer.isHidden = false
-            mainViews.songName.isHidden = false
-            mainViews.songAuthor.isHidden = false
-            mainViews.likeButtonMiniPlayer.isHidden = false
-            mainViews.changeSourcePlayingMiniPlayer.isHidden = false
-            mainViews.playPauseButtonMiniPlayer.isHidden = false
-        }
+//        if UserDefaults.standard.string(forKey: "songName") == nil && UserDefaults.standard.string(forKey: "songAuthor") == nil {
+//            mainViews.miniPlayer.isHidden = true
+//            mainViews.sliderOnMiniPlayer.isHidden = true
+//            mainViews.songName.isHidden = true
+//            mainViews.songAuthor.isHidden = true
+//            mainViews.likeButtonMiniPlayer.isHidden = true
+//            mainViews.changeSourcePlayingMiniPlayer.isHidden = true
+//            mainViews.playPauseButtonMiniPlayer.isHidden = true
+//        } else {
+//            mainViews.miniPlayer.isHidden = false
+//            mainViews.sliderOnMiniPlayer.isHidden = false
+//            mainViews.songName.isHidden = false
+//            mainViews.songAuthor.isHidden = false
+//            mainViews.likeButtonMiniPlayer.isHidden = false
+//            mainViews.changeSourcePlayingMiniPlayer.isHidden = false
+//            mainViews.playPauseButtonMiniPlayer.isHidden = false
+//        }
         
         
         mainViews.songName.text = UserDefaults.standard.string(forKey: "songName")
@@ -281,32 +283,20 @@ class MainVC: UIViewController {
     }
     
     @objc private func playButtonPressed() {
-
-        if AudioPlayer.shared.player?.isPlaying == true {
-            print("pause")
-            mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+        
+        guard let selectedIndexPath = selectedIndexPath else { return }
+        
+        let cell = mainViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: selectedIndexPath, section: 0)) as? MiniPlayerCollectionViewCell
+        
+        if isSongPlaying == true {
+            cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
             AudioPlayer.shared.player?.pause()
         } else {
-            print("play")
-//            let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first
-//            let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
-//            AudioPlayer.shared.currentTrack = getNeededTrack
-//            AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack ?? getNeededTrack!)
-//            AudioPlayer.shared.player?.currentTime = TimeInterval(mainViews.sliderOnMiniPlayer.value)
-//            mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+            print("here")
+            cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
             AudioPlayer.shared.player?.play()
         }
-    }
-    
-    @objc private func miniPlayerPressed() {
-        let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }.first
-        
-        let player = PlayerVC()
-        player.currentTrack = getNeededTrack
-        //player.audioPlayer = AudioPlayer.shared.player
-        player.modalPresentationStyle = .overFullScreen
-        present(player, animated: true)
     }
     
     
@@ -327,13 +317,13 @@ class MainVC: UIViewController {
             AudioPlayer.shared.currentTrack?.albumImage = selectedSong!.albumImage
             mainViews.sliderOnMiniPlayer.maximumValue = Float(AudioPlayer.shared.duration)
             
-            mainViews.miniPlayer.isHidden = false
-            mainViews.sliderOnMiniPlayer.isHidden = false
-            mainViews.songName.isHidden = false
-            mainViews.songAuthor.isHidden = false
-            mainViews.likeButtonMiniPlayer.isHidden = false
-            mainViews.changeSourcePlayingMiniPlayer.isHidden = false
-            mainViews.playPauseButtonMiniPlayer.isHidden = false
+//            mainViews.miniPlayer.isHidden = false
+//            mainViews.sliderOnMiniPlayer.isHidden = false
+//            mainViews.songName.isHidden = false
+//            mainViews.songAuthor.isHidden = false
+//            mainViews.likeButtonMiniPlayer.isHidden = false
+//            mainViews.changeSourcePlayingMiniPlayer.isHidden = false
+//            mainViews.playPauseButtonMiniPlayer.isHidden = false
             
             UserDefaults.standard.set(MiniPlayerView.shared.sliderOnMiniPlayer.maximumValue, forKey: "maximumValue")
             UserDefaults.standard.set(selectedSong?.songAuthor, forKey: "songAuthor")
@@ -351,12 +341,13 @@ class MainVC: UIViewController {
     
     @objc func updateTime() {
         //mainViews.sliderOnMiniPlayer.value = UserDefaults.standard.float(forKey: "valueSlider")
-        let cell = mainViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! MiniPlayerCollectionViewCell
+        guard let selectedIndexPath = selectedIndexPath else { return }
+        let cell = mainViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: selectedIndexPath, section: 0)) as? MiniPlayerCollectionViewCell
         
-        cell.songName.text = UserDefaults.standard.string(forKey: "songName")
-        cell.songAuthor.text = UserDefaults.standard.string(forKey: "songAuthor")
-        cell.trackImage.image = AudioPlayer.shared.currentTrack?.albumImage
-        cell.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
+        cell?.songName.text = AudioPlayer.shared.currentTrack?.songName
+        cell?.songAuthor.text = AudioPlayer.shared.currentTrack?.songAuthor
+        cell?.trackImage.image = AudioPlayer.shared.currentTrack?.albumImage
+        cell?.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
         //mainViews.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
         UserDefaults.standard.set(mainViews.sliderOnMiniPlayer.value, forKey: "valueSlider")
     }
@@ -367,34 +358,6 @@ class MainVC: UIViewController {
     
     @objc private func profileButtonPressed() {
         print("pressed")
-    }
-    
-    @objc private func showChildMainVC() {
-        let mainChildVC = MainChildVC()
-        
-        if let sheet = mainChildVC.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-            sheet.prefersGrabberVisible = true
-        }
-        present(mainChildVC, animated: true)
-    }
-    
-    
-    private func addSecondMainChildVC() {
-        addChild(mainChildVC)
-        mainChildVC.view.isUserInteractionEnabled = true
-        //view.insertSubview(mainChildVC.view, at: 0)
-        mainChildVC.didMove(toParent: self)
-        //navigationController?.pushViewController(mainChildVC, animated: true)
-        
-        
-        NSLayoutConstraint.activate([
-            mainChildVC.view.topAnchor.constraint(equalTo: mainViews.waveAnimationView.bottomAnchor, constant: -80),
-            mainChildVC.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            mainChildVC.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            mainChildVC.view.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1.0)
-        ])
     }
 }
 
@@ -411,24 +374,53 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MiniPlayerCollectionViewCell.cellID, for: indexPath) as! MiniPlayerCollectionViewCell
-        cell.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
-        cell.trackImage.image = AudioPlayer.shared.currentTrack?.albumImage
+        if cell.playPauseButtonMiniPlayer.allTargets.isEmpty {
+            // Устанавливаем таргет только если его нет
+            cell.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        }
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if let cell = cell as? MiniPlayerCollectionViewCell {
+            print("indexPath \(indexPath.item)")
+            AudioPlayer.shared.setTrack(track: SongModel.getSongs()[indexPath.item])
+            if AudioPlayer.shared.player?.isPlaying == true {
+                print("playing")
+                AudioPlayer.shared.player?.play()
+            }
+            print(SongModel.getSongs()[indexPath.item].songName)
+            cell.songName.text = SongModel.getSongs()[indexPath.item].songName
+            cell.songAuthor.text = SongModel.getSongs()[indexPath.item].songAuthor
+            cell.trackImage.image = SongModel.getSongs()[indexPath.item].albumImage
+            cell.sliderOnMiniPlayer.maximumValue = Float(AudioPlayer.shared.player!.duration)
+            UserDefaults.standard.set(cell.songName.text, forKey: "songName")
+            UserDefaults.standard.set(cell.songAuthor.text, forKey: "songAuthor")
+            selectedIndexPath = indexPath.item
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let newTrack = SongModel.getSongs()[indexPath.item]
+        print(newTrack)
+        let player = PlayerVC()
+        player.currentTrack = newTrack
+        //player.audioPlayer = AudioPlayer.shared.player
+        player.modalPresentationStyle = .overFullScreen
+        present(player, animated: true)
+        print("selected \(indexPath.item))")
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-
         return 10
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let frameSize = collectionView.frame.size
-        return CGSize(width: frameSize.width - 10, height: frameSize.height)
+        return CGSize(width: collectionView.frame.width - 10, height: collectionView.frame.height)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
         return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
     }
 }

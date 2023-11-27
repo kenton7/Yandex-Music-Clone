@@ -10,7 +10,7 @@ import UIKit
 class MiniPlayerView: UIView {
     
     static let shared = MiniPlayerView()
-    
+        
     lazy var miniPlayer: UIView = {
         let view = UIView()
         view.isUserInteractionEnabled = true
@@ -92,8 +92,6 @@ class MiniPlayerView: UIView {
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.isPagingEnabled = true
         collectionView.layer.cornerRadius = 8
         collectionView.register(MiniPlayerCollectionViewCell.self, forCellWithReuseIdentifier: MiniPlayerCollectionViewCell.cellID)
@@ -121,7 +119,8 @@ class MiniPlayerView: UIView {
         //addSubview(sliderOnMiniPlayer)
         
         insertSubview(miniPlayer, at: 1)
-        miniPlayer.addSubview(miniPlayerCollectionView)
+        insertSubview(miniPlayerCollectionView, at: 2)
+        //miniPlayer.addSubview(miniPlayerCollectionView)
         //insertSubview(likeButtonMiniPlayer, at: 1)
         
         
@@ -165,31 +164,3 @@ class MiniPlayerView: UIView {
     }
 }
 
-extension MiniPlayerView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return SongModel.getSongs().count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MiniPlayerCollectionViewCell.cellID, for: indexPath) as! MiniPlayerCollectionViewCell
-        cell.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
-        cell.trackImage.image = AudioPlayer.shared.currentTrack?.albumImage
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-
-        return 10
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let frameSize = collectionView.frame.size
-        return CGSize(width: frameSize.width - 10, height: frameSize.height)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
-        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-    }
-}

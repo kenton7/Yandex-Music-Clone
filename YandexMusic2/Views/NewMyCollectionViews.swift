@@ -48,13 +48,6 @@ class NewMyCollectionViews: MiniPlayerView {
         addSubview(tableView)
         addSubview(miniPlayer)
         miniPlayer.addSubview(miniPlayerCollectionView)
-        
-//        addSubview(likeButtonMiniPlayer)
-//        addSubview(songName)
-//        addSubview(songAuthor)
-//        addSubview(changeSourcePlayingMiniPlayer)
-//        addSubview(playPauseButtonMiniPlayer)
-//        addSubview(sliderOnMiniPlayer)
         addSubview(trackPlayingAnimation)
         
         NSLayoutConstraint.activate([
@@ -73,25 +66,6 @@ class NewMyCollectionViews: MiniPlayerView {
             miniPlayerCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             miniPlayerCollectionView.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
             miniPlayerCollectionView.heightAnchor.constraint(equalToConstant: 50),
-            
-//            likeButtonMiniPlayer.leadingAnchor.constraint(equalTo: miniPlayer.leadingAnchor, constant: 10),
-//            likeButtonMiniPlayer.topAnchor.constraint(equalTo: miniPlayer.topAnchor, constant: 10),
-//            likeButtonMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
-//            
-//            songName.leadingAnchor.constraint(equalTo: likeButtonMiniPlayer.trailingAnchor, constant: 10),
-//            songName.topAnchor.constraint(equalTo: miniPlayer.topAnchor, constant: 5),
-//            songAuthor.leadingAnchor.constraint(equalTo: likeButtonMiniPlayer.trailingAnchor, constant: 10),
-//            songAuthor.bottomAnchor.constraint(equalTo: likeButtonMiniPlayer.bottomAnchor, constant: 5),
-//            
-//            playPauseButtonMiniPlayer.trailingAnchor.constraint(equalTo: miniPlayer.trailingAnchor, constant: -10),
-//            playPauseButtonMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
-//            
-//            changeSourcePlayingMiniPlayer.trailingAnchor.constraint(equalTo: playPauseButtonMiniPlayer.leadingAnchor, constant: -20),
-//            changeSourcePlayingMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
-//            
-//            sliderOnMiniPlayer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -2),
-//            sliderOnMiniPlayer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 2),
-//            sliderOnMiniPlayer.bottomAnchor.constraint(equalTo: miniPlayer.topAnchor, constant: 0)
         ])
     }
 }

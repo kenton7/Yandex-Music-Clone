@@ -79,13 +79,13 @@ class PlayerVC: UIViewController {
         
         
         view.backgroundColor = dominantColor(for: getNeededTrack?.albumImage ?? SongModel.getSongs().randomElement()!.albumImage)
-        playerViews.songNameLabel.text = getNeededTrack?.songName
-        playerViews.songAuthorLabel.text = getNeededTrack?.songAuthor
+        playerViews.songNameLabel.text = currentTrack?.songName
+        playerViews.songAuthorLabel.text = currentTrack?.songAuthor
         playerViews.slider.maximumValue = Float(AudioPlayer.shared.player?.duration ?? 0)
         //playerViews.slider.value = playerViews.sliderOnMiniPlayer.value
         playerViews.slider.value = UserDefaults.standard.float(forKey: "valueSlider")
-        
-        AudioPlayer.shared.currentTrack = getNeededTrack!
+        print(AudioPlayer.shared.currentTrack)
+        AudioPlayer.shared.currentTrack = currentTrack!
         
         currentTrackIndex = SongModel.getSongs().firstIndex(where: { $0 == getNeededTrack }) ?? 0
         
@@ -276,6 +276,7 @@ class PlayerVC: UIViewController {
             AudioPlayer.shared.player?.play()
             playerViews.albumImageCollectionView.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 self.playVideoshot()
                 self.playerViews.albumImageCollectionView.alpha = 1.0
