@@ -65,35 +65,21 @@ final class NewMyCollectionVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if UserDefaults.standard.string(forKey: "songName") == nil && UserDefaults.standard.string(forKey: "songAuthor") == nil {
-            newMyCollectionViews.miniPlayer.isHidden = true
-            newMyCollectionViews.sliderOnMiniPlayer.isHidden = true
-            newMyCollectionViews.songName.isHidden = true
-            newMyCollectionViews.songAuthor.isHidden = true
-            newMyCollectionViews.likeButtonMiniPlayer.isHidden = true
-            newMyCollectionViews.changeSourcePlayingMiniPlayer.isHidden = true
-            newMyCollectionViews.playPauseButtonMiniPlayer.isHidden = true
-        } else {
-            newMyCollectionViews.miniPlayer.isHidden = false
-            newMyCollectionViews.sliderOnMiniPlayer.isHidden = false
-            newMyCollectionViews.songName.isHidden = false
-            newMyCollectionViews.songAuthor.isHidden = false
-            newMyCollectionViews.likeButtonMiniPlayer.isHidden = false
-            newMyCollectionViews.changeSourcePlayingMiniPlayer.isHidden = false
-            newMyCollectionViews.playPauseButtonMiniPlayer.isHidden = false
-        }
+        let cell = newMyCollectionViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: UserDefaults.standard.integer(forKey: "trackIndex"), section: 0)) as? MiniPlayerCollectionViewCell
         
-//        newMyCollectionViews.songName.text = UserDefaults.standard.string(forKey: "songName")
-//        newMyCollectionViews.songAuthor.text = UserDefaults.standard.string(forKey: "songAuthor")
-       // newMyCollectionViews.sliderOnMiniPlayer.maximumValue = UserDefaults.standard.float(forKey: "maximumValue")
-//        newMyCollectionViews.sliderOnMiniPlayer.value = UserDefaults.standard.float(forKey: "valueSlider")
+        cell?.songName.text = UserDefaults.standard.string(forKey: "songName")
+        cell?.songAuthor.text = UserDefaults.standard.string(forKey: "songAuthor")
+        cell?.sliderOnMiniPlayer.maximumValue = UserDefaults.standard.float(forKey: "maximumValue")
         
         if AudioPlayer.shared.player?.isPlaying == true {
-            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
-            newMyCollectionViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+            print("playing")
+            cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
         } else {
-            newMyCollectionViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+            print("fuck")
+            cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
         }
+        
+        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
         
         newMyCollectionViews.miniPlayerCollectionView.scrollToItem(at: IndexPath(item: selectedTrackIndex, section: 0), at: .left, animated: false)
         view.layoutSubviews()
@@ -124,20 +110,13 @@ final class NewMyCollectionVC: UIViewController {
         cell?.trackImage.image = AudioPlayer.shared.currentTrack?.albumImage
         cell?.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
         
+        if AudioPlayer.shared.player?.isPlaying == true {
+            cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+        }
+        
         cell?.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.player?.currentTime ?? 0)
         UserDefaults.standard.set(newMyCollectionViews.sliderOnMiniPlayer.value, forKey: "valueSlider")
-//        if AudioPlayer.shared.player?.isPlaying == true {
-//            cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
-//        } else {
-//            newMyCollectionViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
-//        }
     }
-    
-//    @objc private func miniPlayerPressed() {
-//        let playerVC = PlayerVC()
-//        playerVC.modalPresentationStyle = .fullScreen
-//        present(playerVC, animated: true)
-//    }
     
     @objc private func myWaveCollectionPressed() {
         print("my wave collection pressed")
@@ -270,12 +249,13 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
+                
         if let cell = cell as? MiniPlayerCollectionViewCell {
             print("indexPath \(indexPath.item)")
             //AudioPlayer.shared.setTrack(track: SongModel.getSongs()[indexPath.item])
             if AudioPlayer.shared.player?.isPlaying == true {
                 print("playing")
+                cell.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
                 AudioPlayer.shared.player?.play()
             }
             print(SongModel.getSongs()[indexPath.item].songName)
@@ -286,6 +266,7 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
             UserDefaults.standard.set(cell.songName.text, forKey: "songName")
             UserDefaults.standard.set(cell.songAuthor.text, forKey: "songAuthor")
             selectedTrackIndex = indexPath.item
+            UserDefaults.standard.set(selectedTrackIndex, forKey: "trackIndex")
         }
     }
     
@@ -299,7 +280,6 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
             //player.audioPlayer = AudioPlayer.shared.player
             player.modalPresentationStyle = .overFullScreen
             present(player, animated: true)
-            print("selected \(indexPath.item))")
         } else {
             let bgColorView = UIView()
             bgColorView.backgroundColor = #colorLiteral(red: 0.07843136042, green: 0.07843136042, blue: 0.07843136042, alpha: 1)

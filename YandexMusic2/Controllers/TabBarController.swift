@@ -29,8 +29,8 @@ class TabBarController: UITabBarController {
         tabBar.insertSubview(blurView, at: 1)
         setupVCs()
         
-        let playerView = MiniPlayerView(frame: CGRect(x: 0, y: tabBar.frame.minY, width: tabBar.frame.width, height: 65))
-        tabBar.addSubview(playerView)
+//        let playerView = MiniPlayerView(frame: CGRect(x: 0, y: tabBar.frame.minY, width: tabBar.frame.width, height: 65))
+//        tabBar.addSubview(playerView)
     }
     
     func setupVCs() {
