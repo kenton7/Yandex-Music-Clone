@@ -20,6 +20,15 @@ class YourFavouriteTableViewCell: UITableViewCell {
         return label
     }()
     
+    lazy var tracksCount: UILabel = {
+        let label = UILabel()
+         label.text = "7 треков"
+         label.font = UIFont(name: "YandexSansText-Medium", size: 15)
+         label.textColor = .lightGray
+         label.translatesAutoresizingMaskIntoConstraints = false
+         return label
+    }()
+    
     private lazy var favouriteTracksImageView: UIImageView = {
        let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -39,11 +48,19 @@ class YourFavouriteTableViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var stackView: UIStackView = {
+       let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .vertical
+        view.spacing = 6
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configure()
-        contentView.layer.cornerRadius = 10
+        contentView.layer.cornerRadius = 5
         backgroundColor = .clear
         accessoryType = .disclosureIndicator
         selectionStyle = .none
@@ -56,22 +73,21 @@ class YourFavouriteTableViewCell: UITableViewCell {
     
     private func configure() {
         
-        contentView.addSubview(yourFavouriteTracksLabel)
+        //contentView.addSubview(yourFavouriteTracksLabel)
+        contentView.addSubview(tracksCount)
         contentView.addSubview(favouriteTracksImageView)
         contentView.addSubview(iLikeTracksLabel)
+        contentView.addSubview(stackView)
+        stackView.addArrangedSubview(iLikeTracksLabel)
+        stackView.addArrangedSubview(tracksCount)
         
         NSLayoutConstraint.activate([
             favouriteTracksImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             favouriteTracksImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            //favouriteTracksImageView.topAnchor.constraint(equalTo: yourFavouriteTracksLabel.bottomAnchor, constant: 20),
-            favouriteTracksImageView.heightAnchor.constraint(equalToConstant: 100),
-            favouriteTracksImageView.widthAnchor.constraint(equalToConstant: 100),
-            //favouriteTracksImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            
-            iLikeTracksLabel.centerYAnchor.constraint(equalTo: favouriteTracksImageView.centerYAnchor),
-            iLikeTracksLabel.leadingAnchor.constraint(equalTo: favouriteTracksImageView.trailingAnchor, constant: 10),
-            
-            yourFavouriteTracksLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            favouriteTracksImageView.heightAnchor.constraint(equalToConstant: 80),
+            favouriteTracksImageView.widthAnchor.constraint(equalToConstant: 80),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.leadingAnchor.constraint(equalTo: favouriteTracksImageView.trailingAnchor, constant: 10),
         ])
         
     }

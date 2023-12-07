@@ -86,8 +86,12 @@ class MainVC: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.circle.fill"), style: .done, target: self, action: #selector(profileButtonPressed))
         navigationItem.leftBarButtonItem?.tintColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: self, action: #selector(searchButtonPressed))
+        navigationItem.rightBarButtonItem?.tintColor = .white
         
+        
+        //TODO: - При первой загрузке нет плеера и после return код не выполняется
         guard let getNeededTrack = SongModel.getSongs().filter({ $0.songAuthor == mainViews.songAuthor.text && $0.songName == mainViews.songName.text }).first else { return }
+        //---- здесь код перестает выполняться
         AudioPlayer.shared.currentTrack = getNeededTrack
         
         AudioPlayer.shared.setTrack(track: getNeededTrack)
@@ -103,17 +107,12 @@ class MainVC: UIViewController {
         mainViews.miniPlayerCollectionView.dataSource = self
         //mainViews.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         
-        navigationItem.rightBarButtonItem?.tintColor = .white
-        
         if AudioPlayer.shared.player?.isPlaying == true {
             mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)), for: .normal)
         } else {
             mainViews.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)), for: .normal)
         }
-        
         setupChild()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

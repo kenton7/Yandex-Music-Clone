@@ -38,10 +38,13 @@ final class MainChildVC: UIViewController {
   //      mainChildViews.tableView.addGestureRecognizer(panGestureRecognizer)
         
 
-        _ = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(updateCellData), userInfo: nil, repeats: true)
+        //_ = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(updateCellData), userInfo: nil, repeats: true)
         
         mainChildViews.tableView.delegate = self
         mainChildViews.tableView.dataSource = self
+        
+        mainChildViews.recomendationsCollectionView.delegate = self
+        mainChildViews.recomendationsCollectionView.dataSource = self
                 
        // tabBarController?.tabBar.isTranslucent = false
         //tabBarController?.tabBar.backgroundImage = UIImage()
@@ -135,20 +138,21 @@ final class MainChildVC: UIViewController {
 //        }
 //    }
     
-    @objc private func updateCellData() {
-        if let previousCell = mainChildViews.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ClipsTableViewCell {
-            previousCell.playerView.stopVideo()
-        }
-        videoIDs[0] = videoIDs.randomElement()!
-        mainChildViews.tableView.reloadSections(IndexSet(integer: 4), with: .left)
-    }
+//    @objc private func updateCellData() {
+//        if let previousCell = mainChildViews.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? MetInMyWaveTableViewCell {
+//            previousCell.playerView.stopVideo()
+//        }
+//        videoIDs[0] = videoIDs.randomElement()!
+//        mainChildViews.tableView.reloadSections(IndexSet(integer: 4), with: .left)
+//    }
     
 }
 
 extension MainChildVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        //return 10
+        return 8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -159,53 +163,58 @@ extension MainChildVC: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            let cell = CollectForYouCell(style: .default, reuseIdentifier: CollectForYouCell.cellID)
+            let cell = ForYouOrTrendsTableViewCell(style: .default, reuseIdentifier: ForYouOrTrendsTableViewCell.cellID)
             return cell
         case 1:
             let cell = YourFavouriteTableViewCell(style: .default, reuseIdentifier: YourFavouriteTableViewCell.cellID)
             return cell
         case 2:
-            let cell = ListenedRecentlyTableViewCell(style: .default, reuseIdentifier: ListenedRecentlyTableViewCell.cellID)
+            let cell = RecommendNewTableViewCell(style: .default, reuseIdentifier: RecommendNewTableViewCell.cellID)
             return cell
+//            let cell = ListenedRecentlyTableViewCell(style: .default, reuseIdentifier: ListenedRecentlyTableViewCell.cellID)
+//            return cell
         case 3:
-            let cell = InterestingNowTableViewCell(style: .default, reuseIdentifier: InterestingNowTableViewCell.cellID)
+            let cell = InStyleTableViewCell(style: .default, reuseIdentifier: InStyleTableViewCell.cellID)
             return cell
         case 4:
-            let cell = ClipsTableViewCell(style: .default, reuseIdentifier: ClipsTableViewCell.cellID)
+            let cell = MetInMyWaveTableViewCell(style: .default, reuseIdentifier: MetInMyWaveTableViewCell.cellID)
             
-            cell.playerView.load(withVideoId: videoIDs[0], playerVars: [
-                "playsinline": 1,
-                "mute": 1,
-                "controls": 1,
-                "allowFullscreen": 1,
-                "autohide": 1,
-                "showinfo": 0,
-                "modestbranding": 1,
-                "rel": 0,
-                "loop": 1
-            ])
-            cell.playerView.delegate = self
+//            cell.playerView.load(withVideoId: videoIDs[0], playerVars: [
+//                "playsinline": 1,
+//                "mute": 1,
+//                "controls": 1,
+//                "allowFullscreen": 1,
+//                "autohide": 1,
+//                "showinfo": 0,
+//                "modestbranding": 1,
+//                "rel": 0,
+//                "loop": 1
+//            ])
+//            cell.playerView.delegate = self
             return cell
             
         case 5:
-            let cell = NewReleasesTableViewCell(style: .default, reuseIdentifier: NewReleasesTableViewCell.cellID)
+            let cell = MoreTableViewCell(style: .default, reuseIdentifier: MoreTableViewCell.cellID)
             return cell
-            
         case 6:
-            let cell = PopularPlaylistsTableViewCell(style: .default, reuseIdentifier: PopularPlaylistsTableViewCell.cellID)
+            let cell = CollectForYouCell(style: .default, reuseIdentifier: CollectForYouCell.cellID)
             return cell
             
         case 7:
-            let cell = ChartTableViewCell(style: .default, reuseIdentifier: ChartTableViewCell.cellID)
+            let cell = ListenedRecentlyTableViewCell(style: .default, reuseIdentifier: ListenedRecentlyTableViewCell.cellID)
             return cell
-            
-        case 8:
-            let cell = NeuroMusicTableViewCell(style: .default, reuseIdentifier: NeuroMusicTableViewCell.cellID)
-            return cell
-            
-        case 9:
-            let cell = SelectionsTableViewCell(style: .default, reuseIdentifier: SelectionsTableViewCell.cellID)
-            return cell
+//            
+//        case 7:
+//            let cell = ChartTableViewCell(style: .default, reuseIdentifier: ChartTableViewCell.cellID)
+//            return cell
+//            
+//        case 8:
+//            let cell = NeuroMusicTableViewCell(style: .default, reuseIdentifier: NeuroMusicTableViewCell.cellID)
+//            return cell
+//            
+//        case 9:
+//            let cell = SelectionsTableViewCell(style: .default, reuseIdentifier: SelectionsTableViewCell.cellID)
+//            return cell
         default:
             return UITableViewCell()
         }
@@ -215,39 +224,39 @@ extension MainChildVC: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            return 300
+            return 100
         case 1:
-            return 150
+            return 110
         case 2:
-            return 300
-        case 3:
             return 450
+        case 3:
+            return 300
         case 4:
-            return 250
+            return 150
         case 5:
-            return 370
+            return 100
         case 6:
-            return 350
+            return 300
         case 7:
-            return 400
-        case 8:
-            return 180
-        case 9:
-            
-            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: mainChildViews.miniPlayer.frame.height + tabBarController!.tabBar.frame.height + 12, right: 0)
-            let numberOfColumns: CGFloat = 2 // кол-во рядов на экране в одну строку
-            let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // значения отступов между секциями
-            
-            let interItemSpacing = CGFloat(10) // значение интервалов между ячейками
-            
-            let collectionViewWidth = tableView.frame.width - sectionInsets.left - sectionInsets.right // ширина коллекции
-            let itemWidth = floor((collectionViewWidth + interItemSpacing) / numberOfColumns) - interItemSpacing //ширина контента коллекции (ячейки)
-            
-            let numberOfRows = ceil(CGFloat(11) / numberOfColumns)
-            
-            let totalHeight = (itemWidth * numberOfRows) + ((numberOfRows - 1) * interItemSpacing) + sectionInsets.top + sectionInsets.bottom // высота
-            
-            return totalHeight
+            return 300
+//        case 8:
+//            return 180
+//        case 9:
+//            
+//            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: mainChildViews.miniPlayer.frame.height + tabBarController!.tabBar.frame.height + 30, right: 0)
+//            let numberOfColumns: CGFloat = 2 // кол-во рядов на экране в одну строку
+//            let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // значения отступов между секциями
+//            
+//            let interItemSpacing = CGFloat(10) // значение интервалов между ячейками
+//            
+//            let collectionViewWidth = tableView.frame.width - sectionInsets.left - sectionInsets.right // ширина коллекции
+//            let itemWidth = floor((collectionViewWidth + interItemSpacing) / numberOfColumns) - interItemSpacing //ширина контента коллекции (ячейки)
+//            
+//            let numberOfRows = ceil(CGFloat(11) / numberOfColumns)
+//            
+//            let totalHeight = (itemWidth * numberOfRows) + ((numberOfRows - 1) * interItemSpacing) + sectionInsets.top + sectionInsets.bottom // высота
+//            
+//            return totalHeight
         default:
             return UITableView.automaticDimension
         }
@@ -278,8 +287,26 @@ extension MainChildVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension MainChildVC: YTPlayerViewDelegate {
-    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        playerView.playVideo()
+extension MainChildVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecomendationsCollectionViewCell.cellID, for: indexPath) as! RecomendationsCollectionViewCell
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.size.width / 2, height: 60)
+    }
+    
 }
+
+//extension MainChildVC: YTPlayerViewDelegate {
+//    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+//        playerView.playVideo()
+//    }
+//}

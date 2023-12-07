@@ -75,4 +75,34 @@ extension UITableView {
     }
 }
 
+//MARK: - UIColor
+extension UIColor {
+    //Функция для получения доминирующего цвета картинки трека
+    static func dominantColor(for image: UIImage) -> UIColor? {
+        /*
+         Эта строка создает объект CIImage из входного изображения (image).
+         Если изображение не может быть преобразовано в CIImage, функция возвращает nil.
+         */
+        guard let ciImage = CIImage(image: image) else { return nil }
+        let extent = ciImage.extent // используется для определения размеров и расположения изображения ciImage
+        let filter = CIFilter(name: "CIAreaAverage") // Здесь создается фильтр CIAreaAverage, который позволяет вычислить средний цвет на изображении.
+        filter?.setValue(ciImage, forKey: kCIInputImageKey) // filter?.setValue(ciImage, forKey: kCIInputImageKey): Мы устанавливаем ciImage как входное изображение для фильтра CIAreaAverage
+        if let outputImage = filter?.outputImage { // Здесь мы проверяем, удалось ли получить выходное изображение из фильтра CIAreaAverage.
+            let context = CIContext() // Мы создаем объект CIContext, который позволит нам работать с изображениями в Core Image.
+            let rect = CGRect(x: 0, y: 0, width: 1, height: 1) // Здесь мы создаем маленький прямоугольник размером 1x1 пиксель.
+            //Этот прямоугольник будет представлять пиксель, и его цвет будет средним цветом всего изображения.
+            if let cgImage = context.createCGImage(outputImage, from: rect) { // Мы используем CIContext, чтобы создать CGImage (изображение Core Graphics) из выходного изображения фильтра в пределах маленького прямоугольника. Это даст нам изображение размером 1x1 пиксель.
+                let pixelData = cgImage.dataProvider?.data // Мы получаем данные пикселя этого изображения
+                let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData) // Мы получаем указатель на данные пикселя, которые представляют собой значения красного, зеленого и синего каналов цвета.
+                let red = CGFloat(data[0]) / 255.0
+                let green = CGFloat(data[1]) / 255.0
+                let blue = CGFloat(data[2]) / 255.0
+                return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+            }
+        }
+        
+        return nil
+    }
+}
+
 

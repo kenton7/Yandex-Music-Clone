@@ -10,12 +10,12 @@ import UIKit
 final class NewMyCollectionVC: UIViewController {
     
     private let newMyCollectionViews = NewMyCollectionViews()
-    private var handleStartPlayingXAnchor = NSLayoutConstraint()
-    private var handleStartPlayingYAnchor = NSLayoutConstraint()
+    private var playingAnimationXAnchor = NSLayoutConstraint()
+    private var playingAnimationYAnchor = NSLayoutConstraint()
     private var selectTrackInTableViewXAnchor = NSLayoutConstraint()
     private var selectTrackInTableViewYAnchor = NSLayoutConstraint()
     var selectedIndexPath: IndexPath?
-    lazy var selectedTrackIndex: Int = AudioPlayer.shared.currentTrack!.trackID
+    lazy var selectedTrackIndex: Int = AudioPlayer.shared.currentTrack?.trackID ?? 0
     
     private var isSongPlaying: Bool {
         if AudioPlayer.shared.player?.isPlaying == true {
@@ -24,6 +24,8 @@ final class NewMyCollectionVC: UIViewController {
             return false
         }
     }
+    
+    private var isScrolledAndPlayed = false
     
     override func loadView() {
         super.loadView()
@@ -81,13 +83,14 @@ final class NewMyCollectionVC: UIViewController {
         
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
         
-        newMyCollectionViews.miniPlayerCollectionView.scrollToItem(at: IndexPath(item: selectedTrackIndex, section: 0), at: .left, animated: false)
+        //newMyCollectionViews.miniPlayerCollectionView.scrollToItem(at: IndexPath(item: selectedTrackIndex, section: 0), at: .left, animated: false)
         view.layoutSubviews()
     }
     
     @objc private func playPausePressed() {
         
         //guard let selectedTrackIndex = selectedTrackIndex else { return }
+        isScrolledAndPlayed.toggle()
         
         let cell = newMyCollectionViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: selectedTrackIndex, section: 0)) as? MiniPlayerCollectionViewCell
         
@@ -214,7 +217,6 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
 
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ILikeCollectionViewCell.cellID, for: indexPath) as! ILikeCollectionViewCell
-            
             //удаляем кастмное выделение, если оно уже установлено
             cell.subviews.forEach {
                 if $0.tag == 100 {
@@ -222,21 +224,25 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
                 }
             }
             
-            let bgColorView = UIView()
-            bgColorView.backgroundColor = #colorLiteral(red: 0.07843136042, green: 0.07843136042, blue: 0.07843136042, alpha: 1)
+            let customCellSelectionView = UIView()
+            customCellSelectionView.backgroundColor = #colorLiteral(red: 0.07843136042, green: 0.07843136042, blue: 0.07843136042, alpha: 1)
             
             cell.songName.text = SongModel.getSongs()[indexPath.item].songName
             cell.songAuthor.text = SongModel.getSongs()[indexPath.item].songAuthor
             cell.songImage.image = SongModel.getSongs()[indexPath.item].albumImage
             
             if cell.songName.text == AudioPlayer.shared.currentTrack?.songName && cell.songAuthor.text == AudioPlayer.shared.currentTrack?.songAuthor && AudioPlayer.shared.player?.isPlaying == true {
+                
+                print("equal")
                 cell.songImage.addSubview(newMyCollectionViews.trackPlayingAnimation)
+                newMyCollectionViews.trackPlayingAnimation.centerXAnchor.constraint(equalTo: cell.songImage.centerXAnchor).isActive = true
+                newMyCollectionViews.trackPlayingAnimation.centerYAnchor.constraint(equalTo: cell.songImage.centerYAnchor).isActive = true
                 newMyCollectionViews.trackPlayingAnimation.isHidden = false
                 selectTrackInTableViewXAnchor.isActive = false
                 selectTrackInTableViewYAnchor.isActive = false
-                cell.insertSubview(bgColorView, at: 0)
-                bgColorView.frame = CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height)
-                bgColorView.tag = 100
+                cell.insertSubview(customCellSelectionView, at: 0)
+                customCellSelectionView.frame = CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height)
+                customCellSelectionView.tag = 100
                 
                 // Сохраняем индекс текущей ячейки
                 selectedIndexPath = indexPath
@@ -258,11 +264,10 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
                 cell.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
                 AudioPlayer.shared.player?.play()
             }
-            print(SongModel.getSongs()[indexPath.item].songName)
             cell.songName.text = SongModel.getSongs()[selectedTrackIndex].songName
             cell.songAuthor.text = SongModel.getSongs()[selectedTrackIndex].songAuthor
             cell.trackImage.image = SongModel.getSongs()[selectedTrackIndex].albumImage
-            cell.sliderOnMiniPlayer.maximumValue = Float(AudioPlayer.shared.player!.duration)
+            cell.sliderOnMiniPlayer.maximumValue = Float(AudioPlayer.shared.player?.duration ?? 0)
             UserDefaults.standard.set(cell.songName.text, forKey: "songName")
             UserDefaults.standard.set(cell.songAuthor.text, forKey: "songAuthor")
             selectedTrackIndex = indexPath.item
@@ -272,9 +277,10 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let miniPlayerCell = newMyCollectionViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: selectedTrackIndex, section: 0)) as! MiniPlayerCollectionViewCell
+        
         if collectionView == newMyCollectionViews.miniPlayerCollectionView {
             let newTrack = SongModel.getSongs()[indexPath.item]
-            print(newTrack)
             let player = PlayerVC()
             player.currentTrack = AudioPlayer.shared.currentTrack!
             //player.audioPlayer = AudioPlayer.shared.player
@@ -288,10 +294,10 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
             let cell = collectionView.cellForItem(at: indexPath) as! ILikeCollectionViewCell
             cell.selectedBackgroundView = bgColorView
             cell.songImage.addSubview(newMyCollectionViews.trackPlayingAnimation)
-            handleStartPlayingXAnchor = newMyCollectionViews.trackPlayingAnimation.centerXAnchor.constraint(equalTo: cell.songImage.centerXAnchor)
-            handleStartPlayingXAnchor.isActive = true
-            handleStartPlayingYAnchor = newMyCollectionViews.trackPlayingAnimation.centerYAnchor.constraint(equalTo: cell.songImage.centerYAnchor)
-            handleStartPlayingYAnchor.isActive = true
+            playingAnimationXAnchor = newMyCollectionViews.trackPlayingAnimation.centerXAnchor.constraint(equalTo: cell.songImage.centerXAnchor)
+            playingAnimationXAnchor.isActive = true
+            playingAnimationYAnchor = newMyCollectionViews.trackPlayingAnimation.centerYAnchor.constraint(equalTo: cell.songImage.centerYAnchor)
+            playingAnimationYAnchor.isActive = true
             
             // Удаляем кастомное выделение из предыдущей выбранной ячейки
             if let selectedIndexPath = selectedIndexPath, let selectedCell = collectionView.cellForItem(at: selectedIndexPath) as? ILikeCollectionViewCell {
@@ -302,8 +308,7 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
                     }
                 }
             }
-            
-            let miniPlayerCell = newMyCollectionViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: selectedTrackIndex, section: 0)) as! MiniPlayerCollectionViewCell
+        
             miniPlayerCell.songName.text = SongModel.getSongs()[indexPath.item].songName
             miniPlayerCell.songAuthor.text = SongModel.getSongs()[indexPath.item].songAuthor
             miniPlayerCell.trackImage.image = SongModel.getSongs()[indexPath.item].albumImage
@@ -329,6 +334,15 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
             return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         } else {
             return UIEdgeInsets()
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let cell = newMyCollectionViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: selectedTrackIndex, section: 0)) as? MiniPlayerCollectionViewCell
+        
+        if isScrolledAndPlayed == true {
+            AudioPlayer.shared.player?.play()
+            cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
         }
     }
 }

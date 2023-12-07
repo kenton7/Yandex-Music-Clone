@@ -1,20 +1,20 @@
 //
-//  ChildMainVCTableViewCell.swift
+//  CollectForYouCell.swift
 //  YandexMusic2
 //
-//  Created by Илья Кузнецов on 30.10.2023.
+//  Created by Илья Кузнецов on 07.12.2023.
 //
 
 import UIKit
 
 class CollectForYouCell: UITableViewCell {
-    
+
     static let cellID = "CollectForYouCell"
     
     private let images: [UIImage] = [UIImage(named: "Premier")!,
-                                   UIImage(named: "Dejavu")!,
-                                   UIImage(named: "Tainik")!,
-                                   UIImage(named: "PlaylistOfTheDay")!
+                                     UIImage(named: "Dejavu")!,
+                                     UIImage(named: "Tainik")!,
+                                     UIImage(named: "PlaylistOfTheDay")!
     ]
     
     private let playlistNames = ["Премьера", "Дежавю", "Тайник", "Плейлист дня"]
@@ -27,7 +27,7 @@ class CollectForYouCell: UITableViewCell {
     ]
     
     lazy var collectForYouLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Собираем для вас"
         label.font = UIFont(name: "YandexSansText-Medium", size: 18)
@@ -54,10 +54,13 @@ class CollectForYouCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        configure()
-        backgroundColor = .clear
-        contentView.isUserInteractionEnabled = false
+        backgroundColor = .black
         selectionStyle = .none
+        contentView.isUserInteractionEnabled = false
+        
+        insertSubview(forYouCollectionView, at: 1)
+        insertSubview(collectForYouLabel, at: 1)
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -66,20 +69,16 @@ class CollectForYouCell: UITableViewCell {
     
     private func configure() {
         
-        insertSubview(forYouCollectionView, at: 1)
-        insertSubview(collectForYouLabel, at: 1)
-//        addSubview(forYouCollectionView)
-//        addSubview(collectForYouLabel)
-        
         NSLayoutConstraint.activate([
             forYouCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             forYouCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             forYouCollectionView.heightAnchor.constraint(equalToConstant: 350),
             forYouCollectionView.topAnchor.constraint(equalTo: topAnchor, constant: -40),
-            collectForYouLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            collectForYouLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            collectForYouLabel.topAnchor.constraint(equalTo: topAnchor)
         ])
+        
     }
-    
 }
 
 extension CollectForYouCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -98,4 +97,5 @@ extension CollectForYouCell: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 180, height: 180)
     }
+    
 }

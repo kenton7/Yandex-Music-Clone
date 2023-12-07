@@ -16,10 +16,10 @@ class ListenedRecentlyTableViewCell: UITableViewCell {
         UIImage(named: "iLikeImage")!,
         UIImage(named: "ThreeDaysRain")!,
         UIImage(named: "Hits")!,
-        UIImage(named: "Oxxxymiron")!,
+        UIImage(named: "OxxxymironFavourite")!,
     ]
     
-    private let playlistNames = ["Премьера", "Мне нравится", "melancholia", "Хиты", "Oxxxymiron"]
+    private let playlistNames = ["Премьера", "Мне нравится", "melancholia", "Новые хиты", "Oxxxymiron"]
     private let songAuthors = ["", "", "Три дня дождя", "", ""]
     
     private lazy var listenedRecentlyLabel: UILabel = {
@@ -76,9 +76,10 @@ class ListenedRecentlyTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 300),
+            collectionView.heightAnchor.constraint(equalToConstant: 270),
             collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            listenedRecentlyLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            listenedRecentlyLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            listenedRecentlyLabel.topAnchor.constraint(equalTo: topAnchor)
         ])
     }
 }

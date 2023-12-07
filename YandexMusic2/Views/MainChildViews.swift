@@ -11,9 +11,10 @@ class MainChildViews: MiniPlayerView {
         
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(CollectForYouCell.self, forCellReuseIdentifier: CollectForYouCell.cellID)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 600
+        tableView.register(ForYouOrTrendsTableViewCell.self, forCellReuseIdentifier: ForYouOrTrendsTableViewCell.cellID)
+        //tableView.rowHeight = UITableView.automaticDimension
+        //tableView.estimatedRowHeight = 600
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .black
         tableView.separatorStyle = .none
@@ -38,6 +39,20 @@ class MainChildViews: MiniPlayerView {
         return view
     }()
     
+    lazy var recomendationsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
+        collectionView.register(RecomendationsCollectionViewCell.self, forCellWithReuseIdentifier: RecomendationsCollectionViewCell.cellID)
+        return collectionView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -45,6 +60,7 @@ class MainChildViews: MiniPlayerView {
         backgroundColor = .clear
         insertSubview(tableView, at: 0)
         insertSubview(handleArea, at: 0)
+        //insertSubview(recomendationsCollectionView, at: 0)
         handleArea.addSubview(controlImageOnHandleArea)
         //insertSubview(redView, at: 0)
         //addSubview(tableView)
@@ -78,6 +94,11 @@ class MainChildViews: MiniPlayerView {
             handleArea.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0),
             handleArea.trailingAnchor.constraint(equalTo: trailingAnchor),
             handleArea.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -20),
+            
+//            recomendationsCollectionView.topAnchor.constraint(equalTo: topAnchor),
+//            recomendationsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+//            recomendationsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+//            recomendationsCollectionView.heightAnchor.constraint(equalToConstant: 100),
             //handleArea.bottomAnchor.constraint(equalTo: tableView.topAnchor),
             //handleArea.heightAnchor.constraint(equalToConstant: 100),
             //handleArea.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: 10),
