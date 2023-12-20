@@ -69,9 +69,10 @@ final class NewMyCollectionVC: UIViewController {
         
         let cell = newMyCollectionViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: UserDefaults.standard.integer(forKey: "trackIndex"), section: 0)) as? MiniPlayerCollectionViewCell
         
-        cell?.songName.text = UserDefaults.standard.string(forKey: "songName")
-        cell?.songAuthor.text = UserDefaults.standard.string(forKey: "songAuthor")
-        cell?.sliderOnMiniPlayer.maximumValue = UserDefaults.standard.float(forKey: "maximumValue")
+        cell?.songName.text = AudioPlayer.shared.currentTrack?.songName
+        cell?.songAuthor.text = AudioPlayer.shared.currentTrack?.songAuthor
+        cell?.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
+        cell?.sliderOnMiniPlayer.maximumValue = Float(AudioPlayer.shared.player?.duration ?? 0)
         
         if AudioPlayer.shared.player?.isPlaying == true {
             print("playing")
@@ -84,7 +85,6 @@ final class NewMyCollectionVC: UIViewController {
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
         
         //newMyCollectionViews.miniPlayerCollectionView.scrollToItem(at: IndexPath(item: selectedTrackIndex, section: 0), at: .left, animated: false)
-        view.layoutSubviews()
     }
     
     @objc private func playPausePressed() {
@@ -117,8 +117,8 @@ final class NewMyCollectionVC: UIViewController {
             cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
         }
         
-        cell?.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.player?.currentTime ?? 0)
-        UserDefaults.standard.set(newMyCollectionViews.sliderOnMiniPlayer.value, forKey: "valueSlider")
+        //cell?.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.player?.currentTime ?? 0)
+        UserDefaults.standard.set(AudioPlayer.shared.currentTime, forKey: "valueSlider")
     }
     
     @objc private func myWaveCollectionPressed() {
@@ -131,6 +131,11 @@ final class NewMyCollectionVC: UIViewController {
     
     @objc private func profileButtonPressed() {
         print("Pressed")
+    }
+    
+    @objc func allTracksIlikedPressed() {
+        let allTracksVC = AllMyTracksCollectionViewController(collectionViewLayout: AllMyTracksLayout())
+        self.navigationController?.pushViewController(allTracksVC, animated: true)
     }
 
 }
@@ -156,6 +161,7 @@ extension NewMyCollectionVC: UITableViewDelegate, UITableViewDataSource {
             let cell = ILikeTableViewCell(style: .default, reuseIdentifier: ILikeTableViewCell.cellID)
             cell.collectionView.delegate = self
             cell.collectionView.dataSource = self
+            cell.allTracksIlikedButton.addTarget(self, action: #selector(allTracksIlikedPressed), for: .touchUpInside)
             return cell
         case 2:
             let cell = MoreInYourCollectionTableViewCell(style: .default, reuseIdentifier: MoreInYourCollectionTableViewCell.cellID)
@@ -173,7 +179,7 @@ extension NewMyCollectionVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 65
         case 1:
-            return 250
+            return 240
         case 2:
             return 120
         case 3:
@@ -198,7 +204,7 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
         
         if collectionView == newMyCollectionViews.miniPlayerCollectionView {
             let frameSize = collectionView.frame.size
-            return CGSize(width: frameSize.width - 10, height: frameSize.height)
+            return CGSize(width: frameSize.width, height: frameSize.height)
         } else {
             return CGSize(width: view.frame.width, height: 60)
         }
@@ -213,9 +219,7 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
                 cell.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playPausePressed), for: .touchUpInside)
             }
             return cell
-        }
-
-        else {
+        } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ILikeCollectionViewCell.cellID, for: indexPath) as! ILikeCollectionViewCell
             //удаляем кастмное выделение, если оно уже установлено
             cell.subviews.forEach {
@@ -283,6 +287,8 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
             let newTrack = SongModel.getSongs()[indexPath.item]
             let player = PlayerVC()
             player.currentTrack = AudioPlayer.shared.currentTrack!
+            //player.playerViews.artistImage.image = player.currentTrack?.artistImage.
+            print(newTrack.artistImage)
             //player.audioPlayer = AudioPlayer.shared.player
             player.modalPresentationStyle = .overFullScreen
             present(player, animated: true)
@@ -325,15 +331,6 @@ extension NewMyCollectionVC: UICollectionViewDelegate, UICollectionViewDataSourc
             UserDefaults.standard.set(newMyCollectionViews.songAuthor.text, forKey: "songAuthor")
             UserDefaults.standard.set(newMyCollectionViews.songName.text, forKey: "songName")
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        if collectionView == newMyCollectionViews.miniPlayerCollectionView {
-            return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        } else {
-            return UIEdgeInsets()
         }
     }
     

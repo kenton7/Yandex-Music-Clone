@@ -9,5 +9,6 @@ target 'YandexMusic2' do
   # Pods for YandexMusic2
 pod 'lottie-ios'
 pod "youtube-ios-player-helper", "~> 1.0.4"
+pod 'MarqueeLabel'
 
 end

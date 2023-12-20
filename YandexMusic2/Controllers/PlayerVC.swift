@@ -78,19 +78,32 @@ class PlayerVC: UIViewController {
 //            }
         
         
-        view.backgroundColor = dominantColor(for: getNeededTrack?.albumImage ?? SongModel.getSongs().randomElement()!.albumImage)
+        view.backgroundColor = dominantColor(for: AudioPlayer.shared.currentTrack?.albumImage ?? SongModel.getSongs().randomElement()!.albumImage)
         playerViews.songNameLabel.text = currentTrack?.songName
         playerViews.songAuthorLabel.text = currentTrack?.songAuthor
         playerViews.slider.maximumValue = Float(AudioPlayer.shared.player?.duration ?? 0)
         //playerViews.slider.value = playerViews.sliderOnMiniPlayer.value
         playerViews.slider.value = UserDefaults.standard.float(forKey: "valueSlider")
-        print(AudioPlayer.shared.currentTrack)
         AudioPlayer.shared.currentTrack = currentTrack!
         
         currentTrackIndex = SongModel.getSongs().firstIndex(where: { $0 == getNeededTrack }) ?? 0
         
-        print(currentTrackIndex)
-                        
+        print(getNumberOfArtistIn(track: AudioPlayer.shared.currentTrack!))
+        
+        if getNumberOfArtistIn(track: AudioPlayer.shared.currentTrack!) == 2 {
+            playerViews.artistImage2.isHidden = false
+            playerViews.moreThanTwoArtists.isHidden = true
+            //playerViews.songInfoStackViewLeadingAnchor.constant = 20
+            playerViews.songInfoStackView.leadingAnchor.constraint(equalTo: playerViews.artistImage2.trailingAnchor, constant: 20).isActive = true
+        } else if getNumberOfArtistIn(track: AudioPlayer.shared.currentTrack!) == 1 {
+            playerViews.artistImage2.isHidden = true
+            playerViews.moreThanTwoArtists.isHidden = true
+            playerViews.songInfoStackView.leadingAnchor.constraint(equalTo: playerViews.artistImage.trailingAnchor, constant: 20).isActive = true
+        } else if getNumberOfArtistIn(track: AudioPlayer.shared.currentTrack!) > 2 {
+            playerViews.moreThanTwoArtists.isHidden = false
+            playerViews.songInfoStackView.leadingAnchor.constraint(equalTo: playerViews.moreThanTwoArtists.trailingAnchor, constant: 10).isActive = true
+        }
+                                
         playerViews.albumImageCollectionView.delegate = self
         playerViews.albumImageCollectionView.dataSource = self
         playerViews.playPauseButton.addTarget(self, action: #selector(playButtonPressed(_ :)), for: .touchUpInside)
@@ -118,6 +131,7 @@ class PlayerVC: UIViewController {
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
         } else {
             playerViews.playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+            updateSlider()
         }
         
         if isRepeatActivated {
@@ -167,6 +181,40 @@ class PlayerVC: UIViewController {
         }
     }
     
+    private func getNumberOfArtistIn(track: SongModel) -> Int {
+        
+        let authors = track.songAuthor.components(separatedBy: ", ")
+        
+        if authors.count == 1 {
+            playerViews.artistImage2.isHidden = true
+            playerViews.artistImage.image = track.artistImage.first
+        } else {
+            playerViews.artistImage2.isHidden = false
+            playerViews.artistImage.image = track.artistImage.first
+            playerViews.artistImage2.image = track.artistImage[1]
+        }
+        
+//        // Оцениваем ширину текста
+//        let textSize = (playerViews.songAuthorLabel.text! as NSString).boundingRect(with: playerViews.songAuthorLabel.bounds.size, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: playerViews.songAuthorLabel.font!], context: nil)
+//        print(textSize)
+//        print(playerViews.songAuthorLabel.bounds.width)
+//        // Сравниваем ширину текста с шириной лейбла
+//        if textSize.width > playerViews.songAuthorLabel.bounds.width {
+//            print("here")
+//              // Текст не умещается, применяем анимацию
+//              animateText()
+//          }
+        
+        return authors.count
+    }
+    
+//    func animateText() {
+//        // Используем UIView.animate для создания анимации
+//        UIView.animate(withDuration: 2.0, delay: 0, options: [.repeat, .autoreverse], animations: {
+//            // Устанавливаем новую позицию метки (в данном случае, сдвигаем ее вправо)
+//            self.playerViews.songAuthorLabel.center.x += 100
+//        }, completion: nil)
+//    }
     
     func playVideoshot() {
         // Получаем URL-адрес ресурса видеошота

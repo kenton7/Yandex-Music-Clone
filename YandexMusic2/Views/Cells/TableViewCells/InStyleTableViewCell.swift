@@ -25,7 +25,7 @@ class InStyleTableViewCell: UITableViewCell {
     private let inStyleArtistsImages: [UIImage] = [
         UIImage(named: "NILETTO")!,
         UIImage(named: "Kamazz")!,
-        UIImage(named: "ТриДня")!,
+        UIImage(named: "Три дня дождя")!,
         UIImage(named: "Oneil")!,
         UIImage(named: "Лёша Свик")!
     ]

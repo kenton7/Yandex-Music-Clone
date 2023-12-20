@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Lottie
 
+
 class AllMyTracksViews: MiniPlayerView {
     
     lazy var trackPlayingAnimation: LottieAnimationView = {
@@ -23,11 +24,31 @@ class AllMyTracksViews: MiniPlayerView {
         return animationView
     }()
     
+    var headerView: HeaderView?
+    
+//    lazy var headerView = StretchyTableHeaderView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height * 0.5))
+    
+    //------
+    lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: AllMyTracksLayout())
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+            //layout.minimumLineSpacing = 40 // расстояние между ячейками
+        }
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .black
+        collectionView.contentInsetAdjustmentBehavior = .never // игнорировать safeArea
+        collectionView.register(AllMyTracksCollectionViewCell.self, forCellWithReuseIdentifier: AllMyTracksCollectionViewCell.cellID)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
+        //регаем Header у коллекшн вью
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.cellID)
+        return collectionView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         configure()
-        setupMiniPlayer()
     }
     
     required init?(coder: NSCoder) {
@@ -37,44 +58,14 @@ class AllMyTracksViews: MiniPlayerView {
     private func configure() {
         
         addSubview(trackPlayingAnimation)
-    }
-    
-    func setupMiniPlayer() {
-        
-        addSubview(miniPlayer)
-        addSubview(likeButtonMiniPlayer)
-        addSubview(songName)
-        addSubview(songAuthor)
-        addSubview(changeSourcePlayingMiniPlayer)
-        addSubview(playPauseButtonMiniPlayer)
-        addSubview(sliderOnMiniPlayer)
+        insertSubview(collectionView, at: 0)
         
         NSLayoutConstraint.activate([
-            
-            miniPlayer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            miniPlayer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            miniPlayer.heightAnchor.constraint(equalToConstant: 40),
-            miniPlayer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            
-            likeButtonMiniPlayer.leadingAnchor.constraint(equalTo: miniPlayer.leadingAnchor, constant: 10),
-            likeButtonMiniPlayer.topAnchor.constraint(equalTo: miniPlayer.topAnchor, constant: 10),
-            likeButtonMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
-            
-            songName.leadingAnchor.constraint(equalTo: likeButtonMiniPlayer.trailingAnchor, constant: 10),
-            songName.topAnchor.constraint(equalTo: miniPlayer.topAnchor, constant: 5),
-            songAuthor.leadingAnchor.constraint(equalTo: likeButtonMiniPlayer.trailingAnchor, constant: 10),
-            songAuthor.bottomAnchor.constraint(equalTo: likeButtonMiniPlayer.bottomAnchor, constant: 5),
-            
-            playPauseButtonMiniPlayer.trailingAnchor.constraint(equalTo: miniPlayer.trailingAnchor, constant: -10),
-            playPauseButtonMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
-            
-            changeSourcePlayingMiniPlayer.trailingAnchor.constraint(equalTo: playPauseButtonMiniPlayer.leadingAnchor, constant: -20),
-            changeSourcePlayingMiniPlayer.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
-            
-            sliderOnMiniPlayer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -2),
-            sliderOnMiniPlayer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 2),
-            sliderOnMiniPlayer.bottomAnchor.constraint(equalTo: miniPlayer.topAnchor, constant: 0)
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+        
     }
-    
 }

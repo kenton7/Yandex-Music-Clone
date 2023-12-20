@@ -39,17 +39,39 @@ class MainChildViews: MiniPlayerView {
         return view
     }()
     
-    lazy var recomendationsCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//    lazy var recomendationsCollectionView: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .horizontal
+//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//        collectionView.backgroundColor = .clear
+//        collectionView.showsHorizontalScrollIndicator = false
+//        collectionView.showsVerticalScrollIndicator = false
+////        collectionView.delegate = self
+////        collectionView.dataSource = self
+//        collectionView.register(RecomendationsCollectionViewCell.self, forCellWithReuseIdentifier: RecomendationsCollectionViewCell.cellID)
+//        return collectionView
+//    }()
+    
+    lazy var childCollectionView: UICollectionView = {
+       let collectionViewLayout = UICollectionViewLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = .clear
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
         collectionView.register(RecomendationsCollectionViewCell.self, forCellWithReuseIdentifier: RecomendationsCollectionViewCell.cellID)
+        collectionView.register(MyLikedTracksCollectionViewCell.self, forCellWithReuseIdentifier: MyLikedTracksCollectionViewCell.cellID)
+        collectionView.register(RecommendationsNewCollectionViewCell.self, forCellWithReuseIdentifier: RecommendationsNewCollectionViewCell.cellID)
+        collectionView.register(HeaderSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderSupplementaryView.cellID)
+        collectionView.register(StyleCollectionViewCell.self, forCellWithReuseIdentifier: StyleCollectionViewCell.cellID)
+        //collectionView.register(StyleCollectionViewCell.self, forSupplementaryViewOfKind: "textElementKind", withReuseIdentifier: StyleCollectionViewCell.cellID)
+        //collectionView.register(EmptyCollectionViewCell.self, forCellWithReuseIdentifier: EmptyCollectionViewCell.cellID)
+        collectionView.register(StyleRecomedationsCollectionViewCell.self, forCellWithReuseIdentifier: StyleRecomedationsCollectionViewCell.cellID)
+        collectionView.register(MoreOpenedInMyWaveCollectionViewCell.self, forCellWithReuseIdentifier: MoreOpenedInMyWaveCollectionViewCell.cellID)
+        collectionView.register(MyWaveGenresCollectionViewCell.self, forCellWithReuseIdentifier: MyWaveGenresCollectionViewCell.cellID)
+        collectionView.register(MetInWaveCollectionViewCell.self, forCellWithReuseIdentifier: MetInWaveCollectionViewCell.cellID)
+        collectionView.register(CollectForYouCollectionViewCell.self, forCellWithReuseIdentifier: CollectForYouCollectionViewCell.cellID)
         return collectionView
     }()
     
@@ -58,10 +80,12 @@ class MainChildViews: MiniPlayerView {
         
         isUserInteractionEnabled = true
         backgroundColor = .clear
-        insertSubview(tableView, at: 0)
-        insertSubview(handleArea, at: 0)
+        //insertSubview(tableView, at: 0)
+        
+        insertSubview(childCollectionView, at: 0)
+        //insertSubview(handleArea, at: 0)
         //insertSubview(recomendationsCollectionView, at: 0)
-        handleArea.addSubview(controlImageOnHandleArea)
+        //handleArea.addSubview(controlImageOnHandleArea)
         //insertSubview(redView, at: 0)
         //addSubview(tableView)
         configure()
@@ -76,14 +100,6 @@ class MainChildViews: MiniPlayerView {
     
     private func configure() {
         
-        sliderOnMiniPlayer.isHidden = true
-        miniPlayer.isHidden = true
-        likeButtonMiniPlayer.isHidden = true
-        changeSourcePlayingMiniPlayer.isHidden = true
-        playPauseButtonMiniPlayer.isHidden = true
-        songName.isHidden = true
-        songAuthor.isHidden = true
-        
         NSLayoutConstraint.activate([
             
 //            handleArea.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: -frame.height / 2),
@@ -91,34 +107,27 @@ class MainChildViews: MiniPlayerView {
 //            handleArea.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
 //            handleArea.heightAnchor.constraint(equalToConstant: 200),
             
-            handleArea.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0),
-            handleArea.trailingAnchor.constraint(equalTo: trailingAnchor),
-            handleArea.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -20),
+//            handleArea.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0),
+//            handleArea.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            handleArea.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -20),
             
-//            recomendationsCollectionView.topAnchor.constraint(equalTo: topAnchor),
-//            recomendationsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-//            recomendationsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-//            recomendationsCollectionView.heightAnchor.constraint(equalToConstant: 100),
-            //handleArea.bottomAnchor.constraint(equalTo: tableView.topAnchor),
-            //handleArea.heightAnchor.constraint(equalToConstant: 100),
-            //handleArea.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: 10),
+//            controlImageOnHandleArea.centerXAnchor.constraint(equalTo: centerXAnchor),
+//            //controlImageOnHandleArea.centerYAnchor.constraint(equalTo: handleArea.centerYAnchor),
+//            controlImageOnHandleArea.bottomAnchor.constraint(equalTo: handleArea.bottomAnchor),
+//            //controlImageOnHandleArea.topAnchor.constraint(equalTo: handleArea.topAnchor, constant: 10),
+//            controlImageOnHandleArea.heightAnchor.constraint(equalToConstant: 30),
+//            controlImageOnHandleArea.widthAnchor.constraint(equalToConstant: 70),
             
-            controlImageOnHandleArea.centerXAnchor.constraint(equalTo: centerXAnchor),
-            //controlImageOnHandleArea.centerYAnchor.constraint(equalTo: handleArea.centerYAnchor),
-            controlImageOnHandleArea.bottomAnchor.constraint(equalTo: handleArea.bottomAnchor),
-            //controlImageOnHandleArea.topAnchor.constraint(equalTo: handleArea.topAnchor, constant: 10),
-            controlImageOnHandleArea.heightAnchor.constraint(equalToConstant: 30),
-            controlImageOnHandleArea.widthAnchor.constraint(equalToConstant: 70),
+//            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+//            tableView.topAnchor.constraint(equalTo: topAnchor)
             
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            //tableView.heightAnchor.constraint(equalToConstant: frame.height),
-            tableView.topAnchor.constraint(equalTo: handleArea.bottomAnchor, constant: 0)
+            childCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            childCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            childCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            childCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
         ])
-        
-        handleAreaHeight = handleArea.heightAnchor.constraint(equalToConstant: 100)
-        handleAreaHeight.isActive = true
     }
-    
 }
+

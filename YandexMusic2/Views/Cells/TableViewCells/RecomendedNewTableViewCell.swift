@@ -16,7 +16,7 @@ class ListenedRecentlyTableViewCell: UITableViewCell {
         UIImage(named: "iLikeImage")!,
         UIImage(named: "ThreeDaysRain")!,
         UIImage(named: "Hits")!,
-        UIImage(named: "OxxxymironFavourite")!,
+        UIImage(named: "Oxxxymiron")!,
     ]
     
     private let playlistNames = ["Премьера", "Мне нравится", "melancholia", "Новые хиты", "Oxxxymiron"]

@@ -19,7 +19,18 @@ final class AllMyTracksVC: UIViewController {
     private var selectTrackInTableViewXAnchor = NSLayoutConstraint()
     private var selectTrackInTableViewYAnchor = NSLayoutConstraint()
     
+    private var isScrolledAndPlayed = false
     var selectedIndexPath: IndexPath?
+    
+    private var isSongPlaying: Bool {
+        if AudioPlayer.shared.player?.isPlaying == true {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private var selectedTrackIndex: Int?
             
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -32,6 +43,12 @@ final class AllMyTracksVC: UIViewController {
         tableView.clipsToBounds = true
         return tableView
     }()
+    
+    override func loadView() {
+        super.loadView()
+        
+        view = allMyTracksViews
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,14 +66,16 @@ final class AllMyTracksVC: UIViewController {
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        view.addSubview(tableView)
-        setupMiniPlayer()
-        targets()        
-        tableView.frame = view.bounds
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 62 * 2, right: 0)
-        tableView.tableHeaderView = headerView
+        //view.addSubview(tableView)
+        //setupMiniPlayer()
+        targets()
+        //tableView.frame = view.bounds
+//        allMyTracksViews.tableView.delegate = self
+//        allMyTracksViews.tableView.dataSource = self
+//        allMyTracksViews.miniPlayerCollectionView.delegate = self
+//        allMyTracksViews.miniPlayerCollectionView.dataSource = self
+//        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 62 * 2, right: 0)
+//        tableView.tableHeaderView = headerView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,25 +85,7 @@ final class AllMyTracksVC: UIViewController {
 //        self.navigationController?.navigationBar.shadowImage = UIImage()
 //        self.navigationController?.navigationBar.isTranslucent = true
         
-        tableView.reloadData()
-        
-        if UserDefaults.standard.string(forKey: "songName") == nil && UserDefaults.standard.string(forKey: "songAuthor") == nil {
-            allMyTracksViews.miniPlayer.isHidden = true
-            allMyTracksViews.sliderOnMiniPlayer.isHidden = true
-            allMyTracksViews.songName.isHidden = true
-            allMyTracksViews.songAuthor.isHidden = true
-            allMyTracksViews.likeButtonMiniPlayer.isHidden = true
-            allMyTracksViews.changeSourcePlayingMiniPlayer.isHidden = true
-            allMyTracksViews.playPauseButtonMiniPlayer.isHidden = true
-        } else {
-            allMyTracksViews.miniPlayer.isHidden = false
-            allMyTracksViews.sliderOnMiniPlayer.isHidden = false
-            allMyTracksViews.songName.isHidden = false
-            allMyTracksViews.songAuthor.isHidden = false
-            allMyTracksViews.likeButtonMiniPlayer.isHidden = false
-            allMyTracksViews.changeSourcePlayingMiniPlayer.isHidden = false
-            allMyTracksViews.playPauseButtonMiniPlayer.isHidden = false
-        }
+        //allMyTracksViews.tableView.reloadData()
         
         allMyTracksViews.songName.text = UserDefaults.standard.string(forKey: "songName")
         allMyTracksViews.songAuthor.text = UserDefaults.standard.string(forKey: "songAuthor")
@@ -105,6 +106,23 @@ final class AllMyTracksVC: UIViewController {
     
     @objc private func searchPressed() {
         print("search pressed")
+    }
+    
+    @objc private func playButtonPressed() {
+        
+        guard let selectedIndexPath = selectedTrackIndex else { return }
+        isScrolledAndPlayed.toggle()
+        
+        let cell = allMyTracksViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: selectedIndexPath, section: 0)) as? MiniPlayerCollectionViewCell
+        
+        if isSongPlaying == true {
+            cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+            AudioPlayer.shared.player?.pause()
+        } else {
+            cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            AudioPlayer.shared.player?.play()
+        }
     }
 }
 
@@ -224,52 +242,86 @@ extension AllMyTracksVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension AllMyTracksVC: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let headerView = self.tableView.tableHeaderView as! StretchyTableHeaderView
-        headerView.scrollViewDidScroll(scrollView: scrollView)
-    }
-}
+//MARK: - UIScrollViewDelegate
+//extension AllMyTracksVC: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let headerView = allMyTracksViews.tableView.tableHeaderView as! StretchyTableHeaderView
+//        headerView.scrollViewDidScroll(scrollView: scrollView)
+//    }
+//}
 
-private extension AllMyTracksVC {
-    func setupMiniPlayer() {
-        
-        view.addSubview(allMyTracksViews.miniPlayer)
-        view.addSubview(allMyTracksViews.likeButtonMiniPlayer)
-        view.addSubview(allMyTracksViews.songName)
-        view.addSubview(allMyTracksViews.songAuthor)
-        view.addSubview(allMyTracksViews.changeSourcePlayingMiniPlayer)
-        view.addSubview(allMyTracksViews.playPauseButtonMiniPlayer)
-        view.addSubview(allMyTracksViews.sliderOnMiniPlayer)
-        
-        NSLayoutConstraint.activate([
-            
-            allMyTracksViews.miniPlayer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            allMyTracksViews.miniPlayer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            allMyTracksViews.miniPlayer.heightAnchor.constraint(equalToConstant: 40),
-            allMyTracksViews.miniPlayer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            
-            allMyTracksViews.likeButtonMiniPlayer.leadingAnchor.constraint(equalTo: allMyTracksViews.miniPlayer.leadingAnchor, constant: 10),
-            allMyTracksViews.likeButtonMiniPlayer.topAnchor.constraint(equalTo: allMyTracksViews.miniPlayer.topAnchor, constant: 10),
-            allMyTracksViews.likeButtonMiniPlayer.centerYAnchor.constraint(equalTo: allMyTracksViews.miniPlayer.centerYAnchor),
-            
-            allMyTracksViews.songName.leadingAnchor.constraint(equalTo: allMyTracksViews.likeButtonMiniPlayer.trailingAnchor, constant: 10),
-            allMyTracksViews.songName.topAnchor.constraint(equalTo: allMyTracksViews.miniPlayer.topAnchor, constant: 5),
-            allMyTracksViews.songAuthor.leadingAnchor.constraint(equalTo: allMyTracksViews.likeButtonMiniPlayer.trailingAnchor, constant: 10),
-            allMyTracksViews.songAuthor.bottomAnchor.constraint(equalTo: allMyTracksViews.likeButtonMiniPlayer.bottomAnchor, constant: 5),
-            
-            allMyTracksViews.playPauseButtonMiniPlayer.trailingAnchor.constraint(equalTo: allMyTracksViews.miniPlayer.trailingAnchor, constant: -10),
-            allMyTracksViews.playPauseButtonMiniPlayer.centerYAnchor.constraint(equalTo: allMyTracksViews.miniPlayer.centerYAnchor),
-            
-            allMyTracksViews.changeSourcePlayingMiniPlayer.trailingAnchor.constraint(equalTo: allMyTracksViews.playPauseButtonMiniPlayer.leadingAnchor, constant: -20),
-            allMyTracksViews.changeSourcePlayingMiniPlayer.centerYAnchor.constraint(equalTo: allMyTracksViews.miniPlayer.centerYAnchor),
-            
-            allMyTracksViews.sliderOnMiniPlayer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -2),
-            allMyTracksViews.sliderOnMiniPlayer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 2),
-            allMyTracksViews.sliderOnMiniPlayer.bottomAnchor.constraint(equalTo: allMyTracksViews.miniPlayer.topAnchor, constant: 0)
-        ])
+//MARK: - UICollectionView
+extension AllMyTracksVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return SongModel.getSongs().count
     }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MiniPlayerCollectionViewCell.cellID, for: indexPath) as! MiniPlayerCollectionViewCell
+        if cell.playPauseButtonMiniPlayer.allTargets.isEmpty {
+            // Устанавливаем таргет только если его нет
+            cell.playPauseButtonMiniPlayer.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if let cell = cell as? MiniPlayerCollectionViewCell {
+            AudioPlayer.shared.setTrack(track: SongModel.getSongs()[indexPath.item])
+            if AudioPlayer.shared.player?.isPlaying == true {
+                print("hrer")
+                AudioPlayer.shared.player?.play()
+            } else {
+                AudioPlayer.shared.setTrack(track: SongModel.getSongs()[indexPath.item])
+                //AudioPlayer.shared.player?.play()
+            }
+            print(SongModel.getSongs()[indexPath.item].songName)
+            cell.songName.text = SongModel.getSongs()[indexPath.item].songName
+            cell.songAuthor.text = SongModel.getSongs()[indexPath.item].songAuthor
+            cell.trackImage.image = SongModel.getSongs()[indexPath.item].albumImage
+            cell.sliderOnMiniPlayer.maximumValue = Float(AudioPlayer.shared.player!.duration)
+            UserDefaults.standard.set(cell.songName.text, forKey: "songName")
+            UserDefaults.standard.set(cell.songAuthor.text, forKey: "songAuthor")
+            selectedTrackIndex = indexPath.item
+            UserDefaults.standard.set(selectedTrackIndex, forKey: "trackIndex")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let newTrack = SongModel.getSongs()[indexPath.item]
+        print(newTrack)
+        let player = PlayerVC()
+        player.currentTrack = newTrack
+        //player.playerViews.artistImage.image = player.currentTrack?.artistImage
+        //player.audioPlayer = AudioPlayer.shared.player
+        player.modalPresentationStyle = .overFullScreen
+        present(player, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 10, height: collectionView.frame.height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let cell = allMyTracksViews.miniPlayerCollectionView.cellForItem(at: IndexPath(item: selectedTrackIndex ?? 0, section: 0)) as? MiniPlayerCollectionViewCell
+        
+        if isScrolledAndPlayed == true {
+            AudioPlayer.shared.player?.play()
+            cell?.playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
+        }
+    }
+}
+    
+private extension AllMyTracksVC {
     //MARK: - Targets for Buttons
     private func targets() {
         let miniPlayerTapGesture = UITapGestureRecognizer(target: self, action: #selector(miniPlayerPressed))
@@ -306,7 +358,7 @@ private extension AllMyTracksVC {
         }
     }
     
-   @objc private func updateTime() {
+    @objc private func updateTime() {
         allMyTracksViews.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
         UserDefaults.standard.set(allMyTracksViews.sliderOnMiniPlayer.value, forKey: "valueSlider")
     }

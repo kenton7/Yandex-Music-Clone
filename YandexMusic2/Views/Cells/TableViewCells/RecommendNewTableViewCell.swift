@@ -14,7 +14,7 @@ class RecommendNewTableViewCell: UITableViewCell {
     private let recommendationsImages: [UIImage] = [
         UIImage(named: "Лёша Свик")!,
         UIImage(named: "Скриптонит")!,
-        UIImage(named: "OxxxymironFavourite")!,
+        UIImage(named: "Oxxxymiron")!,
         UIImage(named: "NILETTO")!,
         UIImage(named: "Баста")!,
         UIImage(named: "Lx24")!,

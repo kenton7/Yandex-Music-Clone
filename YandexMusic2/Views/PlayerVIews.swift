@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import MarqueeLabel
 
 protocol IPlayer {
     var playlistNameLabel: UILabel { get }
@@ -19,7 +20,7 @@ protocol IPlayer {
     var playPauseButton: UIButton { get }
     var albumImage: UIImageView { get }
     var songNameLabel: UILabel { get }
-    var songAuthorLabel: UILabel { get }
+    //var songAuthorLabel: UILabel { get }
     var slider: UISlider { get }
     var likeButton: UIButton { get }
     var dislikeButton: UIButton { get }
@@ -87,7 +88,7 @@ class PlayerVIews: MainViews, IPlayer {
         return view
     }()
     
-    private let songInfoStackView: UIStackView = {
+    let songInfoStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -220,12 +221,20 @@ class PlayerVIews: MainViews, IPlayer {
         return label
     }()
     
-    var songAuthorLabel: UILabel = {
-        let label = UILabel()
+    var songAuthorLabel: MarqueeLabel = {
+        let label = MarqueeLabel()
+        label.frame = CGRect(x: 0, y: 0, width: 65, height: 30)
         label.textColor = .lightGray
         label.font = UIFont(name: "YandexSansText-Medium", size: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Автор трека"
+        label.numberOfLines = 1
+        label.type = .continuous
+        label.fadeLength = 5.0
+        label.leadingBuffer = 1.0
+        label.trailingBuffer = 20.0
+        label.animationCurve = .linear
+        label.speed = .duration(10.0)
         return label
     }()
     
@@ -341,6 +350,43 @@ class PlayerVIews: MainViews, IPlayer {
         return view
     }()
     
+    lazy var artistImage: UIImageView = {
+       let view = UIImageView()
+        view.frame = CGRect(x: 30, y: 0, width: 50, height: 50)
+        view.layer.cornerRadius = view.frame.width / 2
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFill
+        view.image = UIImage(named: "Lx24")
+        return view
+    }()
+    
+    lazy var artistImage2: UIImageView = {
+        let view = UIImageView()
+         view.frame = CGRect(x: 30, y: 0, width: 50, height: 50)
+         view.layer.cornerRadius = view.frame.width / 2
+         view.clipsToBounds = true
+         view.translatesAutoresizingMaskIntoConstraints = false
+         view.contentMode = .scaleAspectFill
+         view.image = UIImage(named: "Lx24")
+         return view
+    }()
+    
+    lazy var moreThanTwoArtists: UILabel = {
+       let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: 20, height: 30)
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .boldSystemFont(ofSize: 12)
+        label.text = "+1"
+        label.textAlignment = .center
+        label.textColor = .black
+        label.backgroundColor = .white
+        return label
+    }()
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -374,6 +420,9 @@ class PlayerVIews: MainViews, IPlayer {
         addSubview(likeButton)
         addSubview(bottomButtonStackView)
         addSubview(viewForEqualSpacing)
+        addSubview(artistImage)
+        addSubview(artistImage2)
+        addSubview(moreThanTwoArtists)
         //addSubview(videoshot)
         //insertSubview(videoshot, at: 0)
         
@@ -421,13 +470,34 @@ class PlayerVIews: MainViews, IPlayer {
             whereIsPlayingButton.trailingAnchor.constraint(equalTo: songListButton.leadingAnchor, constant: -10),
             whereIsPlayingButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
             
-            songInfoStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            songInfoStackView.topAnchor.constraint(equalTo: albumImageCollectionView.bottomAnchor, constant: 20),
+            artistImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            artistImage.topAnchor.constraint(equalTo: albumImageCollectionView.bottomAnchor, constant: 20),
+            artistImage.heightAnchor.constraint(equalToConstant: 50),
+            artistImage.widthAnchor.constraint(equalToConstant: 50),
+            
+            artistImage2.leadingAnchor.constraint(equalTo: artistImage.trailingAnchor, constant: -20),
+            artistImage2.topAnchor.constraint(equalTo: artistImage.topAnchor),
+            artistImage2.heightAnchor.constraint(equalToConstant: 50),
+            artistImage2.widthAnchor.constraint(equalToConstant: 50),
+            
+            moreThanTwoArtists.leadingAnchor.constraint(equalTo: artistImage2.trailingAnchor, constant: -20),
+            moreThanTwoArtists.bottomAnchor.constraint(equalTo: artistImage2.bottomAnchor),
+            moreThanTwoArtists.heightAnchor.constraint(equalToConstant: 20),
+            moreThanTwoArtists.widthAnchor.constraint(equalToConstant: 30),
+            
+            
+            //songInfoStackView.leadingAnchor.constraint(equalTo: artistImage.trailingAnchor, constant: 20),
+            //songInfoStackView.topAnchor.constraint(equalTo: albumImageCollectionView.bottomAnchor, constant: 20),
             songInfoStackView.heightAnchor.constraint(equalToConstant: 40),
+            songInfoStackView.centerYAnchor.constraint(equalTo: artistImage.centerYAnchor),
+            songInfoStackView.trailingAnchor.constraint(equalTo: rightButtonsStackView.leadingAnchor, constant: -10),
+            //songAuthorLabel.widthAnchor.constraint(equalToConstant: songInfoStackView.bounds.width),
             
             rightButtonsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             rightButtonsStackView.centerYAnchor.constraint(equalTo: songInfoStackView.centerYAnchor),
             rightButtonsStackView.heightAnchor.constraint(equalToConstant: 20),
+            rightButtonsStackView.widthAnchor.constraint(equalToConstant: 70),
+            
             
             slider.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             slider.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),

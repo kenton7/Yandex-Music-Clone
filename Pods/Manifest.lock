@@ -1,20 +1,24 @@
 PODS:
   - lottie-ios (4.3.3)
+  - MarqueeLabel (4.4.0)
   - youtube-ios-player-helper (1.0.4)
 
 DEPENDENCIES:
   - lottie-ios
+  - MarqueeLabel
   - youtube-ios-player-helper (~> 1.0.4)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - lottie-ios
+    - MarqueeLabel
     - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   lottie-ios: 25e7b2675dad5c3ddad369ac9baab03560c5bfdd
+  MarqueeLabel: d2388949ac58d587303178d56a792ba8a001b037
   youtube-ios-player-helper: e9b97535e816db3152179d84d999bc1807ecd689
 
-PODFILE CHECKSUM: 04109ec8763bc1b0279615e6744366d979978d44
+PODFILE CHECKSUM: d50fd30364b03e29fe81e27a0c797f1d582b0fd5
 
 COCOAPODS: 1.13.0

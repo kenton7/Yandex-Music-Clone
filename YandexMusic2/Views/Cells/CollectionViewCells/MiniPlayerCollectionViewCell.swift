@@ -22,6 +22,10 @@ class MiniPlayerCollectionViewCell: UICollectionViewCell {
     
     lazy var sliderOnMiniPlayer: UISlider = {
         let songSlider = UISlider()
+        songSlider.frame = CGRect(x: 0, y: 0, width: 200, height: 5)
+        songSlider.layer.cornerRadius = 15
+        songSlider.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        songSlider.clipsToBounds = true
         songSlider.minimumValue = 0
         songSlider.setThumbImage(UIImage(), for: .normal)
         songSlider.minimumTrackTintColor = UIColor(red: 245/255, green: 209/255, blue: 100/255, alpha: 1)
@@ -30,8 +34,6 @@ class MiniPlayerCollectionViewCell: UICollectionViewCell {
         songSlider.isUserInteractionEnabled = false
         songSlider.value = UserDefaults.standard.float(forKey: "valueSlider")
         songSlider.maximumValue = UserDefaults.standard.float(forKey: "maximumValue")
-        songSlider.layer.cornerRadius = 8
-        songSlider.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         return songSlider
     }()
     
@@ -85,7 +87,7 @@ class MiniPlayerCollectionViewCell: UICollectionViewCell {
     
     private func configure() {
         
-        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffect = UIBlurEffect(style: .systemThinMaterialDark)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = bounds
         addSubview(blurView)
@@ -104,7 +106,7 @@ class MiniPlayerCollectionViewCell: UICollectionViewCell {
             
             sliderOnMiniPlayer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
             sliderOnMiniPlayer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4),
-            sliderOnMiniPlayer.bottomAnchor.constraint(equalTo: topAnchor, constant: 1),
+            sliderOnMiniPlayer.bottomAnchor.constraint(equalTo: topAnchor, constant: 0),
             
             playPauseButtonMiniPlayer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             playPauseButtonMiniPlayer.centerYAnchor.constraint(equalTo: centerYAnchor),

@@ -48,6 +48,40 @@ class MainViews: MiniPlayerView {
         return stackView
     }()
     
+    lazy var forYouButtonInNavigationBar: UIButton = {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 70, height: 20)
+        button.clipsToBounds = true
+        button.setTitle("Для вас", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.tintColor = .white
+        button.backgroundColor = .clear
+        return button
+    }()
+    
+    lazy var trandsButtonInNavigationBar: UIButton = {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 70, height: 20)
+        button.setTitle("Тренды", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.tintColor = .white
+        button.backgroundColor = .clear
+        return button
+    }()
+    
+    lazy var stackViewForNavigationBarButtons: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 20
+        stackView.backgroundColor = .black
+        stackView.autoresizingMask = .flexibleHeight
+        stackView.addArrangedSubview(forYouButtonInNavigationBar)
+        stackView.addArrangedSubview(trandsButtonInNavigationBar)
+        return stackView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

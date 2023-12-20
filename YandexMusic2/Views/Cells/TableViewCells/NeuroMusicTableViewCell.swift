@@ -8,7 +8,7 @@
 import UIKit
 
 class NeuroMusicTableViewCell: UITableViewCell {
-    
+
     private let typesOfNeuroMusic = ["Спокойствие", "Бодрость", "Вдохновение"]
     private let colors: [UIColor] = [.systemCyan, .systemPurple, .systemOrange]
     

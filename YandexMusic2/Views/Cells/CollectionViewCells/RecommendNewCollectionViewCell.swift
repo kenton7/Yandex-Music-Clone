@@ -150,7 +150,8 @@ class RecommendNewCollectionViewCell: UICollectionViewCell {
             
             playButton.trailingAnchor.constraint(equalTo: viewForTrack.trailingAnchor, constant: -10),
             playButton.centerYAnchor.constraint(equalTo: viewForTrack.centerYAnchor),
-            playButton.heightAnchor.constraint(equalToConstant: 60)
+            playButton.heightAnchor.constraint(equalToConstant: 60),
+            playButton.widthAnchor.constraint(equalToConstant: 60)
             
         ])
     }

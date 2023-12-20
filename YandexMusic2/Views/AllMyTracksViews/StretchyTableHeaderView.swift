@@ -30,6 +30,14 @@ class StretchyTableHeaderView: UIView {
         return animationView
     }()
     
+    lazy var strechyHeaderImage: UIImageView = {
+       let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFill
+        view.image = UIImage(named: "iLikeImage")
+        return view
+    }()
+    
     private lazy var playButton: UIButton = {
         let button = UIButton()
         let config = UIImage.SymbolConfiguration(pointSize: 100, weight: .bold, scale: .large)
@@ -106,7 +114,8 @@ class StretchyTableHeaderView: UIView {
         addSubview(playOrPauseLabelForButton)
         addSubview(iLikeLabel)
 
-        containerView.addSubview(heartsAnimation)
+        //containerView.addSubview(heartsAnimation)
+        containerView.addSubview(strechyHeaderImage)
         containerView.addSubview(downloadLabel)
         containerView.addSubview(downloadButton)
         containerView.addSubview(playButton)
@@ -140,22 +149,30 @@ class StretchyTableHeaderView: UIView {
         
         // Container View Constraints
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.widthAnchor.constraint(equalTo: heartsAnimation.widthAnchor).isActive = true
+//        containerView.widthAnchor.constraint(equalTo: heartsAnimation.widthAnchor).isActive = true
+        containerView.widthAnchor.constraint(equalTo: strechyHeaderImage.widthAnchor).isActive = true
         containerViewHeight = containerView.heightAnchor.constraint(equalTo: self.heightAnchor)
         containerViewHeight.isActive = true
         
         // Animation Constraints
         heartsAnimation.translatesAutoresizingMaskIntoConstraints = false
-        animationViewBottom = heartsAnimation.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+//        animationViewBottom = heartsAnimation.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+//        animationViewBottom.isActive = true
+//        animationViewHeight = heartsAnimation.heightAnchor.constraint(equalTo: containerView.heightAnchor)
+//        animationViewHeight.isActive = true
+        
+        //---
+        strechyHeaderImage.translatesAutoresizingMaskIntoConstraints = false
+        animationViewBottom = strechyHeaderImage.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         animationViewBottom.isActive = true
-        animationViewHeight = heartsAnimation.heightAnchor.constraint(equalTo: containerView.heightAnchor)
+        animationViewHeight = strechyHeaderImage.heightAnchor.constraint(equalTo: containerView.heightAnchor)
         animationViewHeight.isActive = true
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         containerViewHeight.constant = scrollView.contentInset.top
         let offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top)
-        containerView.clipsToBounds = offsetY <= 0
+        //containerView.clipsToBounds = offsetY <= 0
         animationViewBottom.constant = offsetY >= 0 ? 0 : -offsetY / 2
         animationViewHeight.constant = max(offsetY + scrollView.contentInset.top, scrollView.contentInset.top)
     }

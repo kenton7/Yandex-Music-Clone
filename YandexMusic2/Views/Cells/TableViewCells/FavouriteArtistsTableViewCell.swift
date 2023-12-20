@@ -14,7 +14,7 @@ class FavouriteArtistsTableViewCell: UITableViewCell {
     private let favouriteArtistsImages: [UIImage] = [
         UIImage(named: "ThirtySecondsToMars")!,
         UIImage(named: "ТаСторона")!,
-        UIImage(named: "OxxxymironFavourite")!,
+        UIImage(named: "Oxxxymiron")!,
         UIImage(named: "Lx24")!,
         UIImage(named: "Nickelback")!,
         UIImage(named: "LocDog")!,

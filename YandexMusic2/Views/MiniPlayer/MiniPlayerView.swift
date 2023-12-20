@@ -109,19 +109,10 @@ class MiniPlayerView: UIView {
     }
     
     private func configure() {
-                
-        //addSubview(miniPlayer)
-        //addSubview(likeButtonMiniPlayer)
-        //addSubview(songName)
-        //addSubview(songAuthor)
-        //addSubview(changeSourcePlayingMiniPlayer)
-        //addSubview(playPauseButtonMiniPlayer)
-        //addSubview(sliderOnMiniPlayer)
         
         insertSubview(miniPlayer, at: 1)
-        insertSubview(miniPlayerCollectionView, at: 2)
-        //miniPlayer.addSubview(miniPlayerCollectionView)
-        //insertSubview(likeButtonMiniPlayer, at: 1)
+        //insertSubview(miniPlayerCollectionView, at: 2)
+        miniPlayer.addSubview(miniPlayerCollectionView)
         
         
         NSLayoutConstraint.activate([
@@ -131,36 +122,12 @@ class MiniPlayerView: UIView {
             miniPlayer.heightAnchor.constraint(equalToConstant: 65),
             miniPlayer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0),
             
-            miniPlayerCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            miniPlayerCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            
+            miniPlayerCollectionView.leadingAnchor.constraint(equalTo: miniPlayer.leadingAnchor, constant: 10),
+            miniPlayerCollectionView.trailingAnchor.constraint(equalTo: miniPlayer.trailingAnchor, constant: -10),
             miniPlayerCollectionView.centerYAnchor.constraint(equalTo: miniPlayer.centerYAnchor),
             miniPlayerCollectionView.heightAnchor.constraint(equalToConstant: 50),
         ])
-    }
-    
-    @objc func updateTime() {
-        //mainViews.sliderOnMiniPlayer.value = UserDefaults.standard.float(forKey: "valueSlider")
-        let cell = miniPlayerCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! MiniPlayerCollectionViewCell
-        cell.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
-        //mainViews.sliderOnMiniPlayer.value = Float(AudioPlayer.shared.currentTime)
-        UserDefaults.standard.set(sliderOnMiniPlayer.value, forKey: "valueSlider")
-    }
-    
-    @objc private func playButtonPressed() {
-
-        if AudioPlayer.shared.player?.isPlaying == true {
-            playPauseButtonMiniPlayer.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
-            AudioPlayer.shared.player?.pause()
-        } else {
-            let getNeededTrack = SongModel.getSongs().filter { $0.songAuthor == songAuthor.text && $0.songName == songName.text }.first
-            let currentSliderValue = UserDefaults.standard.float(forKey: "valueSlider")
-            AudioPlayer.shared.currentTrack = getNeededTrack
-            AudioPlayer.shared.play(song: AudioPlayer.shared.currentTrack ?? getNeededTrack!)
-            AudioPlayer.shared.player?.currentTime = TimeInterval(sliderOnMiniPlayer.value)
-            playPauseButtonMiniPlayer.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold, scale: .large)), for: .normal)
-            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-            AudioPlayer.shared.player?.play()
-        }
     }
 }
 

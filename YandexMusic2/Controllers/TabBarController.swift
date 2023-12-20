@@ -35,7 +35,7 @@ class TabBarController: UITabBarController {
     
     func setupVCs() {
         viewControllers = [
-            createNavController(for: MainVC(), image: UIImage(systemName: "music.note")!.withBaselineOffset(fromBottom: 15.0)),
+            createNavController(for: MainVC(), image: UIImage(named: "Note")!.withBaselineOffset(fromBottom: 14.0)),
             createNavController(for: BooksPodcastsVC(), image: UIImage(systemName: "mic")!.withBaselineOffset(fromBottom: 15.0)),
             createNavController(for: NewMyCollectionVC(), image: UIImage(systemName: "heart.circle.fill")!.withBaselineOffset(fromBottom: 15.0))
         ]

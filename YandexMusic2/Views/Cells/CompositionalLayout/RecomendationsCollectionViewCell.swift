@@ -23,7 +23,7 @@ class RecomendationsCollectionViewCell: UICollectionViewCell {
     lazy var artistsLabel: UILabel = {
         let label = UILabel()
          label.translatesAutoresizingMaskIntoConstraints = false
-         label.text = "Денис Rider, NILETTO"
+         label.text = "Oxxxymiron, NILETTO"
          label.font = .boldSystemFont(ofSize: 12)
          label.textColor = .lightGray
          return label
@@ -36,7 +36,7 @@ class RecomendationsCollectionViewCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.image = UIImage(named: "OxxxymironFavourite")
+        view.image = UIImage(named: "Oxxxymiron")
         return view
     }()
     
@@ -51,6 +51,15 @@ class RecomendationsCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private lazy var stackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(forYouLabel)
+        stackView.addArrangedSubview(artistsLabel)
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
 //    private lazy var trandsLabel: UILabel = {
 //        let label = UILabel()
 //         label.translatesAutoresizingMaskIntoConstraints = false
@@ -63,8 +72,8 @@ class RecomendationsCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        
         configure()
+        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -78,7 +87,7 @@ class RecomendationsCollectionViewCell: UICollectionViewCell {
         addSubview(artistsLabel)
         addSubview(imageView1InForYouLabel)
         addSubview(imageView2InForYouLabel)
-       //addSubview(trandsLabel)
+        addSubview(stackView)
         
         backgroundColor = .clear
         layer.cornerRadius = 30
@@ -90,13 +99,10 @@ class RecomendationsCollectionViewCell: UICollectionViewCell {
             imageView1InForYouLabel.widthAnchor.constraint(equalToConstant: 50),
             imageView2InForYouLabel.leadingAnchor.constraint(equalTo: imageView1InForYouLabel.trailingAnchor, constant: -20),
             imageView2InForYouLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            forYouLabel.topAnchor.constraint(equalTo: topAnchor, constant: 6),
-            forYouLabel.leadingAnchor.constraint(equalTo: imageView2InForYouLabel.trailingAnchor, constant: 6),
             imageView2InForYouLabel.heightAnchor.constraint(equalToConstant:  50),
             imageView2InForYouLabel.widthAnchor.constraint(equalToConstant: 50),
-            artistsLabel.leadingAnchor.constraint(equalTo: imageView2InForYouLabel.trailingAnchor, constant: 6),
-            artistsLabel.topAnchor.constraint(equalTo: forYouLabel.bottomAnchor, constant: 4),
-            artistsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            stackView.centerYAnchor.constraint(equalTo: imageView2InForYouLabel.centerYAnchor),
+            stackView.leadingAnchor.constraint(equalTo: imageView2InForYouLabel.trailingAnchor, constant: 6)
         ])
         
     }

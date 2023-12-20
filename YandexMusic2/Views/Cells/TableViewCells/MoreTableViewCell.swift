@@ -19,12 +19,12 @@ class MoreTableViewCell: UITableViewCell {
     ]
     
     private let myWaveTypes = [
-        "Русская эстрада",
-        "Танцевальная музыка",
-        "Эстрада",
-        "Русская поп-музыка",
         "Поп",
+        "Русская поп-музыка",
         "Русский рэп",
+        "Русская эстрада",
+        "Рэп и хип-хоп",
+        "Эстрада",
     ]
     
     private let colors: [UIColor] = [
@@ -65,7 +65,7 @@ class MoreTableViewCell: UITableViewCell {
     lazy var moreFindingsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 20, height: 50)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 20, height: 55)
         layout.minimumLineSpacing = 20
         //layout.estimatedItemSize = CGSize(width: frame.size.width, height: 50)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -107,7 +107,7 @@ class MoreTableViewCell: UITableViewCell {
             
             moreFindingsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             moreFindingsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            moreFindingsCollectionView.heightAnchor.constraint(equalToConstant: 50),
+            moreFindingsCollectionView.heightAnchor.constraint(equalToConstant: 70),
             moreFindingsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             moreFindingsCollectionView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
@@ -158,7 +158,7 @@ extension MoreTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width - 20
-        layout.itemSize = CGSize(width: width, height: 50)
+        layout.itemSize = CGSize(width: width, height: 55)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 20

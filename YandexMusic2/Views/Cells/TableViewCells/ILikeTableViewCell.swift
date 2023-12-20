@@ -46,7 +46,7 @@ class ILikeTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var allTracksIlikedButton: UIButton = {
+    lazy var allTracksIlikedButton: UIButton = {
        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Всё >", for: .normal)
@@ -67,7 +67,7 @@ class ILikeTableViewCell: UITableViewCell {
     }
     
     private func configure() {
-        backgroundColor = .black
+        backgroundColor = .clear
         selectionStyle = .none
         
         addSubview(collectionView)
@@ -77,10 +77,11 @@ class ILikeTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             
-            trackCount.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            
+            iLikeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             iLikeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            iLikeLabel.bottomAnchor.constraint(equalTo: trackCount.topAnchor, constant: -10),
+            
+            trackCount.leadingAnchor.constraint(equalTo: iLikeLabel.leadingAnchor),
+            trackCount.topAnchor.constraint(equalTo: iLikeLabel.bottomAnchor, constant: 6),
             
             allTracksIlikedButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             allTracksIlikedButton.topAnchor.constraint(equalTo: iLikeLabel.topAnchor),

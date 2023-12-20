@@ -40,7 +40,7 @@ class MyCollectionWaveTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         //contentView.isUserInteractionEnabled = false
-        backgroundColor = .black
+        backgroundColor = .clear
         selectionStyle = .none
         configure()
     }

@@ -120,6 +120,8 @@ class ForYouOrTrendsTableViewCell: UITableViewCell {
             } else {
                 cell.forYouLabel.text = "Тренды"
                 cell.artistsLabel.text = "Скриптонт, Баста"
+                cell.imageView1InForYouLabel.image = UIImage(named: "Скриптонит")
+                cell.imageView2InForYouLabel.image = UIImage(named: "Баста")
             }
             
             return cell

@@ -14,7 +14,7 @@ class NewMyCollectionViews: MiniPlayerView {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(ILikeTableViewCell.self, forCellReuseIdentifier: ILikeTableViewCell.cellID)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         return tableView
